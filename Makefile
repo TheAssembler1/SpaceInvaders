@@ -7,8 +7,8 @@ SRCS := $(shell find $(SRC_DIRS) -name *.c)
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 
-INC_DIRS := $(shell find $(SRC_DIRS) -type d)
-INC_FLAGS := $(addprefix -I,$(INC_DIRS))
+CFLAGS = -DLOG_USE_COLOR
+PARAMS = log/log.txt true log_trace
 
 $(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
 	$(CC) $(OBJS) -o $@ $(LDFLAGS)
@@ -16,12 +16,15 @@ $(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
 # c source
 $(BUILD_DIR)/%.c.o: %.c
 	$(MKDIR_P) $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ 
 
-.PHONY: clean
+.PHONY: clean run
 
 clean:
 	$(RM) -r $(BUILD_DIR)
+
+run:
+	./build/$(TARGET_EXEC) $(PARAMS)
 
 -include $(DEPS)
 

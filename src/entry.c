@@ -1,10 +1,71 @@
+#include <string.h>
+#include <stdlib.h>
 #include "log/log.h"
-#include <stdint.h>
+
+#define USAGE_MESSAGE "Correct Usage: $(TARGET_EXEC) [file_path] [true/false] [log_level]"
 
 int main(int argc, char* argv[]){
-    for(uint8_t i = 0; i < argc; i++){
-        log_info("argv[%d] %s", i, argv[i]);
-    }
+    char* log_add_fp_str;
+    char* log_set_quit_str;
+    char* log_set_level_str;
     
+    FILE* log_add_fp_fptr;
+
+    int log_level;
+
+    for(int i = 0; i < argc; i++)
+        log_info("argv[%d] %s", i, argv[i]);
+   
+    log_info("setting wether to see logs");
+
+    //setting weather to see the logs
+    log_set_quit_str = argv[2]; if(!strcmp(log_set_quit_str, "true")) log_set_quiet(true);
+    else if(!strcmp(log_set_quit_str, "false"))
+        log_set_quiet(false);
+    else{
+        log_fatal(USAGE_MESSAGE); return -1;
+    }
+
+    log_info("setting the log level");
+
+    //setting the log level
+    log_set_level_str = argv[3];
+    if(!strcmp(log_set_level_str, "log_trace"))
+        log_level = LOG_TRACE;
+    else if(!strcmp(log_set_level_str, "log_debug"))
+        log_level = LOG_DEBUG;
+    else if(!strcmp(log_set_level_str, "log_info"))
+        log_level = LOG_INFO;
+    else if(!strcmp(log_set_level_str, "log_warn"))
+        log_level = LOG_WARN;
+    else if(!strcmp(log_set_level_str, "log_error"))
+        log_level = LOG_ERROR;
+    else if(!strcmp(log_set_level_str, "log_fatal"))
+        log_level = LOG_FATAL;
+    else{
+        log_fatal(USAGE_MESSAGE);
+        return -1;
+    }
+    log_set_level(log_level);
+   
+    log_info("setting the files to log to");
+    
+    //setting up logging to stdout
+    if(log_add_fp(stderr, log_level) < 0){                        
+        printf("FATAL ERROR setting up log file for stdout\n");   
+        return -1;                                                
+    }else                                                         
+        log_debug("success setting up log file for stdout");      
+
+    //setting file to log to
+    log_add_fp_str = argv[1];
+    log_add_fp_fptr = fopen(log_add_fp_str, "wr");    
+    if(log_add_fp(log_add_fp_fptr, log_level) < 0){
+        printf("FATAL ERROR setting up log file\n");
+        return -1;
+    }else
+        log_debug("success setting up log file");
+
+    log_trace("returning from main");
     return 0;
 }

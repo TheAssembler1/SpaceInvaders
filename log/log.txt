@@ -1,2 +1,2 @@
-2022-02-07 21:54:18 DEBUG src/entry.c:64: success setting up log file
-2022-02-07 21:54:18 TRACE src/entry.c:66: returning from main
+2022-02-08 11:53:55 DEBUG src/entry.c:64: success setting up log file
+2022-02-08 11:53:55 TRACE src/entry.c:66: returning from main

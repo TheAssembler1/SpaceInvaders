@@ -1,15 +1,16 @@
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "log/log.h"
 
 #define USAGE_MESSAGE "Correct Usage: $(TARGET_EXEC) [file_path] [true/false] [log_level]"
 
 int main(int argc, char* argv[]){
-    char* log_add_fp_str;
-    char* log_set_quit_str;
-    char* log_set_level_str;
+    char* log_add_fp_str = NULL;
+    char* log_set_quit_str = NULL;
+    char* log_set_level_str = NULL;
     
-    FILE* log_add_fp_fptr;
+    FILE* log_add_fp_fptr = NULL;
 
     int log_level;
 
@@ -19,11 +20,14 @@ int main(int argc, char* argv[]){
     log_info("setting wether to see logs");
 
     //setting weather to see the logs
-    log_set_quit_str = argv[2]; if(!strcmp(log_set_quit_str, "true")) log_set_quiet(true);
+    log_set_quit_str = argv[2]; 
+    if(!strcmp(log_set_quit_str, "true")) 
+        log_set_quiet(true);
     else if(!strcmp(log_set_quit_str, "false"))
         log_set_quiet(false);
     else{
-        log_fatal(USAGE_MESSAGE); return -1;
+        log_fatal(USAGE_MESSAGE); 
+        return -1;
     }
 
     log_info("setting the log level");
@@ -48,20 +52,13 @@ int main(int argc, char* argv[]){
     }
     log_set_level(log_level);
    
-    log_info("setting the files to log to");
+    log_info("setting the file to log to");
     
-    //setting up logging to stdout
-    if(log_add_fp(stderr, log_level) < 0){                        
-        printf("FATAL ERROR setting up log file for stdout\n");   
-        return -1;                                                
-    }else                                                         
-        log_debug("success setting up log file for stdout");      
-
     //setting file to log to
     log_add_fp_str = argv[1];
     log_add_fp_fptr = fopen(log_add_fp_str, "wr");    
     if(log_add_fp(log_add_fp_fptr, log_level) < 0){
-        printf("FATAL ERROR setting up log file\n");
+        log_fatal("failed setting up log file");
         return -1;
     }else
         log_debug("success setting up log file");

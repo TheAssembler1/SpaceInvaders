@@ -8,7 +8,7 @@ OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 
 CFLAGS = -DLOG_USE_COLOR
-PARAMS = log/log.txt true log_trace
+PARAMS = log/log.txt false log_trace
 
 $(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
 	$(CC) $(OBJS) -o $@ $(LDFLAGS)

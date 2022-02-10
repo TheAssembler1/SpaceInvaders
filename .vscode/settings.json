@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "cmath": "c",
+        "limits": "c",
+        "*.tcc": "c",
+        "typeinfo": "c",
+        "log.h": "c",
+        "stdbool.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
+}

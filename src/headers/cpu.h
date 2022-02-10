@@ -3,9 +3,10 @@
 
 #include <stdint.h>
 #include <stdlib.h>
-#include "cpu_opcodes.h"
+#include <cpu_opcodes.h>
+#include <manager.h>
 
-typedef struct registers{
+struct registers{
     union{
         struct{
             uint8_t a;
@@ -40,19 +41,19 @@ typedef struct registers{
 
     uint16_t sp;
     uint16_t pc;
-} registers;
+};
 
-typedef struct cpu_state{
+struct cpu_state{
     unsigned long cycles;
-} cpu_state;
+};
 
-typedef enum flags{
+enum _flags{
     SIGN =      0b10000000,
     ZERO =      0b01000000,
     AUX_CARRY = 0b00010000,
     PARRY =     0b00000010,
     CARRY =     0b00000001
-} flags;
+};
 
 void init_cpu();
 

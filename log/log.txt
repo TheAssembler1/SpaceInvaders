@@ -1,3 +1,2 @@
-2022-02-09 21:58:08 DEBUG src/entry.c:65: success setting up log file
-2022-02-09 21:58:08 TRACE src/core/cpu_opcodes.c:4: calling from test
-2022-02-09 21:58:08 TRACE src/entry.c:69: returning from main
+2022-02-09 23:10:14 DEBUG src/entry.c:65: success setting up log file
+2022-02-09 23:10:14 TRACE src/entry.c:69: returning from main

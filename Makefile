@@ -9,6 +9,7 @@ DEPS := $(OBJS:.o=.d)
 
 CFLAGS = -DLOG_USE_COLOR
 PARAMS = log/log.txt false log_trace
+HEADERS = ./src/headers/
 
 $(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
 	$(CC) $(OBJS) -o $@ $(LDFLAGS)
@@ -16,7 +17,7 @@ $(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
 # c source
 $(BUILD_DIR)/%.c.o: %.c
 	$(MKDIR_P) $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@ 
+	$(CC) $(CFLAGS) -I$(HEADERS) -c $< -o $@
 
 .PHONY: clean run
 

@@ -42,6 +42,10 @@ typedef struct registers{
     uint16_t pc;
 } registers;
 
+typedef struct cpu_state{
+    unsigned long cycles;
+} cpu_state;
+
 typedef enum flags{
     SIGN =      0b10000000,
     ZERO =      0b01000000,

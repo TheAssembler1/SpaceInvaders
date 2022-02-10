@@ -2,7 +2,8 @@
 #define CPU_OPCODES_H
 
 #include "../log/log.h"
+#include "cpu.h"
 
-void test();
+void test(registers* reg, cpu_state* cpu);
 
 #endif

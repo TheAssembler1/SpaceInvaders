@@ -2,6 +2,8 @@
 #define CPU_H
 
 #include <stdint.h>
+#include <stdlib.h>
+#include "cpu_opcodes.h"
 
 typedef struct registers{
     union{
@@ -39,5 +41,17 @@ typedef struct registers{
     uint16_t sp;
     uint16_t pc;
 } registers;
+
+typedef enum flags{
+    SIGN =      0b10000000,
+    ZERO =      0b01000000,
+    AUX_CARRY = 0b00010000,
+    PARRY =     0b00000010,
+    CARRY =     0b00000001
+} flags;
+
+void init_cpu();
+
+void execute_opcode(uint16_t opcode);
 
 #endif

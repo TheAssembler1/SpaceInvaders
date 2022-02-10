@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "log/log.h"
+#include "core/manager.h"
 
 #define USAGE_MESSAGE "Correct Usage: $(TARGET_EXEC) [file_path] [true/false] [log_level]"
 
@@ -62,6 +63,8 @@ int main(int argc, char* argv[]){
         return -1;
     }else
         log_debug("success setting up log file");
+
+    init_manager();
 
     log_trace("returning from main");
     return 0;

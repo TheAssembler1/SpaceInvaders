@@ -2,8 +2,8 @@
 
 #define NUM_OPCODES 0xFF + 1
 
-static struct registers regs;
-static struct cpu_state cpu;
+struct registers regs;
+struct cpu_state cpu;
 
 static void (*execute[NUM_OPCODES])() = {
        /*00*//*01*//*02*//*03*//*04*//*05*//*06*//*07*//*08*//*09*//*0A*//*0B*//*0C*//*0D*//*0E*//*0F*/
@@ -35,5 +35,5 @@ void execute_opcode(uint16_t opcode){
         exit(-1);
     }
     else
-        (*execute[opcode])(&regs, &cpu); 
+        (*execute[opcode])(opcode); 
 }

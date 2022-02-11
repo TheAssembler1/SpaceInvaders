@@ -47,12 +47,19 @@ struct cpu_state{
     unsigned long cycles;
 };
 
-enum _flags{
+enum flags{
     SIGN =      0b10000000,
     ZERO =      0b01000000,
     AUX_CARRY = 0b00010000,
     PARRY =     0b00000010,
     CARRY =     0b00000001
+};
+
+enum registers_select{
+    A, F,
+    B, C,
+    D, E,
+    H, L
 };
 
 void init_cpu();

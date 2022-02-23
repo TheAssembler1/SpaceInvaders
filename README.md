@@ -1,5 +1,5 @@
 # SpaceInvaders
-Space Invaders emulator written in C.
+Space Invaders emulator written in C ported from Java.
 
 #### Logging lib used can be found here
 - https://github.com/rxi/

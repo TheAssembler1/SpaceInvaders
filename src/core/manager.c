@@ -2,6 +2,7 @@
 
 void init_manager(){
     init_cpu();
+    execute_opcode(0);
 }
 
 

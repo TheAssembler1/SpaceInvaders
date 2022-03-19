@@ -1,27 +1,32 @@
 #include <headers.h>
 
-struct registers* regs;
-struct cpu_state* cpu;
+static struct registers* registers;
+static struct cpu_state* cpu_state;
 
 void init_cpu(){
     log_info("initializing the cpu");
 
-    regs = (struct registers*)malloc(sizeof(struct registers));
-    cpu = (struct cpu_state*)malloc(sizeof(struct cpu_state));
+    registers = (struct registers*)malloc(sizeof(struct registers));
+    cpu_state = (struct cpu_state*)malloc(sizeof(struct cpu_state));
 
-    if(regs && cpu)
+    if(registers && cpu_state)
         log_info("success setting up cpu");
 }
 
+void log_cpu(){
+    log_info("af:%u | bc:%u | de:%u | hl:%u | sp:%u | pc:%u",
+              registers->af, registers->bc, registers->de, 
+              registers->hl, registers->sp, registers->pc);
+}
+
+void log_flags(){
+
+}
+
 void execute_opcode(uint16_t opcode){
-    log_info("Running %u", opcode);
+    log_cpu();
 
     switch(opcode){
-        case 0x00: nop(); break;
+        case 0x00: nop(registers, cpu_state); break;
     }
-    /* Intel 8080 Manual
-    Description: The specified register or memory byte is
-    incremented by one
-    */
-    //INR | 1 | 5 | S Z A P -
 }

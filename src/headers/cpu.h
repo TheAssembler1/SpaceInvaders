@@ -58,7 +58,9 @@ enum registers_select{
 };
 
 void init_cpu();
-
 void execute_opcode(uint16_t opcode);
+
+void log_cpu();
+void log_flags();
 
 #endif

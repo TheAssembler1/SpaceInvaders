@@ -16,6 +16,13 @@ void init_cpu(){
         log_info("success setting up cpu");
 }
 
+void deinit_cpu(){
+    log_info("deinitializing the cpu");
+
+    free(registers);
+    free(cpu_state);
+}
+
 void log_cpu(){
     log_info("af:%hu | bc:%hu | de:%hu | hl:%hu | sp:%hu | pc:%hu",
               registers->af, registers->bc, registers->de, 

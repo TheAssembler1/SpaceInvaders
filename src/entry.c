@@ -61,6 +61,7 @@ int main(int argc, char* argv[]){
         log_debug("success setting up log file");
 
     init_manager();
+    deinit_manager();
 
     log_trace("returning from main");
     return 0;

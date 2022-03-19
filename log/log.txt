@@ -1,6 +1,8 @@
-2022-03-19 16:01:46 DEBUG src/entry.c:61: success setting up log file
-2022-03-19 16:01:46 INFO  src/core/cpu.c:7: initializing the cpu
-2022-03-19 16:01:46 INFO  src/core/cpu.c:16: success setting up cpu
-2022-03-19 16:01:46 INFO  src/core/cpu.c:20: af:0 | bc:0 | de:0 | hl:0 | sp:0 | pc:0
-2022-03-19 16:01:46 INFO  src/core/cpu.c:20: af:0 | bc:0 | de:0 | hl:0 | sp:0 | pc:1
-2022-03-19 16:01:46 TRACE src/entry.c:65: returning from main
+2022-03-19 16:23:38 DEBUG src/entry.c:61: success setting up log file
+2022-03-19 16:23:38 INFO  src/core/cpu.c:7: initializing the cpu
+2022-03-19 16:23:38 INFO  src/core/cpu.c:16: success setting up cpu
+2022-03-19 16:23:38 INFO  src/core/mem.c:6: initializing the mem
+2022-03-19 16:23:38 INFO  src/core/cpu.c:27: af:0 | bc:0 | de:0 | hl:0 | sp:0 | pc:0
+2022-03-19 16:23:38 INFO  src/core/cpu.c:20: deinitializing the cpu
+2022-03-19 16:23:38 INFO  src/core/mem.c:13: deinitializing the mem
+2022-03-19 16:23:38 TRACE src/entry.c:66: returning from main

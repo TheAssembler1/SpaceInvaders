@@ -1,7 +1,7 @@
-#include <manager.h>
+#include <headers.h>
 
 void init_manager(){
-    execute_opcode(0);
+    init_cpu();
 }
 
 

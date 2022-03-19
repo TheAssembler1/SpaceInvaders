@@ -1,8 +1,4 @@
-#include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <log.h>
-#include <manager.h>
+#include <headers.h>
 
 #define USAGE_MESSAGE "Correct Usage: $(TARGET_EXEC) [file_path] [true/false] [log_level]"
 

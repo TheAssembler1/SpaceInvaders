@@ -1,11 +1,6 @@
 #ifndef CPU_H
 #define CPU_H
 
-#include <stdint.h>
-#include <stdlib.h>
-#include <cpu_opcodes.h>
-#include <manager.h>
-
 struct registers{
     union{
         struct{

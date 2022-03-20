@@ -3,7 +3,7 @@
 void init_manager(){
     init_cpu();
     init_mem();
-    execute_opcode(0);
+    execute_opcode(1);
 }
 
 

@@ -34,5 +34,6 @@ void execute_opcode(uint16_t opcode){
 
     switch(opcode){
         case 0x00: nop(registers, cpu_state); break;
+        default: log_error("opcode %x does not exist", opcode); break;
     }
 }

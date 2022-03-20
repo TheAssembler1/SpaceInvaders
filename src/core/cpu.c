@@ -34,6 +34,13 @@ void execute_opcode(uint16_t opcode){
 
     switch(opcode){
         case 0x00: nop(registers, cpu_state); break;
+        case 0x08: nop(registers, cpu_state); break;
+        case 0x10: nop(registers, cpu_state); break;
+        case 0x18: nop(registers, cpu_state); break;
+        case 0x20: nop(registers, cpu_state); break;
+        case 0x28: nop(registers, cpu_state); break;
+        case 0x30: nop(registers, cpu_state); break;
+        case 0x38: nop(registers, cpu_state); break;
         default: log_error("opcode %x does not exist", opcode); break;
     }
 }

@@ -3,18 +3,24 @@
 static uint8_t* mem_buffer;
 
 //returns length of the file
-static unsigned long open_file_for_reading_bytes(FILE** file, const char* file_path){
+static void write_rom_to_mem_buffer(const char* file_path, unsigned long rom_start){
+    FILE* file = NULL;
     long file_length = 0;
-    *file = fopen(file_path, "rb");
+    file = fopen(file_path, "rb");
 
-    (!*file) ? log_error("%s file was null", file_path) : log_info("%s file was opened", file_path);
+    (!file) ? log_error("%s file was null", file_path) : log_info("%s file was opened", file_path);
 
     //getting the length of the file
-    fseek(*file, 0, SEEK_END);
-    file_length = ftell(*file);
-    rewind(*file);
+    fseek(file, 0, SEEK_END);
+    file_length = ftell(file);
+    rewind(file);
 
-    return file_length;
+    if(fread(&mem_buffer[rom_start], 1, file_length, file) == file_length)
+        log_info("%s was successfully written to mem_buffer", file_path);
+    else
+        log_error("%s was unsuccessfully written to mem_buffer", file_path);
+
+    fclose(file);
 }
 
 #define ROM_INVADERS_H_START 0x0000
@@ -30,39 +36,15 @@ invaders.f 0x1000-0x17FF
 invaders.e 0x1800-0x1FFF
 */
 static void load_rom(const char* folder_path){
-    FILE* file = NULL;
-    long file_length = 0;
-
     log_info("file path to invaders.h:%s", ROM_INVADERS_H);
     log_info("file path to invaders.g:%s", ROM_INVADERS_G);
     log_info("file path to invaders.f:%s", ROM_INVADERS_F);
     log_info("file path to invaders.e:%s", ROM_INVADERS_E);
 
-    file_length = open_file_for_reading_bytes(&file, ROM_INVADERS_H);
-    if(fread(&mem_buffer[ROM_INVADERS_H_START], 1, file_length, file) == file_length)
-        log_info("%s was successfully written to mem_buffer", ROM_INVADERS_H);
-    else
-        log_error("%s was unsuccessfully written to mem_buffer", ROM_INVADERS_H);
-
-    file_length = open_file_for_reading_bytes(&file, ROM_INVADERS_G);
-    if(fread(&mem_buffer[ROM_INVADERS_G_START], 1, file_length, file) == file_length)
-        log_info("%s was successfully written to mem_buffer", ROM_INVADERS_G);
-    else
-        log_error("%s was unsuccessfully written to mem_buffer", ROM_INVADERS_G);
-
-    file_length = open_file_for_reading_bytes(&file, ROM_INVADERS_F);
-    if(fread(&mem_buffer[ROM_INVADERS_F_START], 1, file_length, file) == file_length)
-        log_info("%s was successfully written to mem_buffer", ROM_INVADERS_F);
-    else
-        log_error("%s was unsuccessfully written to mem_buffer", ROM_INVADERS_F);
-
-    file_length = open_file_for_reading_bytes(&file, ROM_INVADERS_E);
-    if(fread(&mem_buffer[ROM_INVADERS_E_START], 1, file_length, file) == file_length)
-        log_info("%s was successfully written to mem_buffer", ROM_INVADERS_E);
-    else
-        log_error("%s was unsuccessfully written to mem_buffer", ROM_INVADERS_E);
-
-    fclose(file);
+    write_rom_to_mem_buffer(ROM_INVADERS_H, ROM_INVADERS_H_START);
+    write_rom_to_mem_buffer(ROM_INVADERS_G, ROM_INVADERS_G_START);
+    write_rom_to_mem_buffer(ROM_INVADERS_F, ROM_INVADERS_F_START);
+    write_rom_to_mem_buffer(ROM_INVADERS_E, ROM_INVADERS_E_START);
 }   
 
 void init_mem(){

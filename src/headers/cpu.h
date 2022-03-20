@@ -64,4 +64,4 @@ void execute_opcode(uint16_t opcode);
 
 void log_cpu();
 
-#endif
+#endif //CPU_H

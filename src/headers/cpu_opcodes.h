@@ -15,4 +15,4 @@ incremented by one
 //INR | 1 | 5 | S Z A P -
 void inr();
 
-#endif
+#endif //CPU_OPCODES_H

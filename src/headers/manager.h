@@ -4,4 +4,4 @@
 void init_manager();
 void deinit_manager();
 
-#endif
+#endif //MANAGER_H

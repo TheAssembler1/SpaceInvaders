@@ -12,4 +12,4 @@ void write_byte_mem(unsigned int address, uint8_t value);
 uint16_t read_short_mem(unsigned int address);
 void write_short_mem(unsigned int address, uint16_t value);
 
-#endif
+#endif //MEM_H

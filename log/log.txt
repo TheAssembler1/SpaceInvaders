@@ -1,8 +1,24 @@
-2022-03-19 16:23:38 DEBUG src/entry.c:61: success setting up log file
-2022-03-19 16:23:38 INFO  src/core/cpu.c:7: initializing the cpu
-2022-03-19 16:23:38 INFO  src/core/cpu.c:16: success setting up cpu
-2022-03-19 16:23:38 INFO  src/core/mem.c:6: initializing the mem
-2022-03-19 16:23:38 INFO  src/core/cpu.c:27: af:0 | bc:0 | de:0 | hl:0 | sp:0 | pc:0
-2022-03-19 16:23:38 INFO  src/core/cpu.c:20: deinitializing the cpu
-2022-03-19 16:23:38 INFO  src/core/mem.c:13: deinitializing the mem
-2022-03-19 16:23:38 TRACE src/entry.c:66: returning from main
+2022-03-20 16:51:41 DEBUG src/entry.c:61: success setting up log file
+2022-03-20 16:51:41 INFO  src/core/cpu.c:7: initializing the cpu
+2022-03-20 16:51:41 INFO  src/core/cpu.c:16: success setting up cpu
+2022-03-20 16:51:41 INFO  src/core/mem.c:6: initializing the mem
+2022-03-20 16:51:41 INFO  src/core/tests.c:8: testing read and write to and from mem
+2022-03-20 16:51:41 INFO  src/core/tests.c:16: SUCCESS::byte r/w | Expected Value:fa | Actual Value:fa
+2022-03-20 16:51:41 INFO  src/core/tests.c:16: SUCCESS::byte r/w | Expected Value:fa | Actual Value:fa
+2022-03-20 16:51:41 INFO  src/core/tests.c:16: SUCCESS::byte r/w | Expected Value:fa | Actual Value:fa
+2022-03-20 16:51:41 INFO  src/core/tests.c:16: SUCCESS::byte r/w | Expected Value:fa | Actual Value:fa
+2022-03-20 16:51:41 INFO  src/core/tests.c:16: SUCCESS::byte r/w | Expected Value:fa | Actual Value:fa
+2022-03-20 16:51:41 INFO  src/core/tests.c:16: SUCCESS::byte r/w | Expected Value:fa | Actual Value:fa
+2022-03-20 16:51:41 INFO  src/core/tests.c:16: SUCCESS::byte r/w | Expected Value:fa | Actual Value:fa
+2022-03-20 16:51:41 INFO  src/core/tests.c:16: SUCCESS::byte r/w | Expected Value:fa | Actual Value:fa
+2022-03-20 16:51:41 INFO  src/core/tests.c:16: SUCCESS::byte r/w | Expected Value:fa | Actual Value:fa
+2022-03-20 16:51:41 INFO  src/core/tests.c:16: SUCCESS::byte r/w | Expected Value:fa | Actual Value:fa
+2022-03-20 16:51:41 INFO  src/core/tests.c:27: SUCCESS::short r/w | Expected Value:ffaa | Actual Value:ffaa
+2022-03-20 16:51:41 INFO  src/core/tests.c:27: SUCCESS::short r/w | Expected Value:ffaa | Actual Value:ffaa
+2022-03-20 16:51:41 INFO  src/core/tests.c:27: SUCCESS::short r/w | Expected Value:ffaa | Actual Value:ffaa
+2022-03-20 16:51:41 INFO  src/core/tests.c:27: SUCCESS::short r/w | Expected Value:ffaa | Actual Value:ffaa
+2022-03-20 16:51:41 INFO  src/core/tests.c:27: SUCCESS::short r/w | Expected Value:ffaa | Actual Value:ffaa
+2022-03-20 16:51:41 INFO  src/core/cpu.c:27: af:0 | bc:0 | de:0 | hl:0 | sp:0 | pc:0
+2022-03-20 16:51:41 INFO  src/core/cpu.c:20: deinitializing the cpu
+2022-03-20 16:51:41 INFO  src/core/mem.c:16: deinitializing the mem
+2022-03-20 16:51:41 TRACE src/entry.c:66: returning from main

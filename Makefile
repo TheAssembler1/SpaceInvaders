@@ -8,6 +8,7 @@ OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 
 CFLAGS = -DLOG_USE_COLOR
+LOG_PATH = log/log.txt
 PARAMS = log/log.txt false log_trace
 HEADERS = ./src/headers/
 
@@ -23,6 +24,7 @@ $(BUILD_DIR)/%.c.o: %.c
 
 clean:
 	$(RM) -r $(BUILD_DIR)
+	$(RM) $(LOG_PATH)
 
 run:
 	./build/$(TARGET_EXEC) $(PARAMS)

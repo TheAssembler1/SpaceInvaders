@@ -3,6 +3,8 @@
 void init_manager(){
     init_cpu();
     init_mem();
+
+    cycle_cpu();
 }
 
 

@@ -60,7 +60,7 @@ enum registers_select{
 void init_cpu();
 void deinit_cpu();
 
-void execute_opcode(uint16_t opcode);
+void cycle_cpu();
 
 void log_cpu();
 

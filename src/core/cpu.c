@@ -29,7 +29,7 @@ void log_cpu(){
               registers->hl, registers->sp, registers->pc);
 }
 
-void execute_opcode(uint16_t opcode){
+static void execute_opcode(uint16_t opcode){
     log_cpu();
 
     switch(opcode){
@@ -41,6 +41,11 @@ void execute_opcode(uint16_t opcode){
         case 0x28: nop(registers, cpu_state); break;
         case 0x30: nop(registers, cpu_state); break;
         case 0x38: nop(registers, cpu_state); break;
-        default: log_error("opcode %x does not exist", opcode); break;
+        default: log_error("opcode %x does not exist", opcode); deinit_manager(); break;
     }
+}
+
+void cycle_cpu(){
+    while(1)
+        execute_opcode(read_byte_mem(registers->pc));
 }

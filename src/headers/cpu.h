@@ -57,11 +57,21 @@ enum registers_select{
     H, L
 };
 
+enum pair_registers_select{
+    AF,
+    BC,
+    DE,
+    HL,
+    SP,
+    PC
+};
+
 void init_cpu();
 void deinit_cpu();
 
 void cycle_cpu();
 
-void log_cpu();
+void load_register(int register, uint8_t value);
+void load_pair_register(int pair_register, uint16_t value);
 
 #endif //CPU_H

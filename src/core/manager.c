@@ -11,4 +11,7 @@ void init_manager(){
 void deinit_manager(){
     deinit_cpu();
     deinit_mem();
+
+    //exiting here instead of in main
+    exit(0);
 }

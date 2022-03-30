@@ -74,4 +74,7 @@ void cycle_cpu();
 void load_register(int register, uint8_t value);
 void load_pair_register(int pair_register, uint16_t value);
 
+uint8_t read_register(int _register);
+uint16_t read_pair_register(int pair_register);
+
 #endif //CPU_H

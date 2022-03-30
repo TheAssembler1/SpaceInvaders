@@ -11,3 +11,10 @@ void lxi(struct registers* registers, struct cpu_state* cpu_state, int pair_regi
     registers->pc += 3; 
     cpu_state->cycles += 10;
 }
+
+void stax(struct registers* registers, struct cpu_state* cpu_state, int pair_register){
+    write_byte_mem(read_pair_register(pair_register), registers->a);
+
+    registers->pc++;
+    cpu_state->cycles += 7;
+}

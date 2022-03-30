@@ -27,9 +27,11 @@ static void execute_opcode(uint16_t opcode){
     switch(opcode){
         case 0x00: nop(registers, cpu_state); break;
         case 0x01: lxi(registers, cpu_state, BC); break;
+        case 0x02: stax(registers, cpu_state, BC); break;
         case 0x08: nop(registers, cpu_state); break;
         case 0x10: nop(registers, cpu_state); break;
         case 0x11: lxi(registers, cpu_state, DE); break;
+        case 0x12: stax(registers, cpu_state, DE); break;
         case 0x18: nop(registers, cpu_state); break;
         case 0x20: nop(registers, cpu_state); break;
         case 0x21: lxi(registers, cpu_state, HL); break;
@@ -52,7 +54,7 @@ void load_register(int _register, uint8_t value){
         case B: registers->b = value; break; case C: registers->c = value; break;
         case D: registers->d = value; break; case E: registers->e = value; break;
         case H: registers->h = value; break; case L: registers->l = value; break;
-        default: log_error("register %u does not exist", value); deinit_manager(); break;
+        default: log_error("load register %u does not exist", _register); deinit_manager(); break;
     }
 }
 
@@ -63,6 +65,27 @@ void load_pair_register(int pair_register, uint16_t value){
         case DE: registers->de = value; break;
         case HL: registers->hl = value; break;
         case SP: registers->sp = value; break;
-        default: log_error("pair register %u does not exist", value); deinit_manager(); break;
+        default: log_error("load pair register %u does not exist", pair_register); deinit_manager(); break;
+    }
+}
+
+uint8_t read_register(int _register){
+    switch(_register){
+        case A: return registers->a; break; case F: return registers->f; break;
+        case B: return registers->b; break; case C: return registers->c; break;
+        case D: return registers->d; break; case E: return registers->e; break;
+        case H: return registers->h; break; case L: return registers->l; break;
+        default: log_error("read register %u does not exist", _register); deinit_manager(); break;
+    }
+}
+
+uint16_t read_pair_register(int pair_register){
+    switch(pair_register){
+        case AF: return registers->af; break;
+        case BC: return registers->bc; break;
+        case DE: return registers->de; break;
+        case HL: return registers->hl; break;
+        case SP: return registers->sp; break;
+        default: log_error("read pair register %u does not exist", pair_register); deinit_manager(); break;
     }
 }

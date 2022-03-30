@@ -1,35 +1,35 @@
-2022-03-30 07:56:37 DEBUG src/entry.c:61: success setting up log file
-2022-03-30 07:56:37 INFO  src/core/cpu.c:7: initializing the cpu
-2022-03-30 07:56:37 INFO  src/core/cpu.c:16: success setting up cpu
-2022-03-30 07:56:37 INFO  src/core/mem.c:56: initializing the mem
-2022-03-30 07:56:37 INFO  src/tests/tests.c:8: testing read and write to and from mem
-2022-03-30 07:56:37 INFO  src/tests/tests.c:16: SUCCESS::byte r/w | Expected Value:fd | Actual Value:fd
-2022-03-30 07:56:37 INFO  src/tests/tests.c:16: SUCCESS::byte r/w | Expected Value:fd | Actual Value:fd
-2022-03-30 07:56:37 INFO  src/tests/tests.c:16: SUCCESS::byte r/w | Expected Value:fd | Actual Value:fd
-2022-03-30 07:56:37 INFO  src/tests/tests.c:16: SUCCESS::byte r/w | Expected Value:fd | Actual Value:fd
-2022-03-30 07:56:37 INFO  src/tests/tests.c:16: SUCCESS::byte r/w | Expected Value:fd | Actual Value:fd
-2022-03-30 07:56:37 INFO  src/tests/tests.c:16: SUCCESS::byte r/w | Expected Value:fd | Actual Value:fd
-2022-03-30 07:56:37 INFO  src/tests/tests.c:16: SUCCESS::byte r/w | Expected Value:fd | Actual Value:fd
-2022-03-30 07:56:37 INFO  src/tests/tests.c:16: SUCCESS::byte r/w | Expected Value:fd | Actual Value:fd
-2022-03-30 07:56:37 INFO  src/tests/tests.c:16: SUCCESS::byte r/w | Expected Value:fd | Actual Value:fd
-2022-03-30 07:56:37 INFO  src/tests/tests.c:16: SUCCESS::byte r/w | Expected Value:fd | Actual Value:fd
-2022-03-30 07:56:37 INFO  src/tests/tests.c:28: SUCCESS::short r/w | Expected Value:fdab | Actual Value:fdab
-2022-03-30 07:56:37 INFO  src/tests/tests.c:28: SUCCESS::short r/w | Expected Value:fdab | Actual Value:fdab
-2022-03-30 07:56:37 INFO  src/tests/tests.c:28: SUCCESS::short r/w | Expected Value:fdab | Actual Value:fdab
-2022-03-30 07:56:37 INFO  src/tests/tests.c:28: SUCCESS::short r/w | Expected Value:fdab | Actual Value:fdab
-2022-03-30 07:56:37 INFO  src/tests/tests.c:28: SUCCESS::short r/w | Expected Value:fdab | Actual Value:fdab
-2022-03-30 07:56:37 INFO  src/core/mem.c:44: file path to invaders.h:rom/invaders.h
-2022-03-30 07:56:37 INFO  src/core/mem.c:45: file path to invaders.g:rom/invaders.g
-2022-03-30 07:56:37 INFO  src/core/mem.c:46: file path to invaders.f:rom/invaders.f
-2022-03-30 07:56:37 INFO  src/core/mem.c:47: file path to invaders.e:rom/invaders.e
-2022-03-30 07:56:37 INFO  src/core/mem.c:11: rom/invaders.h file was opened
-2022-03-30 07:56:37 INFO  src/core/mem.c:19: rom/invaders.h was successfully written to mem_buffer
-2022-03-30 07:56:37 INFO  src/core/mem.c:11: rom/invaders.g file was opened
-2022-03-30 07:56:37 INFO  src/core/mem.c:19: rom/invaders.g was successfully written to mem_buffer
-2022-03-30 07:56:37 INFO  src/core/mem.c:11: rom/invaders.f file was opened
-2022-03-30 07:56:37 INFO  src/core/mem.c:19: rom/invaders.f was successfully written to mem_buffer
-2022-03-30 07:56:37 INFO  src/core/mem.c:11: rom/invaders.e file was opened
-2022-03-30 07:56:37 INFO  src/core/mem.c:19: rom/invaders.e was successfully written to mem_buffer
-2022-03-30 07:56:37 ERROR src/core/cpu.c:40: opcode c3 does not exist
-2022-03-30 07:56:37 INFO  src/core/cpu.c:20: deinitializing the cpu
-2022-03-30 07:56:37 INFO  src/core/mem.c:69: deinitializing the mem
+2022-03-30 08:17:26 DEBUG src/entry.c:61: success setting up log file
+2022-03-30 08:17:26 INFO  src/core/cpu.c:7: initializing the cpu
+2022-03-30 08:17:26 INFO  src/core/cpu.c:16: success setting up cpu
+2022-03-30 08:17:26 INFO  src/core/mem.c:56: initializing the mem
+2022-03-30 08:17:26 INFO  src/tests/tests.c:8: testing read and write to and from mem
+2022-03-30 08:17:26 INFO  src/tests/tests.c:16: SUCCESS::byte r/w | Expected Value:fd | Actual Value:fd
+2022-03-30 08:17:26 INFO  src/tests/tests.c:16: SUCCESS::byte r/w | Expected Value:fd | Actual Value:fd
+2022-03-30 08:17:26 INFO  src/tests/tests.c:16: SUCCESS::byte r/w | Expected Value:fd | Actual Value:fd
+2022-03-30 08:17:26 INFO  src/tests/tests.c:16: SUCCESS::byte r/w | Expected Value:fd | Actual Value:fd
+2022-03-30 08:17:26 INFO  src/tests/tests.c:16: SUCCESS::byte r/w | Expected Value:fd | Actual Value:fd
+2022-03-30 08:17:26 INFO  src/tests/tests.c:16: SUCCESS::byte r/w | Expected Value:fd | Actual Value:fd
+2022-03-30 08:17:26 INFO  src/tests/tests.c:16: SUCCESS::byte r/w | Expected Value:fd | Actual Value:fd
+2022-03-30 08:17:26 INFO  src/tests/tests.c:16: SUCCESS::byte r/w | Expected Value:fd | Actual Value:fd
+2022-03-30 08:17:26 INFO  src/tests/tests.c:16: SUCCESS::byte r/w | Expected Value:fd | Actual Value:fd
+2022-03-30 08:17:26 INFO  src/tests/tests.c:16: SUCCESS::byte r/w | Expected Value:fd | Actual Value:fd
+2022-03-30 08:17:26 INFO  src/tests/tests.c:28: SUCCESS::short r/w | Expected Value:fdab | Actual Value:fdab
+2022-03-30 08:17:26 INFO  src/tests/tests.c:28: SUCCESS::short r/w | Expected Value:fdab | Actual Value:fdab
+2022-03-30 08:17:26 INFO  src/tests/tests.c:28: SUCCESS::short r/w | Expected Value:fdab | Actual Value:fdab
+2022-03-30 08:17:26 INFO  src/tests/tests.c:28: SUCCESS::short r/w | Expected Value:fdab | Actual Value:fdab
+2022-03-30 08:17:26 INFO  src/tests/tests.c:28: SUCCESS::short r/w | Expected Value:fdab | Actual Value:fdab
+2022-03-30 08:17:26 INFO  src/core/mem.c:44: file path to invaders.h:rom/invaders.h
+2022-03-30 08:17:26 INFO  src/core/mem.c:45: file path to invaders.g:rom/invaders.g
+2022-03-30 08:17:26 INFO  src/core/mem.c:46: file path to invaders.f:rom/invaders.f
+2022-03-30 08:17:26 INFO  src/core/mem.c:47: file path to invaders.e:rom/invaders.e
+2022-03-30 08:17:26 INFO  src/core/mem.c:11: rom/invaders.h file was opened
+2022-03-30 08:17:26 INFO  src/core/mem.c:19: rom/invaders.h was successfully written to mem_buffer
+2022-03-30 08:17:26 INFO  src/core/mem.c:11: rom/invaders.g file was opened
+2022-03-30 08:17:26 INFO  src/core/mem.c:19: rom/invaders.g was successfully written to mem_buffer
+2022-03-30 08:17:26 INFO  src/core/mem.c:11: rom/invaders.f file was opened
+2022-03-30 08:17:26 INFO  src/core/mem.c:19: rom/invaders.f was successfully written to mem_buffer
+2022-03-30 08:17:26 INFO  src/core/mem.c:11: rom/invaders.e file was opened
+2022-03-30 08:17:26 INFO  src/core/mem.c:19: rom/invaders.e was successfully written to mem_buffer
+2022-03-30 08:17:26 ERROR src/core/cpu.c:42: opcode c3 does not exist
+2022-03-30 08:17:26 INFO  src/core/cpu.c:20: deinitializing the cpu
+2022-03-30 08:17:26 INFO  src/core/mem.c:69: deinitializing the mem

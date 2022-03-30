@@ -5,7 +5,8 @@
         "*.tcc": "c",
         "typeinfo": "c",
         "log.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "type_traits": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

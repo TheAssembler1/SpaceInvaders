@@ -23,4 +23,12 @@ pointer.
 //LXI | 3 | 10 | - - - - -
 void lxi(struct registers* registers, struct cpu_state* cpu_state, int pair_register);
 
+/* Intel 8080 Manul
+Description: The contents of the accumulator are 
+stored in the memory location addressed by registers B and 
+C, or by registers D and E.
+*/
+//STAX | 1 | 7 | - - - - -
+void stax(struct registers* registers, struct cpu_state* cpu_state, int pair_register);
+
 #endif //CPU_OPCODES_H

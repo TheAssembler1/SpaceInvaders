@@ -32,3 +32,10 @@ void sta(struct registers* registers, struct cpu_state* cpu_state){
     registers->pc += 3;
     cpu_state->cycles += 13;
 }
+
+void inx(struct registers* registers, struct cpu_state* cpu_state, int pair_register){
+    load_pair_register(pair_register, read_pair_register(pair_register) + 1);
+
+    registers->pc++;
+    cpu_state->cycles += 5;
+}

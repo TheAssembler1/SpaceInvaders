@@ -48,4 +48,11 @@ HI ADD and LOW ADD.
 //STA | 3 | 13 | - - - - -
 void sta(struct registers* registers, struct cpu_state* cpu_state);
 
+/* Intel 8080 Manual
+Description: The 16-bit number held in the specified
+register pair is incremented by one.
+*/
+//INX | 1 | 5 | - - - - -
+void inx(struct registers* registers, struct cpu_state* cpu_state, int pair_register);
+
 #endif //CPU_OPCODES_H

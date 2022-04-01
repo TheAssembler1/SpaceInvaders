@@ -25,20 +25,22 @@ void deinit_cpu(){
 
 static void execute_opcode(uint16_t opcode){
     switch(opcode){
-        case 0x00: nop(registers, cpu_state); break;
-        case 0x01: lxi(registers, cpu_state, BC); break;
+        case 0x00: nop(registers, cpu_state);      break;
+        case 0x01: lxi(registers, cpu_state, BC);  break;
         case 0x02: stax(registers, cpu_state, BC); break;
-        case 0x08: nop(registers, cpu_state); break;
-        case 0x10: nop(registers, cpu_state); break;
-        case 0x11: lxi(registers, cpu_state, DE); break;
+        case 0x08: nop(registers, cpu_state);      break;
+        case 0x10: nop(registers, cpu_state);      break;
+        case 0x11: lxi(registers, cpu_state, DE);  break;
         case 0x12: stax(registers, cpu_state, DE); break;
-        case 0x18: nop(registers, cpu_state); break;
-        case 0x20: nop(registers, cpu_state); break;
-        case 0x21: lxi(registers, cpu_state, HL); break;
-        case 0x28: nop(registers, cpu_state); break;
-        case 0x30: nop(registers, cpu_state); break;
-        case 0x31: lxi(registers, cpu_state, SP); break;
-        case 0x38: nop(registers, cpu_state); break;
+        case 0x18: nop(registers, cpu_state);      break;
+        case 0x20: nop(registers, cpu_state);      break;
+        case 0x21: lxi(registers, cpu_state, HL);  break;
+        case 0x22: shld(registers, cpu_state);     break;
+        case 0x28: nop(registers, cpu_state);      break;
+        case 0x30: nop(registers, cpu_state);      break;
+        case 0x31: lxi(registers, cpu_state, SP);  break;
+        case 0x32: sta(registers, cpu_state);      break;
+        case 0x38: nop(registers, cpu_state);      break;
         default: log_error("opcode %x does not exist", opcode); deinit_manager(); break;
     }
 }

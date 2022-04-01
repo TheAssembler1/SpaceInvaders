@@ -18,3 +18,17 @@ void stax(struct registers* registers, struct cpu_state* cpu_state, int pair_reg
     registers->pc++;
     cpu_state->cycles += 7;
 }
+
+void shld(struct registers* registers, struct cpu_state* cpu_state){
+    write_short_mem(read_short_mem(registers->pc + 1), registers->hl);
+
+    registers->pc += 3;
+    cpu_state->cycles += 16;
+}
+
+void sta(struct registers* registers, struct cpu_state* cpu_state){
+    write_byte_mem(read_short_mem(registers->pc + 1), registers->a);
+
+    registers->pc += 3;
+    cpu_state->cycles += 13;
+}

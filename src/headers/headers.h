@@ -2,6 +2,12 @@
 #define HEADERS_H
 
 //global defines
+#ifdef __unix__
+#define UNIX
+#elif defined(_WIN32) || defined(WIN32)
+#define WINDOWS
+#endif
+
 #define ROM_FOLDER "rom/"
 #define ROM_INVADERS_E ROM_FOLDER "invaders.e"
 #define ROM_INVADERS_F ROM_FOLDER "invaders.f"

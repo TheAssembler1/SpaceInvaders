@@ -48,31 +48,7 @@ time.h
 
 ../src/headers/tests.h
 
-/home/theassembler1/Src/SpaceInvaders/src/core/cpu.c
-headers.h
--
-
-/home/theassembler1/Src/SpaceInvaders/src/core/cpu_opcodes.c
-headers.h
--
-
-/home/theassembler1/Src/SpaceInvaders/src/core/manager.c
-headers.h
--
-
-/home/theassembler1/Src/SpaceInvaders/src/core/mem.c
-headers.h
--
-
 /home/theassembler1/Src/SpaceInvaders/src/entry.c
-headers.h
--
-
-/home/theassembler1/Src/SpaceInvaders/src/log/log.c
-log.h
-/home/theassembler1/Src/SpaceInvaders/src/log/log.h
-
-/home/theassembler1/Src/SpaceInvaders/src/tests/tests.c
 headers.h
 -
 

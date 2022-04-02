@@ -60,6 +60,16 @@ int main(int argc, char* argv[]){
     }else
         log_debug("success setting up log file");
 
+    //check we have a valid os
+    #ifdef UNIX
+    log_info("running on unx");
+    #elif #defined(WINDOWS)
+    log_info("running on windows")
+    #else
+    log_error("non valid os");
+    return -1;
+    #endif 
+
     init_manager();
     deinit_manager();
 

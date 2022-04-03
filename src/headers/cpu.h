@@ -1,7 +1,13 @@
 #ifndef CPU_H
 #define CPU_H
 
-struct registers{
+#define SIGN      0b10000000
+#define ZERO      0b01000000
+#define AUX_CARRY 0b00010000
+#define PARRY     0b00000010
+#define CARRY     0b00000001
+
+struct _registers{
     union{
         struct{
             uint8_t a;
@@ -38,17 +44,13 @@ struct registers{
     uint16_t pc;
 };
 
-struct cpu_state{
+typedef struct _registers registers;
+
+struct _cpu_state{
     unsigned long cycles;
 };
 
-enum flags{
-    SIGN =      0b10000000,
-    ZERO =      0b01000000,
-    AUX_CARRY = 0b00010000,
-    PARRY =     0b00000010,
-    CARRY =     0b00000001
-};
+typedef struct _cpu_state cpu_state;
 
 enum registers_select{
     A, F,
@@ -65,6 +67,9 @@ enum pair_registers_select{
     SP,
     PC
 };
+
+registers* regs;
+cpu_state* cpu_st;
 
 void init_cpu();
 void deinit_cpu();

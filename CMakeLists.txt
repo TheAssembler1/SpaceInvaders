@@ -11,4 +11,4 @@ project(SpaceInvaders C)
 # recursively grab c files 
 file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/*.c")
 
-add_executable(SpaceInvaders ${SOURCES})
+add_executable(SpaceInvaders ${SOURCES} "src/headers/file.h"   "src/headers/log.h")

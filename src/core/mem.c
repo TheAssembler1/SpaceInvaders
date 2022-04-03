@@ -4,6 +4,7 @@ static uint8_t* mem_buffer;
 
 //returns length of the file
 static void write_rom_to_mem(const char* file_path, unsigned long rom_start){
+    /*
     FILE* file = NULL;
     long file_length = 0;
     file = fopen(file_path, "rb");
@@ -21,6 +22,7 @@ static void write_rom_to_mem(const char* file_path, unsigned long rom_start){
         log_error("%s was unsuccessfully written to mem_buffer", file_path);
 
     fclose(file);
+    */
 }
 
 #define ROM_INVADERS_H_START 0x0000
@@ -41,11 +43,6 @@ invaders.f 0x1000-0x17FF
 invaders.e 0x1800-0x1FFF
 */
 static void load_rom(const char* folder_path){
-    log_info("file path to invaders.h:%s", ROM_INVADERS_H);
-    log_info("file path to invaders.g:%s", ROM_INVADERS_G);
-    log_info("file path to invaders.f:%s", ROM_INVADERS_F);
-    log_info("file path to invaders.e:%s", ROM_INVADERS_E);
-
     write_rom_to_mem(ROM_INVADERS_H, ROM_INVADERS_H_START);
     write_rom_to_mem(ROM_INVADERS_G, ROM_INVADERS_G_START);
     write_rom_to_mem(ROM_INVADERS_F, ROM_INVADERS_F_START);
@@ -53,8 +50,6 @@ static void load_rom(const char* folder_path){
 }   
 
 void init_mem(){
-    log_info("initializing the mem");
-
     mem_buffer = (int8_t*)malloc(MEM_BUFFER_SIZE);
 
     //calling test for memory
@@ -66,8 +61,6 @@ void init_mem(){
 }
 
 void deinit_mem(){
-    log_info("deinitializing the mem");
-
     free(mem_buffer);
 }
 

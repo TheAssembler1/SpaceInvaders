@@ -64,7 +64,8 @@
 				3,
 				4,
 				5,
-				6
+				6,
+				7
 			]
 		}
 	],
@@ -107,7 +108,16 @@
 				3,
 				4,
 				5,
-				6
+				6,
+				7
+			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				8,
+				9
 			]
 		}
 	],
@@ -146,7 +156,13 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/log/log.c",
+			"path" : "src/io/file.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/io/log.c",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -154,6 +170,16 @@
 			"compileGroupIndex" : 0,
 			"path" : "src/tests/tests.c",
 			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/headers/file.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "src/headers/log.h",
+			"sourceGroupIndex" : 1
 		}
 	],
 	"type" : "EXECUTABLE"

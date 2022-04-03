@@ -258,32 +258,59 @@ src/entry.c.s:
 	$(MAKE) -f CMakeFiles/SpaceInvaders.dir/build.make CMakeFiles/SpaceInvaders.dir/src/entry.c.s
 .PHONY : src/entry.c.s
 
-src/log/log.o: src/log/log.c.o
+src/io/file.o: src/io/file.c.o
 
-.PHONY : src/log/log.o
+.PHONY : src/io/file.o
 
 # target to build an object file
-src/log/log.c.o:
-	$(MAKE) -f CMakeFiles/SpaceInvaders.dir/build.make CMakeFiles/SpaceInvaders.dir/src/log/log.c.o
-.PHONY : src/log/log.c.o
+src/io/file.c.o:
+	$(MAKE) -f CMakeFiles/SpaceInvaders.dir/build.make CMakeFiles/SpaceInvaders.dir/src/io/file.c.o
+.PHONY : src/io/file.c.o
 
-src/log/log.i: src/log/log.c.i
+src/io/file.i: src/io/file.c.i
 
-.PHONY : src/log/log.i
+.PHONY : src/io/file.i
 
 # target to preprocess a source file
-src/log/log.c.i:
-	$(MAKE) -f CMakeFiles/SpaceInvaders.dir/build.make CMakeFiles/SpaceInvaders.dir/src/log/log.c.i
-.PHONY : src/log/log.c.i
+src/io/file.c.i:
+	$(MAKE) -f CMakeFiles/SpaceInvaders.dir/build.make CMakeFiles/SpaceInvaders.dir/src/io/file.c.i
+.PHONY : src/io/file.c.i
 
-src/log/log.s: src/log/log.c.s
+src/io/file.s: src/io/file.c.s
 
-.PHONY : src/log/log.s
+.PHONY : src/io/file.s
 
 # target to generate assembly for a file
-src/log/log.c.s:
-	$(MAKE) -f CMakeFiles/SpaceInvaders.dir/build.make CMakeFiles/SpaceInvaders.dir/src/log/log.c.s
-.PHONY : src/log/log.c.s
+src/io/file.c.s:
+	$(MAKE) -f CMakeFiles/SpaceInvaders.dir/build.make CMakeFiles/SpaceInvaders.dir/src/io/file.c.s
+.PHONY : src/io/file.c.s
+
+src/io/log.o: src/io/log.c.o
+
+.PHONY : src/io/log.o
+
+# target to build an object file
+src/io/log.c.o:
+	$(MAKE) -f CMakeFiles/SpaceInvaders.dir/build.make CMakeFiles/SpaceInvaders.dir/src/io/log.c.o
+.PHONY : src/io/log.c.o
+
+src/io/log.i: src/io/log.c.i
+
+.PHONY : src/io/log.i
+
+# target to preprocess a source file
+src/io/log.c.i:
+	$(MAKE) -f CMakeFiles/SpaceInvaders.dir/build.make CMakeFiles/SpaceInvaders.dir/src/io/log.c.i
+.PHONY : src/io/log.c.i
+
+src/io/log.s: src/io/log.c.s
+
+.PHONY : src/io/log.s
+
+# target to generate assembly for a file
+src/io/log.c.s:
+	$(MAKE) -f CMakeFiles/SpaceInvaders.dir/build.make CMakeFiles/SpaceInvaders.dir/src/io/log.c.s
+.PHONY : src/io/log.c.s
 
 src/tests/tests.o: src/tests/tests.c.o
 
@@ -336,9 +363,12 @@ help:
 	@echo "... src/entry.o"
 	@echo "... src/entry.i"
 	@echo "... src/entry.s"
-	@echo "... src/log/log.o"
-	@echo "... src/log/log.i"
-	@echo "... src/log/log.s"
+	@echo "... src/io/file.o"
+	@echo "... src/io/file.i"
+	@echo "... src/io/file.s"
+	@echo "... src/io/log.o"
+	@echo "... src/io/log.i"
+	@echo "... src/io/log.s"
 	@echo "... src/tests/tests.o"
 	@echo "... src/tests/tests.i"
 	@echo "... src/tests/tests.s"

@@ -16,7 +16,7 @@ char* get_formated_time();
 
 //specific log macros with 
 #define log_debug(format, ...) __LOG__(format, "DEBUG", ## __VA_ARGS__)
-#define log_TRACE(format, ...) __LOG__(format, "TRACE", ## __VA_ARGS__)
+#define log_trace(format, ...) __LOG__(format, "TRACE", ## __VA_ARGS__)
 #define log_warn(format, ...) __LOG__(format, "WARN", ## __VA_ARGS__)
 #define log_error(format, ...) __LOG__(format, "ERROR", ## __VA_ARGS__)
 #define log_info(format, ...) __LOG__(format, "INFO", ## __VA_ARGS__)

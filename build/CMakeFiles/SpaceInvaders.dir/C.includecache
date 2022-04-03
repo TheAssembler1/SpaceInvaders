@@ -10,7 +10,11 @@
 
 ../src/headers/cpu_opcodes.h
 
+../src/headers/file.h
+
 ../src/headers/headers.h
+stdio.h
+-
 string.h
 -
 stdlib.h
@@ -18,6 +22,10 @@ stdlib.h
 stdbool.h
 -
 stdint.h
+-
+time.h
+-
+Windows.h
 -
 log.h
 -
@@ -31,16 +39,10 @@ manager.h
 -
 tests.h
 -
+file.h
+-
 
 ../src/headers/log.h
-stdio.h
--
-stdarg.h
--
-stdbool.h
--
-time.h
--
 
 ../src/headers/manager.h
 
@@ -48,7 +50,7 @@ time.h
 
 ../src/headers/tests.h
 
-/home/theassembler1/Src/SpaceInvaders/src/entry.c
+/home/theassembler1/Src/SpaceInvaders/src/core/manager.c
 headers.h
 -
 

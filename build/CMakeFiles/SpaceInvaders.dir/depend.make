@@ -3,6 +3,7 @@
 
 CMakeFiles/SpaceInvaders.dir/src/core/cpu.c.o: ../src/headers/cpu.h
 CMakeFiles/SpaceInvaders.dir/src/core/cpu.c.o: ../src/headers/cpu_opcodes.h
+CMakeFiles/SpaceInvaders.dir/src/core/cpu.c.o: ../src/headers/file.h
 CMakeFiles/SpaceInvaders.dir/src/core/cpu.c.o: ../src/headers/headers.h
 CMakeFiles/SpaceInvaders.dir/src/core/cpu.c.o: ../src/headers/log.h
 CMakeFiles/SpaceInvaders.dir/src/core/cpu.c.o: ../src/headers/manager.h
@@ -12,6 +13,7 @@ CMakeFiles/SpaceInvaders.dir/src/core/cpu.c.o: ../src/core/cpu.c
 
 CMakeFiles/SpaceInvaders.dir/src/core/cpu_opcodes.c.o: ../src/headers/cpu.h
 CMakeFiles/SpaceInvaders.dir/src/core/cpu_opcodes.c.o: ../src/headers/cpu_opcodes.h
+CMakeFiles/SpaceInvaders.dir/src/core/cpu_opcodes.c.o: ../src/headers/file.h
 CMakeFiles/SpaceInvaders.dir/src/core/cpu_opcodes.c.o: ../src/headers/headers.h
 CMakeFiles/SpaceInvaders.dir/src/core/cpu_opcodes.c.o: ../src/headers/log.h
 CMakeFiles/SpaceInvaders.dir/src/core/cpu_opcodes.c.o: ../src/headers/manager.h
@@ -21,6 +23,7 @@ CMakeFiles/SpaceInvaders.dir/src/core/cpu_opcodes.c.o: ../src/core/cpu_opcodes.c
 
 CMakeFiles/SpaceInvaders.dir/src/core/manager.c.o: ../src/headers/cpu.h
 CMakeFiles/SpaceInvaders.dir/src/core/manager.c.o: ../src/headers/cpu_opcodes.h
+CMakeFiles/SpaceInvaders.dir/src/core/manager.c.o: ../src/headers/file.h
 CMakeFiles/SpaceInvaders.dir/src/core/manager.c.o: ../src/headers/headers.h
 CMakeFiles/SpaceInvaders.dir/src/core/manager.c.o: ../src/headers/log.h
 CMakeFiles/SpaceInvaders.dir/src/core/manager.c.o: ../src/headers/manager.h
@@ -30,6 +33,7 @@ CMakeFiles/SpaceInvaders.dir/src/core/manager.c.o: ../src/core/manager.c
 
 CMakeFiles/SpaceInvaders.dir/src/core/mem.c.o: ../src/headers/cpu.h
 CMakeFiles/SpaceInvaders.dir/src/core/mem.c.o: ../src/headers/cpu_opcodes.h
+CMakeFiles/SpaceInvaders.dir/src/core/mem.c.o: ../src/headers/file.h
 CMakeFiles/SpaceInvaders.dir/src/core/mem.c.o: ../src/headers/headers.h
 CMakeFiles/SpaceInvaders.dir/src/core/mem.c.o: ../src/headers/log.h
 CMakeFiles/SpaceInvaders.dir/src/core/mem.c.o: ../src/headers/manager.h
@@ -39,6 +43,7 @@ CMakeFiles/SpaceInvaders.dir/src/core/mem.c.o: ../src/core/mem.c
 
 CMakeFiles/SpaceInvaders.dir/src/entry.c.o: ../src/headers/cpu.h
 CMakeFiles/SpaceInvaders.dir/src/entry.c.o: ../src/headers/cpu_opcodes.h
+CMakeFiles/SpaceInvaders.dir/src/entry.c.o: ../src/headers/file.h
 CMakeFiles/SpaceInvaders.dir/src/entry.c.o: ../src/headers/headers.h
 CMakeFiles/SpaceInvaders.dir/src/entry.c.o: ../src/headers/log.h
 CMakeFiles/SpaceInvaders.dir/src/entry.c.o: ../src/headers/manager.h
@@ -46,11 +51,29 @@ CMakeFiles/SpaceInvaders.dir/src/entry.c.o: ../src/headers/mem.h
 CMakeFiles/SpaceInvaders.dir/src/entry.c.o: ../src/headers/tests.h
 CMakeFiles/SpaceInvaders.dir/src/entry.c.o: ../src/entry.c
 
-CMakeFiles/SpaceInvaders.dir/src/log/log.c.o: ../src/headers/log.h
-CMakeFiles/SpaceInvaders.dir/src/log/log.c.o: ../src/log/log.c
+CMakeFiles/SpaceInvaders.dir/src/io/file.c.o: ../src/headers/cpu.h
+CMakeFiles/SpaceInvaders.dir/src/io/file.c.o: ../src/headers/cpu_opcodes.h
+CMakeFiles/SpaceInvaders.dir/src/io/file.c.o: ../src/headers/file.h
+CMakeFiles/SpaceInvaders.dir/src/io/file.c.o: ../src/headers/headers.h
+CMakeFiles/SpaceInvaders.dir/src/io/file.c.o: ../src/headers/log.h
+CMakeFiles/SpaceInvaders.dir/src/io/file.c.o: ../src/headers/manager.h
+CMakeFiles/SpaceInvaders.dir/src/io/file.c.o: ../src/headers/mem.h
+CMakeFiles/SpaceInvaders.dir/src/io/file.c.o: ../src/headers/tests.h
+CMakeFiles/SpaceInvaders.dir/src/io/file.c.o: ../src/io/file.c
+
+CMakeFiles/SpaceInvaders.dir/src/io/log.c.o: ../src/headers/cpu.h
+CMakeFiles/SpaceInvaders.dir/src/io/log.c.o: ../src/headers/cpu_opcodes.h
+CMakeFiles/SpaceInvaders.dir/src/io/log.c.o: ../src/headers/file.h
+CMakeFiles/SpaceInvaders.dir/src/io/log.c.o: ../src/headers/headers.h
+CMakeFiles/SpaceInvaders.dir/src/io/log.c.o: ../src/headers/log.h
+CMakeFiles/SpaceInvaders.dir/src/io/log.c.o: ../src/headers/manager.h
+CMakeFiles/SpaceInvaders.dir/src/io/log.c.o: ../src/headers/mem.h
+CMakeFiles/SpaceInvaders.dir/src/io/log.c.o: ../src/headers/tests.h
+CMakeFiles/SpaceInvaders.dir/src/io/log.c.o: ../src/io/log.c
 
 CMakeFiles/SpaceInvaders.dir/src/tests/tests.c.o: ../src/headers/cpu.h
 CMakeFiles/SpaceInvaders.dir/src/tests/tests.c.o: ../src/headers/cpu_opcodes.h
+CMakeFiles/SpaceInvaders.dir/src/tests/tests.c.o: ../src/headers/file.h
 CMakeFiles/SpaceInvaders.dir/src/tests/tests.c.o: ../src/headers/headers.h
 CMakeFiles/SpaceInvaders.dir/src/tests/tests.c.o: ../src/headers/log.h
 CMakeFiles/SpaceInvaders.dir/src/tests/tests.c.o: ../src/headers/manager.h

@@ -12,7 +12,7 @@
 //global defines
 #ifdef __unix__
 #define UNIX
-typedef FILE FILE_HANDLE
+typedef FILE FILE_HANDLE;
 #elif defined(_WIN32) || defined(WIN32)
 #define WINDOWS
 #include <Windows.h>

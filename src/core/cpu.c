@@ -1,16 +1,16 @@
 #include <headers.h>
 
 void init_cpu(){
-    log_info("initializing the cpu", 1);
+    log_info("initializing the cpu");
 
-    regs = (struct regs*)malloc(sizeof(struct _registers));
-    cpu_st = (struct cpu_st*)malloc(sizeof(struct _cpu_state));
+    regs = (registers*)malloc(sizeof(registers));
+    cpu_st = (cpu_state*)malloc(sizeof(cpu_state));
 
     if (regs && cpu_st) {
-        memset(regs, 0, sizeof(struct _registers));
-        memset(cpu_st, 0, sizeof(struct _cpu_state));
+        memset(regs, 0, sizeof(registers));
+        memset(cpu_st, 0, sizeof(cpu_state));
 
-        log_info("success setting up cpu", 1);
+        log_info("success setting up cpu");
     }
 }
 

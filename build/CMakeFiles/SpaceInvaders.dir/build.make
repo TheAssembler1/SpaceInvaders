@@ -122,22 +122,35 @@ CMakeFiles/SpaceInvaders.dir/src/entry.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SpaceInvaders.dir/src/entry.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/theassembler1/Src/SpaceInvaders/src/entry.c -o CMakeFiles/SpaceInvaders.dir/src/entry.c.s
 
-CMakeFiles/SpaceInvaders.dir/src/log/log.c.o: CMakeFiles/SpaceInvaders.dir/flags.make
-CMakeFiles/SpaceInvaders.dir/src/log/log.c.o: ../src/log/log.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/theassembler1/Src/SpaceInvaders/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/SpaceInvaders.dir/src/log/log.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SpaceInvaders.dir/src/log/log.c.o   -c /home/theassembler1/Src/SpaceInvaders/src/log/log.c
+CMakeFiles/SpaceInvaders.dir/src/io/file.c.o: CMakeFiles/SpaceInvaders.dir/flags.make
+CMakeFiles/SpaceInvaders.dir/src/io/file.c.o: ../src/io/file.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/theassembler1/Src/SpaceInvaders/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/SpaceInvaders.dir/src/io/file.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SpaceInvaders.dir/src/io/file.c.o   -c /home/theassembler1/Src/SpaceInvaders/src/io/file.c
 
-CMakeFiles/SpaceInvaders.dir/src/log/log.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SpaceInvaders.dir/src/log/log.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/theassembler1/Src/SpaceInvaders/src/log/log.c > CMakeFiles/SpaceInvaders.dir/src/log/log.c.i
+CMakeFiles/SpaceInvaders.dir/src/io/file.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SpaceInvaders.dir/src/io/file.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/theassembler1/Src/SpaceInvaders/src/io/file.c > CMakeFiles/SpaceInvaders.dir/src/io/file.c.i
 
-CMakeFiles/SpaceInvaders.dir/src/log/log.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SpaceInvaders.dir/src/log/log.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/theassembler1/Src/SpaceInvaders/src/log/log.c -o CMakeFiles/SpaceInvaders.dir/src/log/log.c.s
+CMakeFiles/SpaceInvaders.dir/src/io/file.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SpaceInvaders.dir/src/io/file.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/theassembler1/Src/SpaceInvaders/src/io/file.c -o CMakeFiles/SpaceInvaders.dir/src/io/file.c.s
+
+CMakeFiles/SpaceInvaders.dir/src/io/log.c.o: CMakeFiles/SpaceInvaders.dir/flags.make
+CMakeFiles/SpaceInvaders.dir/src/io/log.c.o: ../src/io/log.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/theassembler1/Src/SpaceInvaders/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/SpaceInvaders.dir/src/io/log.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SpaceInvaders.dir/src/io/log.c.o   -c /home/theassembler1/Src/SpaceInvaders/src/io/log.c
+
+CMakeFiles/SpaceInvaders.dir/src/io/log.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/SpaceInvaders.dir/src/io/log.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/theassembler1/Src/SpaceInvaders/src/io/log.c > CMakeFiles/SpaceInvaders.dir/src/io/log.c.i
+
+CMakeFiles/SpaceInvaders.dir/src/io/log.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/SpaceInvaders.dir/src/io/log.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/theassembler1/Src/SpaceInvaders/src/io/log.c -o CMakeFiles/SpaceInvaders.dir/src/io/log.c.s
 
 CMakeFiles/SpaceInvaders.dir/src/tests/tests.c.o: CMakeFiles/SpaceInvaders.dir/flags.make
 CMakeFiles/SpaceInvaders.dir/src/tests/tests.c.o: ../src/tests/tests.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/theassembler1/Src/SpaceInvaders/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/SpaceInvaders.dir/src/tests/tests.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/theassembler1/Src/SpaceInvaders/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/SpaceInvaders.dir/src/tests/tests.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/SpaceInvaders.dir/src/tests/tests.c.o   -c /home/theassembler1/Src/SpaceInvaders/src/tests/tests.c
 
 CMakeFiles/SpaceInvaders.dir/src/tests/tests.c.i: cmake_force
@@ -155,7 +168,8 @@ SpaceInvaders_OBJECTS = \
 "CMakeFiles/SpaceInvaders.dir/src/core/manager.c.o" \
 "CMakeFiles/SpaceInvaders.dir/src/core/mem.c.o" \
 "CMakeFiles/SpaceInvaders.dir/src/entry.c.o" \
-"CMakeFiles/SpaceInvaders.dir/src/log/log.c.o" \
+"CMakeFiles/SpaceInvaders.dir/src/io/file.c.o" \
+"CMakeFiles/SpaceInvaders.dir/src/io/log.c.o" \
 "CMakeFiles/SpaceInvaders.dir/src/tests/tests.c.o"
 
 # External object files for target SpaceInvaders
@@ -166,11 +180,12 @@ SpaceInvaders: CMakeFiles/SpaceInvaders.dir/src/core/cpu_opcodes.c.o
 SpaceInvaders: CMakeFiles/SpaceInvaders.dir/src/core/manager.c.o
 SpaceInvaders: CMakeFiles/SpaceInvaders.dir/src/core/mem.c.o
 SpaceInvaders: CMakeFiles/SpaceInvaders.dir/src/entry.c.o
-SpaceInvaders: CMakeFiles/SpaceInvaders.dir/src/log/log.c.o
+SpaceInvaders: CMakeFiles/SpaceInvaders.dir/src/io/file.c.o
+SpaceInvaders: CMakeFiles/SpaceInvaders.dir/src/io/log.c.o
 SpaceInvaders: CMakeFiles/SpaceInvaders.dir/src/tests/tests.c.o
 SpaceInvaders: CMakeFiles/SpaceInvaders.dir/build.make
 SpaceInvaders: CMakeFiles/SpaceInvaders.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/theassembler1/Src/SpaceInvaders/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C executable SpaceInvaders"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/theassembler1/Src/SpaceInvaders/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking C executable SpaceInvaders"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SpaceInvaders.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

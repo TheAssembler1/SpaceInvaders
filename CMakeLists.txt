@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 2.6.0)
+# setting minimum cmake
+cmake_minimum_required(VERSION 3.22)  
 
 # adding the headers to the project
 include_directories(src/headers/)

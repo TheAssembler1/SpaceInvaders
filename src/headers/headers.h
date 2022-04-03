@@ -4,7 +4,7 @@
 //global defines
 #ifdef __unix__
 #define UNIX
-#elif defined(_WIN32) || defined(WIN32)
+#elif defined(_WIN32) || defined(WIN32) || defined(WIN64)
 #define WINDOWS
 #endif
 

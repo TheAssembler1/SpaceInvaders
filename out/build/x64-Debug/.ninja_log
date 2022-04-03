@@ -1,0 +1,9 @@
+# ninja log v5
+11	185	6706501458767614	CMakeFiles/SpaceInvaders.dir/src/log/log.c.obj	88f32a1e708a7f56
+13	186	6706501458767614	CMakeFiles/SpaceInvaders.dir/src/tests/tests.c.obj	5f2e9a0ebcafbf59
+5	186	6706501458767614	CMakeFiles/SpaceInvaders.dir/src/entry.c.obj	4564f8349df548d8
+1	187	6706501458767614	CMakeFiles/SpaceInvaders.dir/src/core/cpu_opcodes.c.obj	754b0e3404fac000
+3	187	6706501458767614	CMakeFiles/SpaceInvaders.dir/src/core/cpu.c.obj	36f75198a26d30a4
+8	188	6706501458777581	CMakeFiles/SpaceInvaders.dir/src/core/mem.c.obj	420f87bf330a800f
+7	188	6706501458767614	CMakeFiles/SpaceInvaders.dir/src/core/manager.c.obj	be3fd23af4d1b3ae
+188	401	6706501460762270	SpaceInvaders.exe	f5ccdf48087a2b22

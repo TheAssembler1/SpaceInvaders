@@ -258,33 +258,6 @@ src/entry.c.s:
 	$(MAKE) -f CMakeFiles/SpaceInvaders.dir/build.make CMakeFiles/SpaceInvaders.dir/src/entry.c.s
 .PHONY : src/entry.c.s
 
-src/io/file.o: src/io/file.c.o
-
-.PHONY : src/io/file.o
-
-# target to build an object file
-src/io/file.c.o:
-	$(MAKE) -f CMakeFiles/SpaceInvaders.dir/build.make CMakeFiles/SpaceInvaders.dir/src/io/file.c.o
-.PHONY : src/io/file.c.o
-
-src/io/file.i: src/io/file.c.i
-
-.PHONY : src/io/file.i
-
-# target to preprocess a source file
-src/io/file.c.i:
-	$(MAKE) -f CMakeFiles/SpaceInvaders.dir/build.make CMakeFiles/SpaceInvaders.dir/src/io/file.c.i
-.PHONY : src/io/file.c.i
-
-src/io/file.s: src/io/file.c.s
-
-.PHONY : src/io/file.s
-
-# target to generate assembly for a file
-src/io/file.c.s:
-	$(MAKE) -f CMakeFiles/SpaceInvaders.dir/build.make CMakeFiles/SpaceInvaders.dir/src/io/file.c.s
-.PHONY : src/io/file.c.s
-
 src/io/log.o: src/io/log.c.o
 
 .PHONY : src/io/log.o
@@ -363,9 +336,6 @@ help:
 	@echo "... src/entry.o"
 	@echo "... src/entry.i"
 	@echo "... src/entry.s"
-	@echo "... src/io/file.o"
-	@echo "... src/io/file.i"
-	@echo "... src/io/file.s"
 	@echo "... src/io/log.o"
 	@echo "... src/io/log.i"
 	@echo "... src/io/log.s"

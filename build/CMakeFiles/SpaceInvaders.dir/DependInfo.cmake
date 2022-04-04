@@ -9,7 +9,6 @@ set(CMAKE_DEPENDS_CHECK_C
   "/home/theassembler1/Src/SpaceInvaders/src/core/manager.c" "/home/theassembler1/Src/SpaceInvaders/build/CMakeFiles/SpaceInvaders.dir/src/core/manager.c.o"
   "/home/theassembler1/Src/SpaceInvaders/src/core/mem.c" "/home/theassembler1/Src/SpaceInvaders/build/CMakeFiles/SpaceInvaders.dir/src/core/mem.c.o"
   "/home/theassembler1/Src/SpaceInvaders/src/entry.c" "/home/theassembler1/Src/SpaceInvaders/build/CMakeFiles/SpaceInvaders.dir/src/entry.c.o"
-  "/home/theassembler1/Src/SpaceInvaders/src/io/file.c" "/home/theassembler1/Src/SpaceInvaders/build/CMakeFiles/SpaceInvaders.dir/src/io/file.c.o"
   "/home/theassembler1/Src/SpaceInvaders/src/io/log.c" "/home/theassembler1/Src/SpaceInvaders/build/CMakeFiles/SpaceInvaders.dir/src/io/log.c.o"
   "/home/theassembler1/Src/SpaceInvaders/src/tests/tests.c" "/home/theassembler1/Src/SpaceInvaders/build/CMakeFiles/SpaceInvaders.dir/src/tests/tests.c.o"
   )

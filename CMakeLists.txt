@@ -12,25 +12,29 @@ project(SpaceInvaders C)
 file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/*.c")
 
 #setting sdl 32 bit libraries
-if (${CMAKE_SIZEOF_VOID_P} MATCHES 8)
-	set(SDL2_LIB "${CMAKE_CURRENT_LIST_DIR}/src/external/SDL2-2.0.20/lib/x64/SDL2.lib")
-	set(SDL_DLL  "${CMAKE_CURRENT_LIST_DIR}/src/external/SDL2-2.0.20/lib/x64/SDL2.dll")
-
-	#setting output directory of were are on linux
-	if(UNIX)
-		set(CMAKE_CURRENT_BINARY_DIR, "${CMAKE_CURRENT_LIST_DIR}/out/build/x64-Linux/")
+if(WIN32)
+	if (${CMAKE_SIZEOF_VOID_P} MATCHES 8)
+		set(SDL2_LIBRARIES "${CMAKE_CURRENT_LIST_DIR}/src/external/SDL2-2.0.20/lib/x64/SDL2.lib")
+		set(SDL_DLL  "${CMAKE_CURRENT_LIST_DIR}/src/external/SDL2-2.0.20/lib/x64/SDL2.dll")
+	else()
+		set(SDL2_LIBRARIES "${CMAKE_CURRENT_LIST_DIR}/src/external/SDL2-2.0.20/lib/x86/SDL2.lib")
+		set(SDL_DLL  "${CMAKE_CURRENT_LIST_DIR}/src/external/SDL2-2.0.20/lib/x86/SDL2.dll")
 	endif()
-else()
-	set(SDL2_LIB "${CMAKE_CURRENT_LIST_DIR}/src/external/SDL2-2.0.20/lib/x86/SDL2.lib")
-	set(SDL_DLL  "${CMAKE_CURRENT_LIST_DIR}/src/external/SDL2-2.0.20/lib/x86/SDL2.dll")
 
-	#setting output directory of were are on linux
-	if(UNIX)
-		set(CMAKE_CURRENT_BINARY_DIR, "${CMAKE_CURRENT_LIST_DIR}/out/build/x86-Linux/")
+	file(COPY ${SDL_DLL} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+elseif(UNIX)
+	find_package(SDL2 REQUIRED)
+
+	if (${CMAKE_SIZEOF_VOID_P} MATCHES 8)
+		set(CMAKE_BINARY_DIR "${CMAKE_CURRENT_LIST_DIR}/out/build/x64-Linux")
+		set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+	else()
+		set(CMAKE_BINARY_DIR "${CMAKE_CURRENT_LIST_DIR}/out/build/x86-Linux")
+		set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 	endif()
 endif()
 
-file(COPY ${SDL_DLL} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
 
 add_executable(${PROJECT_NAME} ${SOURCES})
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIB})
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})

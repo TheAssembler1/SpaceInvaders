@@ -18,37 +18,17 @@ static void write_rom_to_mem(const char* file_path, unsigned long rom_start){
         log_info("%s file was opened", file_path);
 
     //going to end of file and getting file length
-    SDL_RWseek(file, 0, RW_SEEK_END);   
-    file_length = SDL_RWtell(file);
+    file_length = SDL_RWseek(file, 0, RW_SEEK_END);
+
+    log_trace("FILE LENGTH %u", file_length);
+
     SDL_RWseek(file, 0, RW_SEEK_SET);
 
-    for (int i = 0; i <= file_length; i++) {
+    for (int i = 0; i < file_length; i++)
         mem_buffer[i + rom_start] = SDL_ReadU8(file);
-        SDL_RWseek(file, 1, RW_SEEK_CUR);
-    }
 
     //closing the file
     SDL_RWclose(file);
-
-    /*
-    FILE* file = NULL;
-    long file_length = 0;
-    file = fopen(file_path, "rb");
-
-    (!file) ? log_error("%s file was null", file_path) : log_info("%s file was opened", file_path);
-
-    //getting the length of the file
-    fseek(file, 0, SEEK_END);
-    file_length = ftell(file);
-    rewind(file);
-
-    if(fread(&mem_buffer[rom_start], 1, file_length, file) == file_length)
-        log_info("%s was successfully written to mem_buffer", file_path);
-    else
-        log_error("%s was unsuccessfully written to mem_buffer", file_path);
-
-    fclose(file);
-    */
 }
 
 #define ROM_INVADERS_H_START 0x0000
@@ -70,9 +50,9 @@ invaders.e 0x1800-0x1FFF
 */
 static void load_rom(const char* folder_path){
     write_rom_to_mem(ROM_INVADERS_H, ROM_INVADERS_H_START);
-    write_rom_to_mem(ROM_INVADERS_G, ROM_INVADERS_G_START);
-    write_rom_to_mem(ROM_INVADERS_F, ROM_INVADERS_F_START);
-    write_rom_to_mem(ROM_INVADERS_E, ROM_INVADERS_E_START);
+    //write_rom_to_mem(ROM_INVADERS_G, ROM_INVADERS_G_START);
+    //write_rom_to_mem(ROM_INVADERS_F, ROM_INVADERS_F_START);
+    //write_rom_to_mem(ROM_INVADERS_E, ROM_INVADERS_E_START);
 
     //printing bytes 0x00 through 0xFF
     print_mem(0x00, 0xFF);
@@ -112,35 +92,14 @@ void write_short_mem(unsigned int address, uint16_t value){
     mem_buffer[address] = value & 0x00FF;
 }
 
-#define ROW_LENGTH 8
-#define CHARS_PER_BYTE 3
-#define BASE 0xF
+#define COLUMNS 0x8
 
 void print_mem(unsigned long start_address, unsigned long end_address) {
-    char chars[ROW_LENGTH * CHARS_PER_BYTE + 1];
-    char temp_chars[CHARS_PER_BYTE + 1];
+    log_info("printing mem buffer 0x%x-0x%x", start_address, end_address);
+    for (int i = start_address; i <= end_address; i++) {
+        log_log_nonewl("0x%02X ", (mem_buffer[i] | 0x00));
 
-    chars[ROW_LENGTH * CHARS_PER_BYTE] = '\0';
-    temp_chars[CHARS_PER_BYTE] = '\0';
-
-    memset(chars, 0, sizeof(chars));
-
-    log_info("printing mem from %x-%x", start_address, end_address);
-    for (int i = start_address; i < end_address; i++) {
-        //store number as string in chars array
-        itoa(mem_buffer[i], temp_chars, BASE);
-
-        unsigned long str_length = strlen(temp_chars);
-        temp_chars[str_length - 1] = '0';
-
-        //storing the bytes as asscci and filling in 0's when needed
-        for (int j = 0; j < str_length; j++)
-            chars[(i % ROW_LENGTH) * CHARS_PER_BYTE + j] = temp_chars[j];
-
-        //acutally printing the bytes
-        if (!((i + 1) % ROW_LENGTH)) {
-            log_info("%-3x | %s", (i + 1) - ROW_LENGTH, chars);
-            memset(chars, 0, sizeof(chars));
-        }
+        if (((i + 1) % 8) == 0)
+            log_log("");
     }
 }

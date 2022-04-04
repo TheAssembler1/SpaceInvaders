@@ -7,6 +7,12 @@
 3	673	6707428581317897	CMakeFiles/SpaceInvaders.dir/src/core/cpu.c.obj	36f75198a26d30a4
 15	641	6707428580998753	CMakeFiles/SpaceInvaders.dir/src/io/file.c.obj	1098494e92c6e4ac
 1	686	6707428581457531	CMakeFiles/SpaceInvaders.dir/src/core/cpu_opcodes.c.obj	754b0e3404fac000
-1	210	6707441088479870	SpaceInvaders.exe	a9954254d9ba1436
-1	93	6707451356400002	build.ninja	1e02b6ebf2002757
+0	211	6707452244413975	SpaceInvaders.exe	c7dddf40794d8a20
+1	93	6707474076557202	build.ninja	1e02b6ebf2002757
 0	7	0	clean	7c4ab7700f810e4a
+1	674	6707476451650342	CMakeFiles/SpaceInvaders.dir/src/entry.c.obj	4564f8349df548d8
+674	772	6707476452428259	SpaceInvaders.exe	c7dddf40794d8a20
+1	290	6707476593485930	CMakeFiles/SpaceInvaders.dir/src/entry.c.obj	4564f8349df548d8
+291	376	6707476594213984	SpaceInvaders.exe	c7dddf40794d8a20
+1	288	6707476717812993	CMakeFiles/SpaceInvaders.dir/src/entry.c.obj	4564f8349df548d8
+288	371	6707476718501157	SpaceInvaders.exe	c7dddf40794d8a20

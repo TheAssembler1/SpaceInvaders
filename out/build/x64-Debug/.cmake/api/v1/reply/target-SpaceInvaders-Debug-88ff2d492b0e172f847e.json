@@ -29,19 +29,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 22,
+				"line" : 35,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 23,
-				"parent" : 0
-			},
-			{
-				"command" : 1,
-				"file" : 0,
-				"line" : 24,
+				"line" : 36,
 				"parent" : 0
 			},
 			{
@@ -64,7 +58,7 @@
 			"includes" : 
 			[
 				{
-					"backtrace" : 4,
+					"backtrace" : 3,
 					"path" : "C:/Users/lewis/Documents/SpaceInvaders/src/headers"
 				}
 			],
@@ -98,11 +92,6 @@
 			{
 				"backtrace" : 2,
 				"fragment" : "..\\..\\..\\src\\external\\SDL2-2.0.20\\lib\\x64\\SDL2.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 3,
-				"fragment" : "..\\..\\..\\src\\external\\SDL2-2.0.20\\lib\\x64\\SDL2.dll",
 				"role" : "libraries"
 			},
 			{

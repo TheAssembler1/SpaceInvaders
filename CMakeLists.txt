@@ -15,10 +15,22 @@ file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/*.c")
 if (${CMAKE_SIZEOF_VOID_P} MATCHES 8)
 	set(SDL2_LIB "${CMAKE_CURRENT_LIST_DIR}/src/external/SDL2-2.0.20/lib/x64/SDL2.lib")
 	set(SDL_DLL  "${CMAKE_CURRENT_LIST_DIR}/src/external/SDL2-2.0.20/lib/x64/SDL2.dll")
+
+	#setting output directory of were are on linux
+	if(UNIX)
+		set(CMAKE_CURRENT_BINARY_DIR, "${CMAKE_CURRENT_LIST_DIR}/out/build/x64-Linux/")
+	endif()
 else()
-	set(SDL2_LIBRARIES "${CMAKE_CURRENT_LIST_DIR}/src/external/SDL2-2.0.20/lib/x86/SDL2.dll;${CMAKE_CURRENT_LIST_DIR}/src/external/SDL2-2.0.20/lib/x86/SDL2.lib")
+	set(SDL2_LIB "${CMAKE_CURRENT_LIST_DIR}/src/external/SDL2-2.0.20/lib/x86/SDL2.lib")
+	set(SDL_DLL  "${CMAKE_CURRENT_LIST_DIR}/src/external/SDL2-2.0.20/lib/x86/SDL2.dll")
+
+	#setting output directory of were are on linux
+	if(UNIX)
+		set(CMAKE_CURRENT_BINARY_DIR, "${CMAKE_CURRENT_LIST_DIR}/out/build/x86-Linux/")
+	endif()
 endif()
+
+file(COPY ${SDL_DLL} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIB})
-target_link_libraries(${PROJECT_NAME} ${SDL_DLL})

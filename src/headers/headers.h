@@ -25,13 +25,17 @@ typedef HANDLE FILE_HANDLE;
 #define ROM_INVADERS_G ROM_FOLDER "invaders.g"
 #define ROM_INVADERS_H ROM_FOLDER "invaders.h"
 
+//external headers
+#include "../external/SDL2-2.0.20/include/SDL.h"
+#undef main
+
 //this projects headers
-#include <log.h>
-#include <cpu.h>
-#include <cpu_opcodes.h>
-#include <mem.h>
-#include <manager.h>
-#include <tests.h>
-#include <file.h>
+#include "log.h"
+#include "cpu.h"
+#include "cpu_opcodes.h"
+#include "mem.h"
+#include "manager.h"
+#include "tests.h"
+#include "file.h"
 
 #endif //HEADERS_H

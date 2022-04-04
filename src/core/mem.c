@@ -73,6 +73,9 @@ static void load_rom(const char* folder_path){
     write_rom_to_mem(ROM_INVADERS_G, ROM_INVADERS_G_START);
     write_rom_to_mem(ROM_INVADERS_F, ROM_INVADERS_F_START);
     write_rom_to_mem(ROM_INVADERS_E, ROM_INVADERS_E_START);
+
+    //printing bytes 0x00 through 0xFF
+    print_mem(0x00, 0xFF);
 }   
 
 void init_mem(){
@@ -107,4 +110,37 @@ uint16_t read_short_mem(unsigned int address){
 void write_short_mem(unsigned int address, uint16_t value){
     mem_buffer[address + 1] = (value & 0xFF00) >> 8;
     mem_buffer[address] = value & 0x00FF;
+}
+
+#define ROW_LENGTH 8
+#define CHARS_PER_BYTE 3
+#define BASE 0xF
+
+void print_mem(unsigned long start_address, unsigned long end_address) {
+    char chars[ROW_LENGTH * CHARS_PER_BYTE + 1];
+    char temp_chars[CHARS_PER_BYTE + 1];
+
+    chars[ROW_LENGTH * CHARS_PER_BYTE] = '\0';
+    temp_chars[CHARS_PER_BYTE] = '\0';
+
+    memset(chars, 0, sizeof(chars));
+
+    log_info("printing mem from %x-%x", start_address, end_address);
+    for (int i = start_address; i < end_address; i++) {
+        //store number as string in chars array
+        itoa(mem_buffer[i], temp_chars, BASE);
+
+        unsigned long str_length = strlen(temp_chars);
+        temp_chars[str_length - 1] = '0';
+
+        //storing the bytes as asscci and filling in 0's when needed
+        for (int j = 0; j < str_length; j++)
+            chars[(i % ROW_LENGTH) * CHARS_PER_BYTE + j] = temp_chars[j];
+
+        //acutally printing the bytes
+        if (!((i + 1) % ROW_LENGTH)) {
+            log_info("%-3x | %s", (i + 1) - ROW_LENGTH, chars);
+            memset(chars, 0, sizeof(chars));
+        }
+    }
 }

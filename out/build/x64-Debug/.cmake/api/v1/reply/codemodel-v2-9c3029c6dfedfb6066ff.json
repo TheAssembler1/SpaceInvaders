@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "SpaceInvaders::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-SpaceInvaders-Debug-9ef164d339028764a697.json",
+					"jsonFile" : "target-SpaceInvaders-Debug-1a49c48773654dcc38c8.json",
 					"name" : "SpaceInvaders",
 					"projectIndex" : 0
 				}
@@ -49,7 +49,7 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/lewis/Documents/SpaceInvaders/out/build/x86-Debug",
+		"build" : "C:/Users/lewis/Documents/SpaceInvaders/out/build/x64-Debug",
 		"source" : "C:/Users/lewis/Documents/SpaceInvaders"
 	},
 	"version" : 

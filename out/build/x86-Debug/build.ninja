@@ -89,14 +89,6 @@ build CMakeFiles\SpaceInvaders.dir\src\entry.c.obj: C_COMPILER__SpaceInvaders_De
   TARGET_COMPILE_PDB = CMakeFiles\SpaceInvaders.dir\
   TARGET_PDB = SpaceInvaders.pdb
 
-build CMakeFiles\SpaceInvaders.dir\src\io\file.c.obj: C_COMPILER__SpaceInvaders_Debug C$:\Users\lewis\Documents\SpaceInvaders\src\io\file.c || cmake_object_order_depends_target_SpaceInvaders
-  FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd
-  INCLUDES = -IC:\Users\lewis\Documents\SpaceInvaders\src\headers
-  OBJECT_DIR = CMakeFiles\SpaceInvaders.dir
-  OBJECT_FILE_DIR = CMakeFiles\SpaceInvaders.dir\src\io
-  TARGET_COMPILE_PDB = CMakeFiles\SpaceInvaders.dir\
-  TARGET_PDB = SpaceInvaders.pdb
-
 build CMakeFiles\SpaceInvaders.dir\src\io\log.c.obj: C_COMPILER__SpaceInvaders_Debug C$:\Users\lewis\Documents\SpaceInvaders\src\io\log.c || cmake_object_order_depends_target_SpaceInvaders
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd
   INCLUDES = -IC:\Users\lewis\Documents\SpaceInvaders\src\headers
@@ -121,7 +113,7 @@ build CMakeFiles\SpaceInvaders.dir\src\tests\tests.c.obj: C_COMPILER__SpaceInvad
 #############################################
 # Link the executable SpaceInvaders.exe
 
-build SpaceInvaders.exe: C_EXECUTABLE_LINKER__SpaceInvaders_Debug CMakeFiles\SpaceInvaders.dir\src\core\cpu.c.obj CMakeFiles\SpaceInvaders.dir\src\core\cpu_opcodes.c.obj CMakeFiles\SpaceInvaders.dir\src\core\manager.c.obj CMakeFiles\SpaceInvaders.dir\src\core\mem.c.obj CMakeFiles\SpaceInvaders.dir\src\entry.c.obj CMakeFiles\SpaceInvaders.dir\src\io\file.c.obj CMakeFiles\SpaceInvaders.dir\src\io\log.c.obj CMakeFiles\SpaceInvaders.dir\src\tests\tests.c.obj | ..\..\..\src\external\SDL2-2.0.20\lib\x86\SDL2.lib
+build SpaceInvaders.exe: C_EXECUTABLE_LINKER__SpaceInvaders_Debug CMakeFiles\SpaceInvaders.dir\src\core\cpu.c.obj CMakeFiles\SpaceInvaders.dir\src\core\cpu_opcodes.c.obj CMakeFiles\SpaceInvaders.dir\src\core\manager.c.obj CMakeFiles\SpaceInvaders.dir\src\core\mem.c.obj CMakeFiles\SpaceInvaders.dir\src\entry.c.obj CMakeFiles\SpaceInvaders.dir\src\io\log.c.obj CMakeFiles\SpaceInvaders.dir\src\tests\tests.c.obj | ..\..\..\src\external\SDL2-2.0.20\lib\x86\SDL2.lib
   FLAGS = /DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:X86 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = ..\..\..\src\external\SDL2-2.0.20\lib\x86\SDL2.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

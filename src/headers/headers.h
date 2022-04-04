@@ -12,22 +12,24 @@
 //global defines
 #ifdef __unix__
 #define UNIX
-typedef FILE FILE_HANDLE;
 #elif defined(_WIN32) || defined(WIN32)
 #define WINDOWS
-#include <Windows.h>
-typedef HANDLE FILE_HANDLE;
 #endif
 
-#define ROM_FOLDER "rom/"
+#ifdef UNIX
+#define ROM_FOLDER "../../../rom/"
+#elif defined(WINDOWS)
+#define ROM_FOLDER "..\\..\\..\\rom\\"
+#endif
+
 #define ROM_INVADERS_E ROM_FOLDER "invaders.e"
 #define ROM_INVADERS_F ROM_FOLDER "invaders.f"
 #define ROM_INVADERS_G ROM_FOLDER "invaders.g"
 #define ROM_INVADERS_H ROM_FOLDER "invaders.h"
 
 //external headers
+#define SDL_MAIN_HANDLED
 #include "../external/SDL2-2.0.20/include/SDL.h"
-#undef main
 
 //this projects headers
 #include "log.h"
@@ -36,6 +38,5 @@ typedef HANDLE FILE_HANDLE;
 #include "mem.h"
 #include "manager.h"
 #include "tests.h"
-#include "file.h"
 
 #endif //HEADERS_H

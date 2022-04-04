@@ -4,6 +4,32 @@ static uint8_t* mem_buffer;
 
 //returns length of the file
 static void write_rom_to_mem(const char* file_path, unsigned long rom_start){
+    //creating file and checking if it is NULL
+    SDL_RWops* file = NULL;
+
+    long file_length = 0;
+
+    file = SDL_RWFromFile(file_path, "rb");
+    if (!file) { 
+        log_error("%s file was null", file_path);
+        deinit_manager();
+    }
+    else
+        log_info("%s file was opened", file_path);
+
+    //going to end of file and getting file length
+    SDL_RWseek(file, 0, RW_SEEK_END);   
+    file_length = SDL_RWtell(file);
+    SDL_RWseek(file, 0, RW_SEEK_SET);
+
+    for (int i = 0; i <= file_length; i++) {
+        mem_buffer[i + rom_start] = SDL_ReadU8(file);
+        SDL_RWseek(file, 1, RW_SEEK_CUR);
+    }
+
+    //closing the file
+    SDL_RWclose(file);
+
     /*
     FILE* file = NULL;
     long file_length = 0;
@@ -56,7 +82,9 @@ void init_mem(){
     test_read_write_mem();
 
     //resetting memory and loading the rom into memory
-    memset(mem_buffer, 0, MEM_BUFFER_SIZE);
+    if(mem_buffer)
+        memset(mem_buffer, 0, MEM_BUFFER_SIZE);
+
     load_rom(ROM_FOLDER);
 }
 

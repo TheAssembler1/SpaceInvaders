@@ -23,7 +23,7 @@ pointer.
 //LXI | 3 | 10 | - - - - -
 void lxi(registers* registers, cpu_state* cpu_state, int pair_register);
 
-/* Intel 8080 Manul
+/* Intel 8080 Manual
 Description: The contents of the accumulator are 
 stored in the memory location addressed by registers B and 
 C, or by registers D and E.
@@ -54,5 +54,12 @@ register pair is incremented by one.
 */
 //INX | 1 | 5 | - - - - -
 void inx(registers* registers, cpu_state* cpu_state, int pair_register);
+
+/* Intel 8080 Manual
+Description: The byte of immediate data is stored in
+specified register or memory byte.
+*/
+//MVI | 2 | 7/10 | - - - - -
+void mvi(registers* registers, cpu_state* cpu_state, int _register);
 
 #endif //CPU_OPCODES_H

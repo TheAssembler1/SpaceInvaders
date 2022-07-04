@@ -50,9 +50,9 @@ invaders.e 0x1800-0x1FFF
 */
 static void load_rom(const char* folder_path){
     write_rom_to_mem(ROM_INVADERS_H, ROM_INVADERS_H_START);
-    //write_rom_to_mem(ROM_INVADERS_G, ROM_INVADERS_G_START);
-    //write_rom_to_mem(ROM_INVADERS_F, ROM_INVADERS_F_START);
-    //write_rom_to_mem(ROM_INVADERS_E, ROM_INVADERS_E_START);
+    write_rom_to_mem(ROM_INVADERS_G, ROM_INVADERS_G_START);
+    write_rom_to_mem(ROM_INVADERS_F, ROM_INVADERS_F_START);
+    write_rom_to_mem(ROM_INVADERS_E, ROM_INVADERS_E_START);
 
     //printing bytes 0x00 through 0xFF
     print_mem(0x00, 0xFF);

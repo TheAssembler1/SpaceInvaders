@@ -39,3 +39,15 @@ void inx(registers* registers, cpu_state* cpu_state, int pair_register){
     registers->pc++;
     cpu_state->cycles += 5;
 }
+
+void mvi(registers* registers, cpu_state* cpu_state, int _register) {
+    if (_register != M)
+        load_register(_register, read_byte_mem(registers->pc + 1));
+    else {
+        write_byte_mem(registers->hl, read_byte_mem(registers->pc + 1));
+        cpu_state->cycles += 3;
+    }
+
+    registers->pc += 2;
+    cpu_state->cycles += 7;
+}

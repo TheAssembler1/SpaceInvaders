@@ -15,7 +15,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.31.31103/bin/Hostx64/x64/lib.exe"
+			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.32.31326/bin/Hostx64/x64/lib.exe"
 		},
 		{
 			"name" : "CMAKE_BUILD_TYPE",
@@ -39,7 +39,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/lewis/Documents/SpaceInvaders/out/build/x64-Debug"
+			"value" : "c:/Users/TheAssembler/Src/SpaceInvaders/out/build/x64-Debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -75,7 +75,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "22022201"
+			"value" : "22040401"
 		},
 		{
 			"name" : "CMAKE_COMMAND",
@@ -127,7 +127,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.31.31103/bin/Hostx64/x64/cl.exe"
+			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.32.31326/bin/Hostx64/x64/cl.exe"
 		},
 		{
 			"name" : "CMAKE_C_FLAGS",
@@ -403,7 +403,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/lewis/Documents/SpaceInvaders"
+			"value" : "C:/Users/TheAssembler/Src/SpaceInvaders"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -415,7 +415,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Users/lewis/Documents/SpaceInvaders/out/install/x64-Debug"
+			"value" : "C:/Users/TheAssembler/Src/SpaceInvaders/out/install/x64-Debug"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -431,7 +431,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.31.31103/bin/Hostx64/x64/link.exe"
+			"value" : "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.32.31326/bin/Hostx64/x64/link.exe"
 		},
 		{
 			"name" : "CMAKE_MAKE_PROGRAM",
@@ -951,7 +951,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/lewis/Documents/SpaceInvaders/out/build/x64-Debug"
+			"value" : "C:/Users/TheAssembler/Src/SpaceInvaders/out/build/x64-Debug"
 		},
 		{
 			"name" : "SpaceInvaders_IS_TOP_LEVEL",
@@ -975,7 +975,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/lewis/Documents/SpaceInvaders"
+			"value" : "C:/Users/TheAssembler/Src/SpaceInvaders"
 		}
 	],
 	"kind" : "cache",

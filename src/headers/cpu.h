@@ -56,7 +56,8 @@ enum registers_select{
     A, F,
     B, C,
     D, E,
-    H, L
+    H, L,
+    M
 };
 
 enum pair_registers_select{

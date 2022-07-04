@@ -27,23 +27,30 @@ static void execute_opcode(uint16_t opcode){
         case 0x01: lxi(regs, cpu_st, BC);  break;
         case 0x02: stax(regs, cpu_st, BC); break;
         case 0x03: inx(regs, cpu_st, BC);  break;
+        case 0x06: mvi(regs, cpu_st, B);   break;
         case 0x08: nop(regs, cpu_st);      break;
         case 0x10: nop(regs, cpu_st);      break;
         case 0x11: lxi(regs, cpu_st, DE);  break;
         case 0x12: stax(regs, cpu_st, DE); break;
         case 0x13: inx(regs, cpu_st, DE);  break;
+        case 0x16: mvi(regs, cpu_st, D);   break;
         case 0x18: nop(regs, cpu_st);      break;
         case 0x20: nop(regs, cpu_st);      break;
         case 0x21: lxi(regs, cpu_st, HL);  break;
         case 0x22: shld(regs, cpu_st);     break;
         case 0x23: inx(regs, cpu_st, HL);  break;
+        case 0x26: mvi(regs, cpu_st, H);   break;
         case 0x28: nop(regs, cpu_st);      break;
         case 0x30: nop(regs, cpu_st);      break;
         case 0x31: lxi(regs, cpu_st, SP);  break;
         case 0x32: sta(regs, cpu_st);      break;
         case 0x33: inx(regs, cpu_st, SP);  break;
+        case 0x36: mvi(regs, cpu_st, M);   break;
         case 0x38: nop(regs, cpu_st);      break;
-        default: log_error("opcode %x does not exist", opcode); deinit_manager(); break;
+        default: 
+            log_error("opcode %x does not exist", opcode); 
+            deinit_manager(); 
+            break;
     }
 }
 

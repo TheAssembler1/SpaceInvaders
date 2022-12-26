@@ -23,30 +23,51 @@ void deinit_cpu(){
 
 static void execute_opcode(uint16_t opcode){
     switch(opcode){
-        case 0x00: nop(regs, cpu_st);      break;
-        case 0x01: lxi(regs, cpu_st, BC);  break;
-        case 0x02: stax(regs, cpu_st, BC); break;
-        case 0x03: inx(regs, cpu_st, BC);  break;
-        case 0x06: mvi(regs, cpu_st, B);   break;
-        case 0x08: nop(regs, cpu_st);      break;
-        case 0x10: nop(regs, cpu_st);      break;
-        case 0x11: lxi(regs, cpu_st, DE);  break;
-        case 0x12: stax(regs, cpu_st, DE); break;
-        case 0x13: inx(regs, cpu_st, DE);  break;
-        case 0x16: mvi(regs, cpu_st, D);   break;
-        case 0x18: nop(regs, cpu_st);      break;
-        case 0x20: nop(regs, cpu_st);      break;
-        case 0x21: lxi(regs, cpu_st, HL);  break;
-        case 0x22: shld(regs, cpu_st);     break;
-        case 0x23: inx(regs, cpu_st, HL);  break;
-        case 0x26: mvi(regs, cpu_st, H);   break;
-        case 0x28: nop(regs, cpu_st);      break;
-        case 0x30: nop(regs, cpu_st);      break;
-        case 0x31: lxi(regs, cpu_st, SP);  break;
-        case 0x32: sta(regs, cpu_st);      break;
-        case 0x33: inx(regs, cpu_st, SP);  break;
-        case 0x36: mvi(regs, cpu_st, M);   break;
-        case 0x38: nop(regs, cpu_st);      break;
+        case 0x00: nop(regs, cpu_st);                                break;
+        case 0x01: lxi(regs, cpu_st, BC);                            break;
+        case 0x02: stax(regs, cpu_st, BC);                           break;
+        case 0x03: inx(regs, cpu_st, BC);                            break;
+        case 0x06: mvi(regs, cpu_st, B);                             break;
+        case 0x08: nop(regs, cpu_st);                                break;
+        case 0x10: nop(regs, cpu_st);                                break;
+        case 0x11: lxi(regs, cpu_st, DE);                            break;
+        case 0x12: stax(regs, cpu_st, DE);                           break;
+        case 0x13: inx(regs, cpu_st, DE);                            break;
+        case 0x16: mvi(regs, cpu_st, D);                             break;
+        case 0x18: nop(regs, cpu_st);                                break;
+        case 0x20: nop(regs, cpu_st);                                break;
+        case 0x21: lxi(regs, cpu_st, HL);                            break;
+        case 0x22: shld(regs, cpu_st);                               break;
+        case 0x23: inx(regs, cpu_st, HL);                            break;
+        case 0x26: mvi(regs, cpu_st, H);                             break;
+        case 0x28: nop(regs, cpu_st);                                break;
+        case 0x30: nop(regs, cpu_st);                                break;
+        case 0x31: lxi(regs, cpu_st, SP);                            break;
+        case 0x32: sta(regs, cpu_st);                                break;
+        case 0x33: inx(regs, cpu_st, SP);                            break;
+        case 0x36: mvi_m(regs, cpu_st);                              break;
+        case 0x38: nop(regs, cpu_st);                                break;
+        case 0xC2: jmp(regs, cpu_st, ZERO_DISTANCE, false, false);   break;
+        case 0xC3: jmp(regs, cpu_st, NULL, NULL, true);              break;
+        case 0xC4: call(regs, cpu_st, ZERO_DISTANCE, false, false);  break;
+        case 0xCC: call(regs, cpu_st, ZERO_DISTANCE, true, false);   break;
+        case 0xCD: call(regs, cpu_st, NULL, NULL, true);             break;
+        case 0xCE: call(regs, cpu_st, NULL, NULL, true);             break;
+        case 0xCF: call(regs, cpu_st, NULL, NULL, true);             break;
+        case 0xD2: jmp(regs, cpu_st, CARRY_DISTANCE, false, false);  break;
+        case 0xD4: call(regs, cpu_st, CARRY_DISTANCE, false, false); break;
+        case 0xE2: jmp(regs, cpu_st, PARRY_DISTANCE, false, false);  break;
+        case 0xF2: jmp(regs, cpu_st, SIGN_DISTANCE, false, false);   break;
+        case 0xCA: jmp(regs, cpu_st, ZERO_DISTANCE, true, false);    break;
+        case 0xCB: jmp(regs, cpu_st, NULL, NULL, true);              break;
+        case 0xDA: jmp(regs, cpu_st, CARRY_DISTANCE, true, false);   break;
+        case 0xDC: call(regs, cpu_st, CARRY_DISTANCE, true, false);  break;
+        case 0xE4: call(regs, cpu_st, PARRY_DISTANCE, false, false); break;
+        case 0xEA: jmp(regs, cpu_st, PARRY_DISTANCE, true, false);   break;
+        case 0xEC: call(regs, cpu_st, PARRY_DISTANCE, true, false);  break;
+        case 0xF4: call(regs, cpu_st, SIGN_DISTANCE, false, false);  break;
+        case 0xFA: jmp(regs, cpu_st, SIGN_DISTANCE, true, false);    break;
+        case 0xFC: call(regs, cpu_st, SIGN_DISTANCE, true, false);   break;
         default: 
             log_error("opcode %x does not exist", opcode); 
             deinit_manager(); 
@@ -55,7 +76,7 @@ static void execute_opcode(uint16_t opcode){
 }
 
 void cycle_cpu(){
-    while(1)
+    while (1)
         execute_opcode(read_byte_mem(regs->pc));
 }
 

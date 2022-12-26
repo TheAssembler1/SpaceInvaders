@@ -7,6 +7,20 @@
 #define PARRY     0b00000010
 #define CARRY     0b00000001
 
+#define SIGN_DISTANCE 7
+#define ZERO_DISTANCE 6
+#define AUX_CARRY_DISTANCE 4
+#define PARRY_DISTANCE 1
+#define CARRY_DISTANCE 0
+
+#define BOOL(x) (!(!(x)))
+
+#define BIT_SET(arg,posn) ((arg) | (1L << (posn)))
+#define BIT_CLEAR(arg,posn) ((arg) & ~(1L << (posn)))
+#define BIT_TEST(arg,posn) BOOL((arg) & (1L << (posn)))
+#define BIT_FLIP(arg,posn) ((arg) ^ (1L << (posn)))
+
+
 struct _registers{
     union{
         struct{
@@ -56,8 +70,7 @@ enum registers_select{
     A, F,
     B, C,
     D, E,
-    H, L,
-    M
+    H, L
 };
 
 enum pair_registers_select{

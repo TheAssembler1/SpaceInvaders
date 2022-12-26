@@ -59,7 +59,50 @@ void inx(registers* registers, cpu_state* cpu_state, int pair_register);
 Description: The byte of immediate data is stored in
 specified register or memory byte.
 */
-//MVI | 2 | 7/10 | - - - - -
+//MVI | 2 | 7 | - - - - -
 void mvi(registers* registers, cpu_state* cpu_state, int _register);
+//MVI_M | 2 | 10 | - - - - -
+void mvi_m(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+NOTE: This is not the description for each
+jump command instead this is the general description
+for all of them.
+
+This section descrives instructions which alter the 
+normal execution sequence of instructions. Note that,
+just as addresses are normally stored in memory with 
+the low-order byte first, so are the addresses represented
+in the Jump instructions. The three-byte instructions in 
+this class cause a transfer of program control depending 
+upon certain specified conditions. If the specified 
+condition is true, program execution will continue at the 
+memory addresss formed by concantenating the 8 bits of HI 
+ADD (the third byte of the instruction) with the 8 bits of 
+LOW ADD (the second byte of the instruction). If the specified
+condition is false, program execution will continue with the
+next sequential instruction.
+*/
+void jmp(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool truthness, bool always_jump);
+
+/* Intel 8080 Manual
+Note: This is not the description for each
+call command instead this is the general description
+for all of them.
+
+This sections describes the instructions which call sub-
+routines. These instructions operate like the jump instruc-
+tions, causing a transfer of program control. In addition, a 
+return address is pushed into the stack for use by the
+RETURN instructions (see Return From Subroutine In-
+structions later in this chapter). Instructions in this
+class call subroutines upon certain specified conditions.
+If the specified condition is true, a return address is pushed
+into the stack and program execution continues at memory address
+SUB, formed by concatenating the 8 bits of HI ADD and the 8
+bits of LOW ADD, If the specified condition is false, program
+execution continues with the next sequential instruction.
+*/
+void call(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool truthness, bool always_call);
 
 #endif //CPU_OPCODES_H

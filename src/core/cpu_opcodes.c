@@ -41,13 +41,59 @@ void inx(registers* registers, cpu_state* cpu_state, int pair_register){
 }
 
 void mvi(registers* registers, cpu_state* cpu_state, int _register) {
-    if (_register != M)
-        load_register(_register, read_byte_mem(registers->pc + 1));
-    else {
-        write_byte_mem(registers->hl, read_byte_mem(registers->pc + 1));
-        cpu_state->cycles += 3;
-    }
+    load_register(_register, read_byte_mem(registers->pc + 1));
 
     registers->pc += 2;
     cpu_state->cycles += 7;
+}
+
+void mvi_m(registers* registers, cpu_state* cpu_state) {
+    write_byte_mem(registers->hl, read_byte_mem(registers->pc + 1));
+
+    registers->pc += 2;
+    cpu_state->cycles += 10;
+}
+
+void jmp(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool truthness, bool always_jump) {
+    bool jumped = false;
+
+    /* 
+        How to check the given flag is shown by the truthness
+        truthness == true -> jmp if condition is true
+        truthness == false -> jmp if condition is false
+    */
+    if (always_jump || (truthness && BIT_TEST(registers->f, flag_distance)) || (!truthness && !BIT_TEST(registers->f, flag_distance))) {
+        registers->pc = read_short_mem(registers->pc + 1);
+        jumped = true;
+    }
+   
+
+    if (!jumped)
+        registers->pc += 3;
+    cpu_state->cycles += 10;
+}
+
+void call(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool truthness, bool always_call) {
+    bool called = false;
+
+    /*
+        How to check the given flag is shown by the truthness
+        truthness == true -> jmp if condition is true
+        truthness == false -> jmp if condition is false
+    */
+    if (always_call || (truthness && BIT_TEST(registers->f, flag_distance)) || (!truthness && !BIT_TEST(registers->f, flag_distance))) {
+        //NOTE: dec sp by two and store next instruction at sp
+        registers->sp -= 2;
+        write_short_mem(registers->sp, registers->pc + 3);
+
+        registers->pc = read_short_mem(registers->pc + 1);
+        called = true;
+    }
+
+    if (called)
+        cpu_state->cycles += 17;
+    else { //NOTE: call condition was not met so we just go to the next instruction
+        registers->pc += 3;
+        cpu_state->cycles += 10;
+    }
 }

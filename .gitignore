@@ -1,3 +1,6 @@
+# Custom files/folders
+out/
+
 # Prerequisites
 *.d
 

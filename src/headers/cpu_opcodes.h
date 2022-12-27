@@ -105,4 +105,26 @@ execution continues with the next sequential instruction.
 */
 void call(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool truthness, bool always_call);
 
+/* Intel 8080 Manual
+Description: The contents of the memory location
+addressed by registers B and C, or by registers D and E, re-
+place the contents of the accumulator.
+*/
+void ldax(registers* registers, cpu_state* cpu_state, int _register);
+
+/* Intel 8080 Manual
+Description: the byte at the memory address formed
+by concatenating HI ADD with LOW ADD replaces the con-
+tents of the L register. The byte at the next higher memory
+address replaces the contents of the H register.
+*/
+void lhld(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The byte at the memory address formed
+by concatenating HI ADD with LOW ADD replaces the con-
+tents of the accumulator.
+*/
+void lda(registers* registers, cpu_state* cpu_state);
+
 #endif //CPU_OPCODES_H

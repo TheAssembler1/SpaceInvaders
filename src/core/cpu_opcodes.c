@@ -97,3 +97,24 @@ void call(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, boo
         cpu_state->cycles += 10;
     }
 }
+
+void ldax(registers* registers, cpu_state* cpu_state, int _register) {
+    registers->a = read_byte_mem(read_pair_register(_register));
+
+    registers->pc++;
+    cpu_state->cycles += 7;
+}
+
+void lhld(registers* registers, cpu_state* cpu_state) {
+    registers->hl = read_short_mem(read_short_mem(registers->pc + 1));
+
+    registers->pc += 3;
+    cpu_state->cycles += 16;
+}
+
+void lda(registers* registers, cpu_state* cpu_state) {
+    registers->a = read_byte_mem(read_short_mem(registers->pc + 1));
+
+    registers->pc += 3;
+    cpu_state->cycles += 13;
+}

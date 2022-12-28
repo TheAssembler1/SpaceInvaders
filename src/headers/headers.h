@@ -18,8 +18,10 @@
 
 #ifdef UNIX
 #define ROM_FOLDER "../../../rom/"
+#define FONT_PATH "../../../res/fonts/FreeSans.ttf"
 #elif defined(WINDOWS)
 #define ROM_FOLDER "..\\..\\..\\rom\\"
+#define FONT_PATH "..\\..\\..\\res\\fonts\\FreeSans.ttf"
 #endif
 
 #define ROM_INVADERS_E ROM_FOLDER "invaders.e"
@@ -29,7 +31,8 @@
 
 //external headers
 #define SDL_MAIN_HANDLED
-#include "../external/SDL2-2.0.20/include/SDL.h"
+#include <SDL.h>
+#include <SDL_ttf.h>
 
 //this projects headers
 #include "log.h"
@@ -38,5 +41,6 @@
 #include "mem.h"
 #include "manager.h"
 #include "tests.h"
+#include "gpu.h"
 
 #endif //HEADERS_H

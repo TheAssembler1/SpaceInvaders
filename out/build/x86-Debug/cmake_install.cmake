@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/lewis/Documents/SpaceInvaders
+# Install script for directory: C:/Users/lewis/OneDrive/Documents/GitHub/SpaceInvaders
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Users/lewis/Documents/SpaceInvaders/out/install/x86-Debug")
+  set(CMAKE_INSTALL_PREFIX "C:/Users/lewis/OneDrive/Documents/GitHub/SpaceInvaders/out/install/x86-Debug")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/lewis/Documents/SpaceInvaders/out/build/x86-Debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/lewis/OneDrive/Documents/GitHub/SpaceInvaders/out/build/x86-Debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

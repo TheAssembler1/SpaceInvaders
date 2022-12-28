@@ -61,6 +61,9 @@ static void load_rom(const char* folder_path){
 void init_mem(){
     mem_buffer = (int8_t*)malloc(MEM_BUFFER_SIZE);
 
+    if (mem_buffer)
+        memset(mem_buffer, 0, MEM_BUFFER_SIZE);
+
     //calling test for memory
     test_read_write_mem();
 
@@ -72,6 +75,7 @@ void init_mem(){
 }
 
 void deinit_mem(){
+    log_info("deinitializing the mem");
     free(mem_buffer);
 }
 

@@ -88,7 +88,7 @@ cpu_state* cpu_st;
 void init_cpu();
 void deinit_cpu();
 
-void cycle_cpu();
+void run_next_opcode();
 
 void load_register(int register, uint8_t value);
 void load_pair_register(int pair_register, uint16_t value);

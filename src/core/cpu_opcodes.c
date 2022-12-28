@@ -156,5 +156,5 @@ void dcr_m(registers* registers, cpu_state* cpu_state) {
     check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY, intial, result);
 
     registers->pc++;
-    cpu_state->cycles += 5;
+    cpu_state->cycles += 10;
 }

@@ -24,32 +24,32 @@
 struct _registers{
     union{
         struct{
-            uint8_t a;
             uint8_t f;
+            uint8_t a;
         };
         uint16_t af;
     };
     
     union{
         struct{
-            uint8_t b;
             uint8_t c;
+            uint8_t b;
         };
         uint16_t bc;
     };
 
     union{
         struct{
-            uint8_t d;
             uint8_t e;
+            uint8_t d;
         };
         uint16_t de;
     };
 
     union{
         struct{
-            uint8_t h;
             uint8_t l;
+            uint8_t h;
         };
         uint16_t hl;
     };
@@ -98,5 +98,7 @@ uint16_t read_pair_register(int pair_register);
 
 //NOTE: This takes what flags to check set ORd together
 void check_set_flags(registers* registers, uint8_t flags, uint8_t intial, uint16_t result);
+
+void print_cpu(registers* registers);
 
 #endif //CPU_H

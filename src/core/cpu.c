@@ -243,3 +243,50 @@ void check_set_flags(registers* registers, uint8_t flags, uint8_t intial, uint16
             registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
     }
 }
+
+static void print_bits(int size, uint16_t value){
+    for (int i = (size * 8) - 1; i >= 0; i--) {
+        if (i != (size * 8) - 1 && (i + 1) % 8 == 0)
+            log_log_nonewl(" ");
+
+        if (BIT_TEST(value, i))
+            log_log_nonewl("1");
+        else
+            log_log_nonewl("0");
+    }
+}
+
+void print_cpu() {
+    log_trace("Begin printing cpu");
+    log_log("------------------------------");
+
+    log_log_nonewl("AF: ");
+    print_bits(sizeof(uint16_t), regs->af);
+    log_log("");
+
+    log_log_nonewl("BC: ");
+    print_bits(sizeof(uint16_t), regs->af);
+    log_log("");
+
+    log_log_nonewl("DE: ");
+    print_bits(sizeof(uint16_t), regs->af);
+    log_log("");
+
+    log_log_nonewl("HL: ");
+    print_bits(sizeof(uint16_t), regs->af);
+    log_log("");
+
+    log_log_nonewl("SIGN FLAG: ");
+    (BIT_TEST(regs->f, SIGN_DISTANCE)) ? log_log("     1") : log_log("     0");
+    log_log_nonewl("ZERO FLAG: ");
+    (BIT_TEST(regs->f, ZERO_DISTANCE)) ? log_log("     1") : log_log("     0");
+    log_log_nonewl("AUX CARRY FLAG: ");
+    (BIT_TEST(regs->f, AUX_CARRY_DISTANCE)) ? log_log("1") : log_log("0");
+    log_log_nonewl("PARRY FLAG: ");
+    (BIT_TEST(regs->f, PARRY_DISTANCE)) ? log_log("    1") : log_log("    0");
+    log_log_nonewl("CARRY FLAG: ");
+    (BIT_TEST(regs->f, CARRY_DISTANCE)) ? log_log("    1") : log_log("    0");
+
+    log_log("------------------------------");
+    log_trace("End printing cpu");
+}

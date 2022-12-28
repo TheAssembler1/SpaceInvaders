@@ -1,6 +1,7 @@
 #include <headers.h>
 
 static void cycle_machine();
+registers* regs;
 
 void init_manager(){
     //initing sdl
@@ -16,6 +17,8 @@ void init_manager(){
     init_cpu();
     init_mem();
     init_gpu();
+
+    test(regs);
 
     cycle_machine();
 }

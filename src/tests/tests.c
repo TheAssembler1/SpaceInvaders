@@ -30,3 +30,7 @@ void test_read_write_mem(){
             log_error("FAILED::short r/w | Expected Value:%x | Actual Value:%x", TEST_SHORT_VALUE, read_short_mem(i));
     }
 }
+
+void test(registers* registers) {
+    print_cpu(registers);
+}

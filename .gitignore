@@ -3,6 +3,7 @@ out
 CMakeFiles
 .vscode
 .vs
+Makefile
 
 # Prerequisites
 *.d

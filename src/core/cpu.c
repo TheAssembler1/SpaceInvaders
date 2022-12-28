@@ -54,6 +54,54 @@ static void execute_opcode(uint16_t opcode){
         case 0x36: mvi_m(regs, cpu_st);                              break;
         case 0x38: nop(regs, cpu_st);                                break;
         case 0x3A: lda(regs, cpu_st);                                break;
+        case 0x40: mov(regs, cpu_st, B, B); break;
+        case 0x41: mov(regs, cpu_st, B, C); break;
+        case 0x42: mov(regs, cpu_st, B, D); break;
+        case 0x43: mov(regs, cpu_st, B, E); break;
+        case 0x44: mov(regs, cpu_st, B, H); break;
+        case 0x45: mov(regs, cpu_st, B, L); break;
+        //MOV_M
+        case 0x47: mov(regs, cpu_st, B, A); break;
+        case 0x48: mov(regs, cpu_st, C, B); break;
+        case 0x49: mov(regs, cpu_st, C, C); break;
+        case 0x4A: mov(regs, cpu_st, C, D); break;
+        case 0x4B: mov(regs, cpu_st, C, E); break;
+        case 0x4C: mov(regs, cpu_st, C, H); break;
+        case 0x4D: mov(regs, cpu_st, C, L); break;
+        //MOV_M
+        case 0x4F: mov(regs, cpu_st, C, A); break;
+        case 0x50: mov(regs, cpu_st, D, B); break;
+        case 0x51: mov(regs, cpu_st, D, C); break;
+        case 0x52: mov(regs, cpu_st, D, D); break;
+        case 0x53: mov(regs, cpu_st, D, E); break;
+        case 0x54: mov(regs, cpu_st, D, H); break;
+        case 0x55: mov(regs, cpu_st, D, L); break;
+        //MOV_M
+        case 0x57: mov(regs, cpu_st, D, A); break;
+        case 0x58: mov(regs, cpu_st, E, B); break;
+        case 0x59: mov(regs, cpu_st, E, D); break;
+        case 0x5A: mov(regs, cpu_st, E, D); break;
+        case 0x5B: mov(regs, cpu_st, E, E); break;
+        case 0x5C: mov(regs, cpu_st, E, H); break;
+        case 0x5D: mov(regs, cpu_st, E, L); break;
+        //MOV_M
+        case 0x5F: mov(regs, cpu_st, E, A); break;
+        case 0x60: mov(regs, cpu_st, H, B); break;
+        case 0x61: mov(regs, cpu_st, H, C); break;
+        case 0x62: mov(regs, cpu_st, H, D); break;
+        case 0x63: mov(regs, cpu_st, H, E); break;
+        case 0x64: mov(regs, cpu_st, H, H); break;
+        case 0x65: mov(regs, cpu_st, H, L); break;
+        //MOV_M
+        case 0x67: mov(regs, cpu_st, H, A); break;
+        case 0x68: mov(regs, cpu_st, L, B); break;
+        case 0x69: mov(regs, cpu_st, L, D); break;
+        case 0x6A: mov(regs, cpu_st, L, D); break;
+        case 0x6B: mov(regs, cpu_st, L, E); break;
+        case 0x6C: mov(regs, cpu_st, L, H); break;
+        case 0x6D: mov(regs, cpu_st, L, L); break;
+        //MOV_M
+        case 0x6F: mov(regs, cpu_st, L, A); break;
         case 0xC2: jmp(regs, cpu_st, ZERO_DISTANCE, false, false);   break;
         case 0xC3: jmp(regs, cpu_st, false, false, true);            break;
         case 0xC4: call(regs, cpu_st, ZERO_DISTANCE, false, false);  break;

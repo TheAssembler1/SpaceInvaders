@@ -127,4 +127,14 @@ tents of the accumulator.
 */
 void lda(registers* registers, cpu_state* cpu_state);
 
-#endif //CPU_OPCODES_H
+/* Intel 8080 Manual
+Description: One byte of data is moved from the
+register specified by src (the source register) to the register
+specified by dst (the desintation register). The data re-
+plces the contents of the destination register; the source
+remains unchanged.
+*/
+//MOV | 1 | 5 | - - - - -
+void mov(registers* registers, cpu_state* cpu_state, int register_dst, int register_src);
+
+#endif //CPU_OPCODES_H 

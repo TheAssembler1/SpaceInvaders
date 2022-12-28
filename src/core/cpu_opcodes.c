@@ -118,3 +118,10 @@ void lda(registers* registers, cpu_state* cpu_state) {
     registers->pc += 3;
     cpu_state->cycles += 13;
 }
+
+void mov(registers* registers, cpu_state* cpu_state, int register_dst, int register_src) {
+    load_register(register_dst, read_register(register_src));
+
+    registers->pc++;
+    cpu_state->cycles += 5;
+}

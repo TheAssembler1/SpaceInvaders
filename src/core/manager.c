@@ -26,7 +26,7 @@ static void cycle_machine() {
     SDL_Event event;
 
     while (run_machine) {
-        //run_next_opcode();
+        run_next_opcode();
         render_screen(renderer);
 
         if (SDL_PollEvent(&event) && event.type == SDL_QUIT)

@@ -1,5 +1,6 @@
 # Custom files/folders
-out/*
+out
+CMakeFiles
 
 # Prerequisites
 *.d

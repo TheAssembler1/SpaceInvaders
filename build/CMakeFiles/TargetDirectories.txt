@@ -1,3 +1,0 @@
-/home/theassembler1/Src/SpaceInvaders/build/CMakeFiles/rebuild_cache.dir
-/home/theassembler1/Src/SpaceInvaders/build/CMakeFiles/edit_cache.dir
-/home/theassembler1/Src/SpaceInvaders/build/CMakeFiles/SpaceInvaders.dir

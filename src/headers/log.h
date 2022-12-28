@@ -29,6 +29,6 @@ char* get_formated_time();
 #define log_warn_nonewl(format, ...)  __LOG_NONEWL__(format, "WARN", ## __VA_ARGS__)
 #define log_error_nonewl(format, ...) __LOG_NONEWL__(format, "ERROR", ## __VA_ARGS__)
 #define log_info_nonewl(format, ...)  __LOG_NONEWL__(format, "INFO", ## __VA_ARGS__)
-#define log_log_nonewl(...)			  printf(## __VA_ARGS__)
+#define log_log_nonewl(...)			  printf("%s", ## __VA_ARGS__)
 
 #endif //LOG_H

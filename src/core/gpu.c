@@ -1,6 +1,8 @@
 #include <headers.h>
 
 TTF_Font* font;
+SDL_Renderer* renderer;
+SDL_Window* window;
 
 void init_gpu() {
 	log_info("initializing the gpu");

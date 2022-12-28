@@ -4,8 +4,8 @@
 #define SCREEN_WIDTH 500
 #define SCREEN_HEIGHT 500
 
-SDL_Renderer* renderer;
-SDL_Window* window;
+extern SDL_Renderer* renderer;
+extern SDL_Window* window;
 
 void init_gpu();
 void deinit_gpu();

@@ -1,5 +1,8 @@
 #include <headers.h>
 
+registers* regs;
+cpu_state* cpu_st;
+
 void init_cpu(){
     log_info("initializing the cpu");
 

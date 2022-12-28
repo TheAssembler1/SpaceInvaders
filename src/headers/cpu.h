@@ -82,8 +82,8 @@ enum pair_registers_select{
     PC
 };
 
-registers* regs;
-cpu_state* cpu_st;
+extern registers* regs;
+extern cpu_state* cpu_st;
 
 void init_cpu();
 void deinit_cpu();

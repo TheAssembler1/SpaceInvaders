@@ -83,6 +83,7 @@ LOW ADD (the second byte of the instruction). If the specified
 condition is false, program execution will continue with the
 next sequential instruction.
 */
+//JMP | 3 | 10 | - - - - -
 void jmp(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool truthness, bool always_jump);
 
 /* Intel 8080 Manual
@@ -103,6 +104,7 @@ SUB, formed by concatenating the 8 bits of HI ADD and the 8
 bits of LOW ADD, If the specified condition is false, program
 execution continues with the next sequential instruction.
 */
+//CALL | 3 | 17/11 | - - - - - 
 void call(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool truthness, bool always_call);
 
 /* Intel 8080 Manual
@@ -110,6 +112,7 @@ Description: The contents of the memory location
 addressed by registers B and C, or by registers D and E, re-
 place the contents of the accumulator.
 */
+//LDAX | 1 | 7 | - - - - -
 void ldax(registers* registers, cpu_state* cpu_state, int _register);
 
 /* Intel 8080 Manual
@@ -118,6 +121,7 @@ by concatenating HI ADD with LOW ADD replaces the con-
 tents of the L register. The byte at the next higher memory
 address replaces the contents of the H register.
 */
+//LHLD | 3 | 16 | - - - - -
 void lhld(registers* registers, cpu_state* cpu_state);
 
 /* Intel 8080 Manual
@@ -125,6 +129,7 @@ Description: The byte at the memory address formed
 by concatenating HI ADD with LOW ADD replaces the con-
 tents of the accumulator.
 */
+//LDA | 3 | 13 | - - - - -
 void lda(registers* registers, cpu_state* cpu_state);
 
 /* Intel 8080 Manual
@@ -136,5 +141,16 @@ remains unchanged.
 */
 //MOV | 1 | 5 | - - - - -
 void mov(registers* registers, cpu_state* cpu_state, int register_dst, int register_src);
+//MOV_M | 1 | 7 | - - - - -
+void mov_m(registers* registers, cpu_state* cpu_state, int _register, bool into_m);
+
+/* Intel 8080 Manual
+Description: The specified register or memory byte is
+decremented by one.
+*/
+//DCR | 1 | 5 | S Z A P -
+void dcr(registers* registers, cpu_state* cpu_state, int _register);
+//DCR_M | 1 | 10 | S Z A P -
+void dcr_m(registers* registers, cpu_state* cpu_state);
 
 #endif //CPU_OPCODES_H 

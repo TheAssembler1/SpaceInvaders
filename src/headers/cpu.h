@@ -90,10 +90,13 @@ void deinit_cpu();
 
 void run_next_opcode();
 
-void load_register(int register, uint8_t value);
+void load_register(int _register, uint8_t value);
 void load_pair_register(int pair_register, uint16_t value);
 
 uint8_t read_register(int _register);
 uint16_t read_pair_register(int pair_register);
+
+//NOTE: This takes what flags to check set ORd together
+void check_set_flags(registers* registers, uint8_t flags, uint8_t intial, uint16_t result);
 
 #endif //CPU_H

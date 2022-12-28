@@ -30,6 +30,7 @@ static void execute_opcode(uint16_t opcode){
         case 0x01: lxi(regs, cpu_st, BC);                            break;
         case 0x02: stax(regs, cpu_st, BC);                           break;
         case 0x03: inx(regs, cpu_st, BC);                            break;
+        case 0x05: dcr(regs, cpu_st, B);                             break;
         case 0x06: mvi(regs, cpu_st, B);                             break;
         case 0x08: nop(regs, cpu_st);                                break;
         case 0x0A: ldax(regs, cpu_st, BC);                           break;
@@ -37,6 +38,7 @@ static void execute_opcode(uint16_t opcode){
         case 0x11: lxi(regs, cpu_st, DE);                            break;
         case 0x12: stax(regs, cpu_st, DE);                           break;
         case 0x13: inx(regs, cpu_st, DE);                            break;
+        case 0x15: dcr(regs, cpu_st, D);                             break;
         case 0x16: mvi(regs, cpu_st, D);                             break;
         case 0x18: nop(regs, cpu_st);                                break;
         case 0x1A: ldax(regs, cpu_st, DE);                           break;
@@ -44,6 +46,7 @@ static void execute_opcode(uint16_t opcode){
         case 0x21: lxi(regs, cpu_st, HL);                            break;
         case 0x22: shld(regs, cpu_st);                               break;
         case 0x23: inx(regs, cpu_st, HL);                            break;
+        case 0x25: dcr(regs, cpu_st, H);                             break;
         case 0x26: mvi(regs, cpu_st, H);                             break;
         case 0x28: nop(regs, cpu_st);                                break;
         case 0x2A: lhld(regs, cpu_st);                               break;
@@ -51,57 +54,74 @@ static void execute_opcode(uint16_t opcode){
         case 0x31: lxi(regs, cpu_st, SP);                            break;
         case 0x32: sta(regs, cpu_st);                                break;
         case 0x33: inx(regs, cpu_st, SP);                            break;
+        case 0x35: dcr_m(regs, cpu_st);                              break;
         case 0x36: mvi_m(regs, cpu_st);                              break;
         case 0x38: nop(regs, cpu_st);                                break;
         case 0x3A: lda(regs, cpu_st);                                break;
-        case 0x40: mov(regs, cpu_st, B, B); break;
-        case 0x41: mov(regs, cpu_st, B, C); break;
-        case 0x42: mov(regs, cpu_st, B, D); break;
-        case 0x43: mov(regs, cpu_st, B, E); break;
-        case 0x44: mov(regs, cpu_st, B, H); break;
-        case 0x45: mov(regs, cpu_st, B, L); break;
-        //MOV_M
-        case 0x47: mov(regs, cpu_st, B, A); break;
-        case 0x48: mov(regs, cpu_st, C, B); break;
-        case 0x49: mov(regs, cpu_st, C, C); break;
-        case 0x4A: mov(regs, cpu_st, C, D); break;
-        case 0x4B: mov(regs, cpu_st, C, E); break;
-        case 0x4C: mov(regs, cpu_st, C, H); break;
-        case 0x4D: mov(regs, cpu_st, C, L); break;
-        //MOV_M
-        case 0x4F: mov(regs, cpu_st, C, A); break;
-        case 0x50: mov(regs, cpu_st, D, B); break;
-        case 0x51: mov(regs, cpu_st, D, C); break;
-        case 0x52: mov(regs, cpu_st, D, D); break;
-        case 0x53: mov(regs, cpu_st, D, E); break;
-        case 0x54: mov(regs, cpu_st, D, H); break;
-        case 0x55: mov(regs, cpu_st, D, L); break;
-        //MOV_M
-        case 0x57: mov(regs, cpu_st, D, A); break;
-        case 0x58: mov(regs, cpu_st, E, B); break;
-        case 0x59: mov(regs, cpu_st, E, D); break;
-        case 0x5A: mov(regs, cpu_st, E, D); break;
-        case 0x5B: mov(regs, cpu_st, E, E); break;
-        case 0x5C: mov(regs, cpu_st, E, H); break;
-        case 0x5D: mov(regs, cpu_st, E, L); break;
-        //MOV_M
-        case 0x5F: mov(regs, cpu_st, E, A); break;
-        case 0x60: mov(regs, cpu_st, H, B); break;
-        case 0x61: mov(regs, cpu_st, H, C); break;
-        case 0x62: mov(regs, cpu_st, H, D); break;
-        case 0x63: mov(regs, cpu_st, H, E); break;
-        case 0x64: mov(regs, cpu_st, H, H); break;
-        case 0x65: mov(regs, cpu_st, H, L); break;
-        //MOV_M
-        case 0x67: mov(regs, cpu_st, H, A); break;
-        case 0x68: mov(regs, cpu_st, L, B); break;
-        case 0x69: mov(regs, cpu_st, L, D); break;
-        case 0x6A: mov(regs, cpu_st, L, D); break;
-        case 0x6B: mov(regs, cpu_st, L, E); break;
-        case 0x6C: mov(regs, cpu_st, L, H); break;
-        case 0x6D: mov(regs, cpu_st, L, L); break;
-        //MOV_M
-        case 0x6F: mov(regs, cpu_st, L, A); break;
+        case 0x40: mov(regs, cpu_st, B, B);                          break;
+        case 0x41: mov(regs, cpu_st, B, C);                          break;
+        case 0x42: mov(regs, cpu_st, B, D);                          break;
+        case 0x43: mov(regs, cpu_st, B, E);                          break;
+        case 0x44: mov(regs, cpu_st, B, H);                          break;
+        case 0x45: mov(regs, cpu_st, B, L);                          break;
+        case 0x46: mov_m(regs, cpu_st, B, false);                    break;
+        case 0x47: mov(regs, cpu_st, B, A);                          break;
+        case 0x48: mov(regs, cpu_st, C, B);                          break;
+        case 0x49: mov(regs, cpu_st, C, C);                          break;
+        case 0x4A: mov(regs, cpu_st, C, D);                          break;
+        case 0x4B: mov(regs, cpu_st, C, E);                          break;
+        case 0x4C: mov(regs, cpu_st, C, H);                          break;
+        case 0x4D: mov(regs, cpu_st, C, L);                          break;
+        case 0x4E: mov_m(regs, cpu_st, C, false);                    break;
+        case 0x4F: mov(regs, cpu_st, C, A);                          break;
+        case 0x50: mov(regs, cpu_st, D, B);                          break;
+        case 0x51: mov(regs, cpu_st, D, C);                          break;
+        case 0x52: mov(regs, cpu_st, D, D);                          break;
+        case 0x53: mov(regs, cpu_st, D, E);                          break;
+        case 0x54: mov(regs, cpu_st, D, H);                          break;
+        case 0x55: mov(regs, cpu_st, D, L);                          break;
+        case 0x56: mov_m(regs, cpu_st, D, false);                    break;
+        case 0x57: mov(regs, cpu_st, D, A);                          break;
+        case 0x58: mov(regs, cpu_st, E, B);                          break;
+        case 0x59: mov(regs, cpu_st, E, D);                          break;
+        case 0x5A: mov(regs, cpu_st, E, D);                          break;
+        case 0x5B: mov(regs, cpu_st, E, E);                          break;
+        case 0x5C: mov(regs, cpu_st, E, H);                          break;
+        case 0x5D: mov(regs, cpu_st, E, L);                          break;
+        case 0x5E: mov_m(regs, cpu_st, E, false);                    break;
+        case 0x5F: mov(regs, cpu_st, E, A);                          break;
+        case 0x60: mov(regs, cpu_st, H, B);                          break;
+        case 0x61: mov(regs, cpu_st, H, C);                          break;
+        case 0x62: mov(regs, cpu_st, H, D);                          break;
+        case 0x63: mov(regs, cpu_st, H, E);                          break;
+        case 0x64: mov(regs, cpu_st, H, H);                          break;
+        case 0x65: mov(regs, cpu_st, H, L);                          break;
+        case 0x66: mov_m(regs, cpu_st, H, false);                    break;
+        case 0x67: mov(regs, cpu_st, H, A);                          break;
+        case 0x68: mov(regs, cpu_st, L, B);                          break;
+        case 0x69: mov(regs, cpu_st, L, D);                          break;
+        case 0x6A: mov(regs, cpu_st, L, D);                          break;
+        case 0x6B: mov(regs, cpu_st, L, E);                          break;
+        case 0x6C: mov(regs, cpu_st, L, H);                          break;
+        case 0x6D: mov(regs, cpu_st, L, L);                          break;
+        case 0x6E: mov_m(regs, cpu_st, L, false);                    break;
+        case 0x6F: mov(regs, cpu_st, L, A);                          break;
+        case 0x70: mov_m(regs, cpu_st, B, true);                     break;
+        case 0x71: mov_m(regs, cpu_st, C, true);                     break;
+        case 0x72: mov_m(regs, cpu_st, D, true);                     break;
+        case 0x73: mov_m(regs, cpu_st, E, true);                     break;
+        case 0x74: mov_m(regs, cpu_st, H, true);                     break;
+        case 0x75: mov_m(regs, cpu_st, L, true);                     break;
+        //HLT    
+        case 0x77: mov_m(regs, cpu_st, A, true);                     break;
+        case 0x78: mov(regs, cpu_st, A, B);                          break;
+        case 0x79: mov(regs, cpu_st, A, D);                          break;
+        case 0x7A: mov(regs, cpu_st, A, D);                          break;
+        case 0x7B: mov(regs, cpu_st, A, E);                          break;
+        case 0x7C: mov(regs, cpu_st, A, H);                          break;
+        case 0x7D: mov(regs, cpu_st, A, L);                          break;
+        case 0x7E: mov_m(regs, cpu_st, A, false);                    break;
+        case 0x7F: mov(regs, cpu_st, A, A);                          break;
         case 0xC2: jmp(regs, cpu_st, ZERO_DISTANCE, false, false);   break;
         case 0xC3: jmp(regs, cpu_st, false, false, true);            break;
         case 0xC4: call(regs, cpu_st, ZERO_DISTANCE, false, false);  break;
@@ -173,5 +193,53 @@ uint16_t read_pair_register(int pair_register){
         case HL: return regs->hl; break;
         case SP: return regs->sp; break;
         default: log_error("read pair register does not exist"); deinit_manager(); break;
+    }
+}
+
+static int parity_array[256] = {1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0,
+                                0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1,
+                                0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1,
+                                1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0,
+                                0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1,
+                                1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0,
+                                1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0,
+                                0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1};
+
+#define OVERFLOW 0xFF
+
+void check_set_flags(registers* registers, uint8_t flags, uint8_t intial, uint16_t result) {
+    if (BIT_TEST(flags, SIGN_DISTANCE)) {
+        if (BIT_TEST(result, SIGN_DISTANCE))
+            registers->f = BIT_SET(registers->f, SIGN_DISTANCE);
+        else
+            registers->f = BIT_CLEAR(registers->f, SIGN_DISTANCE);
+    }
+
+    if (BIT_TEST(flags, ZERO_DISTANCE)) {
+        if (!result)
+            registers->f = BIT_SET(registers->f, ZERO_DISTANCE);
+        else
+            registers->f = BIT_CLEAR(registers->f, ZERO_DISTANCE);
+    }
+
+    if (BIT_TEST(flags, AUX_CARRY_DISTANCE)) {
+        if (~(registers->a ^ intial ^ result) & 0x10)
+            registers->f = BIT_SET(registers->f, AUX_CARRY_DISTANCE);
+        else
+            registers->f = BIT_CLEAR(registers->f, AUX_CARRY_DISTANCE);
+    }
+
+    if (BIT_TEST(flags, PARRY_DISTANCE)) {
+        if (parity_array[(uint8_t)result])
+            registers->f = BIT_SET(registers->f, PARRY_DISTANCE);
+        else
+            registers->f = BIT_CLEAR(registers->f, PARRY_DISTANCE);
+    }
+
+    if (BIT_TEST(flags, CARRY_DISTANCE)) {
+        if (result > OVERFLOW)
+            registers->f = BIT_SET(registers->f, CARRY_DISTANCE);
+        else
+            registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
     }
 }

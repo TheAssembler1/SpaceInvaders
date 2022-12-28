@@ -125,3 +125,36 @@ void mov(registers* registers, cpu_state* cpu_state, int register_dst, int regis
     registers->pc++;
     cpu_state->cycles += 5;
 }
+
+void mov_m(registers* registers, cpu_state* cpu_state, int _register, bool into_m) {
+    //NOTE: into_m determines whether we are storing in m or getting value from m
+    if (into_m)
+        write_byte_mem(registers->hl, read_register(_register));
+    else
+        load_register(_register, read_byte_mem(registers->hl));
+
+    registers->pc++;
+    cpu_state->cycles += 7;
+}
+
+void dcr(registers* registers, cpu_state* cpu_state, int _register) {
+    uint8_t intial = read_register(_register);
+    uint16_t result = intial - 1;
+
+    load_register(_register, result);
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY, intial, result);
+
+    registers->pc++;
+    cpu_state->cycles += 5;
+}
+
+void dcr_m(registers* registers, cpu_state* cpu_state) {
+    uint8_t intial = read_byte_mem(registers->hl);
+    uint16_t result = intial - 1;
+
+    write_byte_mem(registers->hl, result);
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY, intial, result);
+
+    registers->pc++;
+    cpu_state->cycles += 5;
+}

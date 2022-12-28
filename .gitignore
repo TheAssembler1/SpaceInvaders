@@ -1,6 +1,8 @@
 # Custom files/folders
 out
 CMakeFiles
+.vscode
+.vs
 
 # Prerequisites
 *.d

@@ -99,6 +99,6 @@ uint16_t read_pair_register(int pair_register);
 //NOTE: This takes what flags to check set ORd together
 void check_set_flags(registers* registers, uint8_t flags, uint8_t intial, uint16_t result);
 
-void print_cpu(registers* registers);
+void print_cpu();
 
 #endif //CPU_H

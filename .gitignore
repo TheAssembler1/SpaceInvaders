@@ -4,6 +4,7 @@ CMakeFiles
 .vscode
 .vs
 Makefile
+CMakeCache.txt 
 
 # Prerequisites
 *.d

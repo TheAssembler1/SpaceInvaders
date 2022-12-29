@@ -2,8 +2,6 @@
 
 static void cycle_machine();
 
-cpu_state* cpu_st;
-
 void init_manager(){
     //initing sdl
     SDL_SetMainReady();

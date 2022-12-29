@@ -244,3 +244,222 @@ void and_m(registers* registers, cpu_state* cpu_state) {
     registers->pc++;
     cpu_state->cycles += 7;
 }
+
+void push(registers* registers, cpu_state* cpu_state, int pair_register) {
+    registers->sp -= 2;
+    write_short_mem(registers->sp, read_pair_register(pair_register));
+
+    registers->pc++;
+    cpu_state->cycles += 11;
+}
+
+void pop(registers* registers, cpu_state* cpu_state, int pair_register) {
+    load_pair_register(pair_register, read_short_mem(registers->sp));
+    registers->sp += 2;
+
+    registers->pc++;
+    cpu_state->cycles += 10;
+}
+
+void xchg(registers* registers, cpu_state* cpu_state) {
+    uint16_t temp = registers->hl;
+    registers->hl = registers->de;
+    registers->de = temp;
+
+    registers->pc++;
+    cpu_state->cycles += 5;
+}
+
+void rlc(registers* registers, cpu_state* cpu_state) {
+    uint8_t prev_a = registers->a;
+    
+    registers->a <<= 1;
+    if (BIT_TEST(prev_a, 7)) {
+        registers->f = BIT_SET(registers->f, CARRY_DISTANCE);
+        registers->a = BIT_SET(registers->a, 0);
+    }
+    else {
+        registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
+        registers->a = BIT_CLEAR(registers->a, 0);
+    }
+
+    registers->pc++;
+    cpu_state->cycles += 4;
+}
+
+void rrc(registers* registers, cpu_state* cpu_state) {
+    uint8_t prev_a = registers->a;
+
+    registers->a >>= 1;
+    if (BIT_TEST(prev_a, 0)) {
+        registers->f = BIT_SET(registers->f, CARRY_DISTANCE);
+        registers->a = BIT_SET(registers->a, 7);
+    }
+    else {
+        registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
+        registers->a = BIT_CLEAR(registers->a, 7);
+    }
+
+    registers->pc++;
+    cpu_state->cycles += 4;
+}
+
+void ral(registers* registers, cpu_state* cpu_state) {
+    uint8_t prev_a = registers->a;
+
+    registers->a <<= 1;
+    if (BIT_TEST(registers->f, CARRY_DISTANCE)) {
+        registers->a = BIT_SET(registers->a, 0);
+    }
+    else {
+        registers->a = BIT_CLEAR(registers->a, 0);
+    }
+
+    if (BIT_TEST(prev_a, 7)) {
+        registers->f = BIT_SET(registers->f, CARRY_DISTANCE);
+    }
+    else {
+        registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
+    }
+
+    registers->pc++;
+    cpu_state->cycles += 4;
+}
+
+void rar(registers* registers, cpu_state* cpu_state) {
+    uint8_t prev_a = registers->a;
+
+    registers->a >>= 1;
+    if (BIT_TEST(registers->f, CARRY_DISTANCE)) {
+        registers->a = BIT_SET(registers->a, 0);
+    }
+    else {
+        registers->a = BIT_CLEAR(registers->a, 0);
+    }
+
+    if (BIT_TEST(prev_a, 7)) {
+        registers->f = BIT_SET(registers->f, CARRY_DISTANCE);
+    }
+    else {
+        registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
+    }
+
+    registers->pc++;
+    cpu_state->cycles += 4;
+}
+
+void adi(registers* registers, cpu_state* cpu_state) {
+    uint8_t initial = registers->a;
+    uint16_t result = (uint16_t)initial + read_byte_mem(registers->pc + 1);
+
+    registers->a = result;
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+
+    registers->pc += 2;
+    cpu_state->cycles += 7;
+}
+
+void sui(registers* registers, cpu_state* cpu_state) {
+    uint8_t initial = registers->a;
+    uint16_t result = (uint16_t)initial - read_byte_mem(registers->pc + 1);
+
+    registers->a = result;
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+
+    registers->pc += 2;
+    cpu_state->cycles += 7;
+}
+
+void ani(registers* registers, cpu_state* cpu_state) {
+    uint8_t initial = registers->a;
+    uint16_t result = (uint16_t)initial & read_byte_mem(registers->pc + 1);
+
+    registers->a = result;
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+
+    registers->pc += 2;
+    cpu_state->cycles += 7;
+}
+
+void ori(registers* registers, cpu_state* cpu_state) {
+    uint8_t initial = registers->a;
+    uint16_t result = (uint16_t)initial | read_byte_mem(registers->pc + 1);
+
+    registers->a = result;
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+
+    registers->pc += 2;
+    cpu_state->cycles += 7;
+}
+
+void aci(registers* registers, cpu_state* cpu_state) {
+    uint8_t initial = registers->a;
+    uint16_t result = (uint16_t)initial + read_byte_mem(registers->pc + 1);
+
+    result += (BIT_TEST(registers->f, CARRY_DISTANCE)) ? 1 : 0;
+
+    registers->a = result;
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+
+    registers->pc += 2;
+    cpu_state->cycles += 7;
+}
+
+void sbi(registers* registers, cpu_state* cpu_state) {
+    uint8_t initial = registers->a;
+    uint16_t result = (uint16_t)initial - read_byte_mem(registers->pc + 1);
+
+    result -= (BIT_TEST(registers->f, CARRY_DISTANCE)) ? 1 : 0;
+
+    registers->a = result;
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+
+    registers->pc += 2;
+    cpu_state->cycles += 7;
+}
+
+void xri(registers* registers, cpu_state* cpu_state) {
+    uint8_t initial = registers->a;
+    uint16_t result = (uint16_t)initial ^ read_byte_mem(registers->pc + 1);
+
+    registers->a = result;
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+
+    registers->pc += 2;
+    cpu_state->cycles += 7;
+}
+
+void cpi(registers* registers, cpu_state* cpu_state) {
+    uint8_t initial = registers->a;
+    uint16_t result = (uint16_t)initial - read_byte_mem(registers->pc + 1);
+
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+
+    registers->pc += 2;
+    cpu_state->cycles += 7;
+}
+
+void ei(registers* registers, cpu_state* cpu_state) {
+    cpu_state->interrupts_enabled = true;
+
+    registers->pc++;
+    cpu_state->cycles += 4;
+}
+
+void di(registers* registers, cpu_state* cpu_state) {
+    cpu_state->interrupts_enabled = false;
+
+    registers->pc++;
+    cpu_state->cycles += 4;
+}
+
+void rst(registers* registers, cpu_state* cpu_state, uint16_t address) {
+    if (cpu_state->interrupts_enabled) {
+        cpu_state->interrupts_enabled = false;
+
+        registers->sp -= 2;
+        write_short_mem(registers->sp, registers->pc);
+
+        registers->pc = address;
+    }
+}

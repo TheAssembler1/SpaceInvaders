@@ -206,4 +206,195 @@ void and(registers* registers, cpu_state* cpu_state, int _register);
 //AND_M | 1 | 7 | S Z A P C
 void and_m(registers* registers, cpu_state* cpu_state);
 
+/* Intel 8080 Manual
+Description: The contents of the specified register pair
+are saved in two bytes of memory indicated by the stack
+pointer SP.
+The contents of the first register are saved at the mem-
+ory address one les than the address indicated by the stack
+pointer; the contents of the second register are saed at the
+address two less than the address indicated by the stack
+pointer. If register pair PSW is specified, the first byte of in-
+formation saved holds the contents of the A register; the
+second byte holds the settings of the five condition bits,
+i.e., Carry, Zero, Parity, and Auxiliary Carry. 
+In any case, after the data has been saved, the stack
+pointer is decremented by two.
+*/
+//PUSH | 1 | 11 | - - - -
+void push(registers* registers, cpu_state* cpu_state, int pair_register);
+
+/* Intel 8080 Manual
+Description: The contents of the specified register pair
+are stored from two bytes of memory indicated by the
+stack pointer SP. The byte of data at the memory address
+indicated by the stack pointer is loaded into the second
+register of the register pair, the byte of data at the address
+on greater than the address indicated by the stack pointer
+is loaded into the first register of the pair. If register pair
+PSW is specified, the byte of data indicated by the contents
+of the stack pointer plus one is used to restore the values of
+the five condition bits (Carry, Zero, Sign, Parity, and Aux-
+iliary Carry) using the format described in the last section.
+In any case, after the data has been restored, the stack
+pointer is incremented by two.
+*/
+//POP | 1 | 10 | - - - - -
+void pop(registers* registers, cpu_state* cpu_state, int pair_register);
+
+/* Intel 8080 Manual
+Description: The 16 bits of data held in in the H and L
+registers are exchanged withe 16 bits of data held in the
+D and E registers.
+*/
+//XCHG | 1 | 5 | - - - -
+void xchg(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The Carry bit is set equal to the high-
+order bit of the accumulator. The contents of the accumu-
+lator are rotated one bit position to the left with the high-
+order bit being transferred to the low-order bit position of
+the accumulator.
+*/
+//RLC | 1 | 4 | - - - - C
+void rlc(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The carry bit is set to equal to the low-order
+bit of the accumulator. The contents of the accumulator are
+rotated one bit position to the right, with the low-order bit
+being transferred to the high-order bit position of the 
+accumulator.
+*/
+//RRC | 1 | 4 | - - - - C
+void rrc(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The contents of the accumulator are ro-
+tated one bit position to the left.
+The high-order bit of the accumulator replaces the 
+Carry bit, while the Carry bit replaces the high-order bit of
+the accumulator.
+*/
+//RAL | 1 | 4 | - - - - C
+void ral(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The contents of the accumulator are ro-
+tated one bit position to the right.
+The low-order bit of the accumulator replaces the
+carry bit, while the carry bit replaces the high-order bit of
+the accumulator.
+*/
+//RAR | 1 | 4 | - - - - C
+void rar(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The byte of immediate data is added to
+the contents of the accumulaotr using two's complement
+arithmetic.
+*/
+//ADI | 2 | 7 | S Z A P C
+void adi(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The byte of immediate data is subtracted
+from the contents of the accumulator using two's comple-
+ment arithmetic.
+*/
+//SUI | 2 | 7 | S Z A P C
+void sui(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The byte of immediate data is logically 
+ANDed with the contents of the accumulator, The Carry bit
+is reset to zero
+*/
+//ANI | 2 | 7 | S Z A P C
+void ani(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The byte of immediate data is logically 
+ORed with the contents of the accumulator.
+*/
+//ORI | 2 | 7 | S Z A P C
+void ori(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The byte of immediate data is added to
+the contents of the accumulator plus the contents of the
+carry bit.
+*/
+//ACI | 2 | 7 | S Z A P C
+void aci(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: the carry bit is internally added to the
+byte of immediate data. This values is then subtracted from
+the accumulator using two's complement arithmetic.
+this instuction and the SBB instruction are most use-
+ful when performing multibyte subtractions. 
+*/
+//SBI | 2 | 7 | S Z A P C
+void sbi(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The byte of immediate data is EXCLU-
+SIVE-ORed with the contents of the accumulator. The carry
+bit is set to zero.
+*/
+//XRI | 2 | 7 | S Z A P C 
+void xri(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The byte of immediate data is compared
+to the contents of the accumulator.
+The comparison is performed by internally substract-
+ing the data from the accumulator using two's copmlement
+arithmetic, leaving the accumulator unchanged but setting
+the condition bits by the result.
+In particular, the zero bit is set if the qunatities are
+equal, and reset if they are unequal.
+Since a substract operation is performed, the Carry bit
+will be set if there is no carry out of bit 7, indicating the
+immediate data is greater than the contents of the accumu-
+lator, and reset otherwise.
+*/
+//CPI | 2 | 7 | S Z A P C
+void cpi(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: This instruction sets the INTE flip-flop,
+enabling the cpu to recognize and respond to interrupts.
+*/
+//EI | 1 | 4 | - - - -
+void ei(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: This instruction resets the INTE flip-flop
+causing the CPU to ignore all interrupts.
+*/
+//DI | 1 | 4 | - - - -
+void di(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Descriptoin: The contents of the program counter
+are pushed onto the stack, providing a return address for
+later use by a RETURN instruction. 
+Program execution continues at memory address:
+	0000000000EXP000B
+Normally, this instruction is used in conjunction with
+up to eight eight-byte routines in the lower 64 word of
+memory in order to service interrupts to the processor. The
+intterrupting device causes a particular RST instruction to be
+executed, transferring control to a subroutine which deals 
+with the situation as described in Section 6.
+A RETURN instruction then causes the program 
+which was originally running to resume execution at the
+instruction where the interrupt occured.
+*/
+//RST | 1 | 11 | - - - - -
+void rst(registers* registers, cpu_state* cpu_state, uint16_t address);
+
 #endif //CPU_OPCODES_H 

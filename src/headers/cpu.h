@@ -20,7 +20,6 @@
 #define BIT_TEST(arg,posn) BOOL((arg) & (1L << (posn)))
 #define BIT_FLIP(arg,posn) ((arg) ^ (1L << (posn)))
 
-
 struct _registers{
     union{
         struct{
@@ -61,7 +60,8 @@ struct _registers{
 typedef struct _registers registers;
 
 struct _cpu_state{
-    unsigned long cycles;
+    long double cycles;
+    bool interrupts_enabled;
 };
 
 typedef struct _cpu_state cpu_state;

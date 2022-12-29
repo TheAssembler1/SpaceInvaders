@@ -2,6 +2,8 @@
 
 static void cycle_machine();
 
+cpu_state* cpu_st;
+
 void init_manager(){
     //initing sdl
     SDL_SetMainReady();
@@ -29,7 +31,7 @@ static void cycle_machine() {
 
     while (run_machine) {
         run_next_opcode();
-        render_screen(renderer);
+        render_screen(renderer, cpu_st);
 
         if (SDL_PollEvent(&event) && event.type == SDL_QUIT)
             run_machine = false;

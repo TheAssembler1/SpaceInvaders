@@ -379,7 +379,7 @@ causing the CPU to ignore all interrupts.
 void di(registers* registers, cpu_state* cpu_state);
 
 /* Intel 8080 Manual
-Descriptoin: The contents of the program counter
+Description: The contents of the program counter
 are pushed onto the stack, providing a return address for
 later use by a RETURN instruction. 
 Program execution continues at memory address:
@@ -393,8 +393,26 @@ with the situation as described in Section 6.
 A RETURN instruction then causes the program 
 which was originally running to resume execution at the
 instruction where the interrupt occured.
+
+NOTE: Byte Examples
+0b0000000000 000 000
+0b0000000000 001 000
+0b0000000000 010 000
+0b0000000000 011 000
+0b0000000000 100 000
+0b0000000000 101 000
+0b0000000000 110 000
+0b0000000000 111 000
 */
 //RST | 1 | 11 | - - - - -
 void rst(registers* registers, cpu_state* cpu_state, uint16_t address);
+
+/* Intel 8080 Manual
+Description: An eight-bit data byte is read from input
+device number exp and replaces the contents of the 
+accumulator.
+*/
+//IN | 2 | 10 | - - - - -
+void in(registers* registers, cpu_state* cpu_state);
 
 #endif //CPU_OPCODES_H 

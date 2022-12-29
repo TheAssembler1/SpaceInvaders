@@ -217,7 +217,7 @@ void out(registers* registers, cpu_state* cpu_state) {
     uint8_t value = registers->a;
     uint8_t device = read_byte_mem(registers->pc + 1);
 
-    log_info("Value 0x%02X sent to device 0x%02X", value, device);
+    //log_info("Value 0x%02X sent to device 0x%02X", value, device);
 
     registers->pc += 2;
     cpu_state->cycles += 10;
@@ -454,12 +454,24 @@ void di(registers* registers, cpu_state* cpu_state) {
 }
 
 void rst(registers* registers, cpu_state* cpu_state, uint16_t address) {
-    if (cpu_state->interrupts_enabled) {
-        cpu_state->interrupts_enabled = false;
+    cpu_state->interrupts_enabled = false;
 
-        registers->sp -= 2;
-        write_short_mem(registers->sp, registers->pc);
+    registers->sp -= 2;
+    write_short_mem(registers->sp, registers->pc);
 
-        registers->pc = address;
-    }
+    registers->pc = address;
+}
+
+//FIXME:: read input from device
+//Current just reading a in from device;
+void in(registers* registers, cpu_state* cpu_state) {
+    registers->a = 0;
+
+    int device = read_byte_mem(registers->pc + 1);
+    int value = registers->a;
+
+    //log_info("Value 0x%02X sent from device 0x%02X", value, device);
+
+    registers->pc += 2;
+    cpu_state->cycles += 10;
 }

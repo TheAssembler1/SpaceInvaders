@@ -20,6 +20,8 @@
 #define BIT_TEST(arg,posn) BOOL((arg) & (1L << (posn)))
 #define BIT_FLIP(arg,posn) ((arg) ^ (1L << (posn)))
 
+#define CYCLES_PER_SECOND 500000
+
 struct _registers{
     union{
         struct{
@@ -100,5 +102,7 @@ uint16_t read_pair_register(int pair_register);
 void check_set_flags(registers* registers, uint8_t flags, uint8_t intial, uint16_t result);
 
 void print_cpu();
+
+void execute_interrupt(uint16_t opcode);
 
 #endif //CPU_H

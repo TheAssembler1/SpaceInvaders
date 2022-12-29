@@ -192,7 +192,7 @@ static void execute_opcode(uint16_t opcode){
         case 0xEA: jmp(regs, cpu_st, PARRY_DISTANCE, true, false);   break;
         case 0xEB: xchg(regs, cpu_st);                               break;
         case 0xEC: call(regs, cpu_st, PARRY_DISTANCE, true, false);  break;
-        case 0xED: call(regs, cpu_st, false, false, false, true);    break;
+        case 0xED: call(regs, cpu_st, false, false, true);    break;
         case 0xEE: xri(regs, cpu_st);                                break;
         case 0xF0: ret(regs, cpu_st, SIGN_DISTANCE, false, false);   break;
         case 0xF1: pop(regs, cpu_st, AF);                            break;

@@ -25,6 +25,7 @@ void deinit_cpu(){
 }
 
 static void execute_opcode(uint16_t opcode){
+    log_log("0x%02X", regs->pc);
     switch(opcode){
         case 0x00: nop(regs, cpu_st);                                break;
         case 0x01: lxi(regs, cpu_st, BC);                            break;
@@ -33,7 +34,9 @@ static void execute_opcode(uint16_t opcode){
         case 0x05: dcr(regs, cpu_st, B);                             break;
         case 0x06: mvi(regs, cpu_st, B);                             break;
         case 0x08: nop(regs, cpu_st);                                break;
+        case 0x09: dad(regs, cpu_st, BC);                            break;
         case 0x0A: ldax(regs, cpu_st, BC);                           break;
+        case 0x0E: mvi(regs, cpu_st, C);                             break;
         case 0x10: nop(regs, cpu_st);                                break;
         case 0x11: lxi(regs, cpu_st, DE);                            break;
         case 0x12: stax(regs, cpu_st, DE);                           break;
@@ -41,7 +44,9 @@ static void execute_opcode(uint16_t opcode){
         case 0x15: dcr(regs, cpu_st, D);                             break;
         case 0x16: mvi(regs, cpu_st, D);                             break;
         case 0x18: nop(regs, cpu_st);                                break;
+        case 0x19: dad(regs, cpu_st, DE);                            break;
         case 0x1A: ldax(regs, cpu_st, DE);                           break;
+        case 0x1E: mvi(regs, cpu_st, E);                             break;
         case 0x20: nop(regs, cpu_st);                                break;
         case 0x21: lxi(regs, cpu_st, HL);                            break;
         case 0x22: shld(regs, cpu_st);                               break;
@@ -49,7 +54,9 @@ static void execute_opcode(uint16_t opcode){
         case 0x25: dcr(regs, cpu_st, H);                             break;
         case 0x26: mvi(regs, cpu_st, H);                             break;
         case 0x28: nop(regs, cpu_st);                                break;
+        case 0x29: dad(regs, cpu_st, HL);                            break;
         case 0x2A: lhld(regs, cpu_st);                               break;
+        case 0x2E: mvi(regs, cpu_st, L);                             break;
         case 0x30: nop(regs, cpu_st);                                break;
         case 0x31: lxi(regs, cpu_st, SP);                            break;
         case 0x32: sta(regs, cpu_st);                                break;
@@ -57,7 +64,9 @@ static void execute_opcode(uint16_t opcode){
         case 0x35: dcr_m(regs, cpu_st);                              break;
         case 0x36: mvi_m(regs, cpu_st);                              break;
         case 0x38: nop(regs, cpu_st);                                break;
+        case 0x39: dad(regs, cpu_st, SP);                            break;
         case 0x3A: lda(regs, cpu_st);                                break;
+        case 0x3E: mvi(regs, cpu_st, A);                             break;
         case 0x40: mov(regs, cpu_st, B, B);                          break;
         case 0x41: mov(regs, cpu_st, B, C);                          break;
         case 0x42: mov(regs, cpu_st, B, D);                          break;
@@ -122,25 +131,52 @@ static void execute_opcode(uint16_t opcode){
         case 0x7D: mov(regs, cpu_st, A, L);                          break;
         case 0x7E: mov_m(regs, cpu_st, A, false);                    break;
         case 0x7F: mov(regs, cpu_st, A, A);                          break;
+        case 0xA0: and(regs, cpu_st, B);                             break;
+        case 0xA1: and(regs, cpu_st, C);                             break;
+        case 0xA2: and(regs, cpu_st, D);                             break;
+        case 0xA3: and(regs, cpu_st, E);                             break;
+        case 0xA4: and(regs, cpu_st, H);                             break;
+        case 0xA5: and(regs, cpu_st, L);                             break;
+        case 0xA6: and_m(regs, cpu_st);                              break;
+        case 0xA7: and (regs, cpu_st, A);                            break;
+        case 0xA8: xra(regs, cpu_st, B);                             break;
+        case 0xA9: xra(regs, cpu_st, C);                             break;
+        case 0xAA: xra(regs, cpu_st, D);                             break;
+        case 0xAB: xra(regs, cpu_st, E);                             break;
+        case 0xAC: xra(regs, cpu_st, H);                             break;
+        case 0xAD: xra(regs, cpu_st, L);                             break;
+        case 0xAE: xra_m(regs, cpu_st);                              break;
+        case 0xAF: xra(regs, cpu_st, A);                             break;
+        case 0xC0: ret(regs, cpu_st, ZERO_DISTANCE, false, false);   break;
         case 0xC2: jmp(regs, cpu_st, ZERO_DISTANCE, false, false);   break;
         case 0xC3: jmp(regs, cpu_st, false, false, true);            break;
         case 0xC4: call(regs, cpu_st, ZERO_DISTANCE, false, false);  break;
+        case 0xC8: ret(regs, cpu_st, ZERO_DISTANCE, true, false);    break;
+        case 0xC9: ret(regs, cpu_st, false, false, true);            break;
         case 0xCC: call(regs, cpu_st, ZERO_DISTANCE, true, false);   break;
         case 0xCD: call(regs, cpu_st, false, false, true);           break;
         case 0xCE: call(regs, cpu_st, false, false, true);           break;
         case 0xCF: call(regs, cpu_st, false, false, true);           break;
+        case 0xD0: ret(regs, cpu_st, CARRY_DISTANCE, false, false);  break;
         case 0xD2: jmp(regs, cpu_st, CARRY_DISTANCE, false, false);  break;
+        case 0xD3: out(regs, cpu_st);                                break;
         case 0xD4: call(regs, cpu_st, CARRY_DISTANCE, false, false); break;
+        case 0xD9: ret(regs, cpu_st, false, false, true);            break;
+        case 0xE0: ret(regs, cpu_st, PARRY_DISTANCE, false, false);  break;
         case 0xE2: jmp(regs, cpu_st, PARRY_DISTANCE, false, false);  break;
         case 0xF2: jmp(regs, cpu_st, SIGN_DISTANCE, false, false);   break;
         case 0xCA: jmp(regs, cpu_st, ZERO_DISTANCE, true, false);    break;
         case 0xCB: jmp(regs, cpu_st, false, false, true);            break;
+        case 0xD8: ret(regs, cpu_st, CARRY_DISTANCE, true, false);   break;
         case 0xDA: jmp(regs, cpu_st, CARRY_DISTANCE, true, false);   break;
         case 0xDC: call(regs, cpu_st, CARRY_DISTANCE, true, false);  break;
         case 0xE4: call(regs, cpu_st, PARRY_DISTANCE, false, false); break;
+        case 0xE8: ret(regs, cpu_st, PARRY_DISTANCE, true, false);   break;
         case 0xEA: jmp(regs, cpu_st, PARRY_DISTANCE, true, false);   break;
         case 0xEC: call(regs, cpu_st, PARRY_DISTANCE, true, false);  break;
+        case 0xF0: ret(regs, cpu_st, SIGN_DISTANCE, false, false);   break;
         case 0xF4: call(regs, cpu_st, SIGN_DISTANCE, false, false);  break;
+        case 0xF8: ret(regs, cpu_st, SIGN_DISTANCE, true, false);    break;
         case 0xFA: jmp(regs, cpu_st, SIGN_DISTANCE, true, false);    break;
         case 0xFC: call(regs, cpu_st, SIGN_DISTANCE, true, false);   break;
         default: 
@@ -260,21 +296,29 @@ void print_cpu() {
     log_trace("Begin printing cpu");
     log_log("------------------------------");
 
+    log_log_nonewl("PC: ");
+    print_bits(sizeof(uint16_t), regs->pc);
+    log_log(" | 0x%04X", regs->pc);
+
+    log_log_nonewl("SP: ");
+    print_bits(sizeof(uint16_t), regs->sp);
+    log_log(" | 0x%04X", regs->sp);
+
     log_log_nonewl("AF: ");
     print_bits(sizeof(uint16_t), regs->af);
-    log_log("");
+    log_log(" | 0x%04X", regs->af);
 
     log_log_nonewl("BC: ");
-    print_bits(sizeof(uint16_t), regs->af);
-    log_log("");
+    print_bits(sizeof(uint16_t), regs->bc);
+    log_log(" | 0x%04X", regs->bc);
 
     log_log_nonewl("DE: ");
-    print_bits(sizeof(uint16_t), regs->af);
-    log_log("");
+    print_bits(sizeof(uint16_t), regs->de);
+    log_log(" | 0x%04X", regs->de);
 
     log_log_nonewl("HL: ");
-    print_bits(sizeof(uint16_t), regs->af);
-    log_log("");
+    print_bits(sizeof(uint16_t), regs->hl);
+    log_log(" | 0x%04X", regs->hl);
 
     log_log_nonewl("SIGN FLAG: ");
     (BIT_TEST(regs->f, SIGN_DISTANCE)) ? log_log("     1") : log_log("     0");

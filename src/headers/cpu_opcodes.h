@@ -153,4 +153,57 @@ void dcr(registers* registers, cpu_state* cpu_state, int _register);
 //DCR_M | 1 | 10 | S Z A P -
 void dcr_m(registers* registers, cpu_state* cpu_state);
 
+/* Intel 8080 Manual
+NOTE: This is not the description for each
+jump command instead this is the general description
+for all of them.
+
+This section describes the instructions used to return
+from subroutines. These instructions pop the last address
+saved on the stack into the program counter, cause a trans-
+fer of program control to that address. 
+Instructions in this class perform RETURN operations 
+upon certain specified conditions. If the specified condition
+is true, a return operation is performed. Otherwise, program
+execution continues with the next sequential instruction.
+*/
+//RET | 1 | 4/10/11 | - - - - - 
+void ret(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool truthness, bool always_return);
+
+/* Intel 8080 Manual
+Description: The 16-bit number in the specified regis-
+ter pair is added to the 16-bit number held in the H and L
+registers using two's complement arithmetic. The result re-
+places the contents of the H and L registers.
+*/
+//DAD | 1 | 10 | - - - - C
+void dad(registers* registers, cpu_state* cpu_state, int pair_register);
+
+/* Intel 8080 Manual
+Description: The specified byte is EXCLUSIVE-ORed 
+bit by bit with the contents of the accumulator. The Carry
+bit is reset to zero.
+*/
+//XRA | 1 | 4 | S Z A P C
+void xra(registers* registers, cpu_state* cpu_state, int _register);
+//XRA | 1 | 7 | S Z A P C
+void xra_m(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The contents of the accumulator are sent
+to output device number exp.
+*/
+//OUT | 2 | 10 | - - - - -
+void out(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The specified byte is logically ANDed bit
+by bit with the contents of the accumulator. The Carry bit
+is reset to zero.
+*/
+//AND | 1 | 4 | S Z A P C
+void and(registers* registers, cpu_state* cpu_state, int _register);
+//AND_M | 1 | 7 | S Z A P C
+void and_m(registers* registers, cpu_state* cpu_state);
+
 #endif //CPU_OPCODES_H 

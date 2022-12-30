@@ -23,7 +23,7 @@ void deinit_gpu() {
 #define FULL_INTERRUPT 0xD7
 
 void render_screen(SDL_Renderer* renderer, cpu_state* cpu_st) {
-	if (cpu_st->cycles > CYCLES_PER_HALF_WIDTH_OF_ROW) {
+	while(cpu_st->cycles >= CYCLES_PER_HALF_WIDTH_OF_ROW ) {
 		cpu_st->cycles -= CYCLES_PER_HALF_WIDTH_OF_ROW;
 
 		//render 128 pixels which is 16 bytes
@@ -34,7 +34,7 @@ void render_screen(SDL_Renderer* renderer, cpu_state* cpu_st) {
 				int linear_pixel_position = (i * 8) + j;
 
 				//set render color
-				if (BIT_TEST(current_byte, j)) 
+				if (BIT_TEST(current_byte, j))
 					SDL_SetRenderDrawColor(renderer, ON_PIXEL, 0);
 				else
 					SDL_SetRenderDrawColor(renderer, OFF_PIXEL, 0);
@@ -50,9 +50,9 @@ void render_screen(SDL_Renderer* renderer, cpu_state* cpu_st) {
 
 		current_pixel_byte += 16;
 
-		if (current_pixel_byte == VIDEO_BYTES / 2) 
+		if (current_pixel_byte == VIDEO_BYTES / 2) {
 			execute_interrupt(HALFWAY_INTERRUPT);
-		else if (current_pixel_byte >= VIDEO_BYTES) {
+		}else if (current_pixel_byte >= VIDEO_BYTES) {
 			current_pixel_byte = 0;
 			execute_interrupt(FULL_INTERRUPT);
 		}

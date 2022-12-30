@@ -28,8 +28,18 @@ static void cycle_machine() {
     SDL_Event event;
 
     while (run_machine) {
-        run_next_opcode();
-        render_screen(renderer, cpu_st);
+        while(cpu_st->cycles < CYCLES_PER_FRAME)
+            run_next_opcode();
+        execute_interrupt(HALFWAY_INTERRUPT);
+
+        while (cpu_st->cycles < CYCLES_PER_FRAME * 2)
+            run_next_opcode();
+        execute_interrupt(FULL_INTERRUPT);
+
+        render_screen(renderer);
+
+        //reset cycles
+        cpu_st->cycles = 0;
 
         if (SDL_PollEvent(&event) && event.type == SDL_QUIT)
             run_machine = false;

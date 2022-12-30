@@ -19,12 +19,15 @@
 
 #define VIDEO_BYTES 7168
 
+#define HALFWAY_INTERRUPT 0xCF
+#define FULL_INTERRUPT 0xD7
+
 extern SDL_Renderer* renderer;
 extern SDL_Window* window;
 
 void init_gpu();
 void deinit_gpu();
 
-void render_screen(SDL_Renderer* renderer, cpu_state* cpu_st);
+void render_screen(SDL_Renderer* renderer);
 
 #endif

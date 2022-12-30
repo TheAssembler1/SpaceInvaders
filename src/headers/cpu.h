@@ -20,7 +20,9 @@
 #define BIT_TEST(arg,posn) BOOL((arg) & (1L << (posn)))
 #define BIT_FLIP(arg,posn) ((arg) ^ (1L << (posn)))
 
-#define CYCLES_PER_SECOND 500000
+//FIXME: Changing this to 400000 breaks with interrupts. something is def wrong here.
+#define CYCLES_PER_SECOND  2000000
+#define CYCLES_PER_FRAME CYCLES_PER_SECOND / 60
 
 struct _registers{
     union{

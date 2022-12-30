@@ -201,10 +201,10 @@ Description: The specified byte is logically ANDed bit
 by bit with the contents of the accumulator. The Carry bit
 is reset to zero.
 */
-//AND | 1 | 4 | S Z A P C
-void and(registers* registers, cpu_state* cpu_state, int _register);
-//AND_M | 1 | 7 | S Z A P C
-void and_m(registers* registers, cpu_state* cpu_state);
+//ANA | 1 | 4 | S Z A P C
+void ana(registers* registers, cpu_state* cpu_state, int _register);
+//ANA_M | 1 | 7 | S Z A P C
+void ana_m(registers* registers, cpu_state* cpu_state);
 
 /* Intel 8080 Manual
 Description: The contents of the specified register pair
@@ -414,5 +414,59 @@ accumulator.
 */
 //IN | 2 | 10 | - - - - -
 void in(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The eight-bit hexadecimal number in the
+accumulator is adjusted to form two four-bit binary-coded
+decimal digits by the following two step process
+1. If the least significant bits of the accumualtor
+represents a number greater than 9, or if the Auxiliary
+Carry bit is equal t oone, the accumulator is incre-
+mented by six. Otherwise, no incrementing occurs.
+2. If the most significant four bits of the accumulator
+now represent a number greater than 9, or if the nor-
+mal carry bit is equal to one, the most significant four
+bits of the accumulator are incremented by six. Other-
+wise, no incrementing occurs.
+If a carry out of the least significatn four bits occurs 
+during Step(1), the Auxiliary Carry Bit is set; otherwise it is
+reset. Likewise, if a carry out bit of the most significant four
+bigs occurs during Step(2), the normal Carry bit is set;
+otherwise, it is unaffected.
+*/
+//DAA | 1 | 4 | S Z A P C
+void daa(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The Carry bit is set to one.
+*/
+//STC | 1 | 4 | - - - - C
+void stc(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The 16-bit number held in the specified
+register pair is decremented by one.
+*/
+//dcx | 1 | 5 | - - - - -
+void dcx(registers* registers, cpu_state* cpu_state, int pair_register);
+
+/* Intel 8080 Manua
+Description: The specified byte is logically ORed bit
+by bit with the contents of the accumulator. The carry bit
+is reset to zero.
+*/
+//ORA | 1 | 4 | S Z A P C
+void ora(registers* registers, cpu_state* cpu_state, int _register);
+//ORA_M | 1 | 4 | S Z A P C
+void ora_m(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The specified register or memory byte is
+incremented by one.
+*/
+//INR | 1 | 5 | S Z A P -
+void inr(registers* registers, cpu_state* cpu_state, int _register);
+//INR_M | 1 | 10 | S Z A P -
+void inr_m(registers* registers, cpu_state* cpu_state);
 
 #endif //CPU_OPCODES_H 

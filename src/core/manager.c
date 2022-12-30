@@ -39,6 +39,8 @@ static void cycle_machine() {
 }
 
 void deinit_manager(){
+    print_cpu();
+
     deinit_cpu();
     deinit_mem();
     deinit_gpu();

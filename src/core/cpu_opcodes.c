@@ -223,7 +223,7 @@ void out(registers* registers, cpu_state* cpu_state) {
     cpu_state->cycles += 10;
 }
 
-void and(registers* registers, cpu_state* cpu_state, int _register) {
+void ana(registers* registers, cpu_state* cpu_state, int _register) {
     uint8_t initial = registers->a;
     uint16_t result = (uint16_t)initial & read_register(_register);
 
@@ -234,7 +234,7 @@ void and(registers* registers, cpu_state* cpu_state, int _register) {
     cpu_state->cycles += 4;
 }
 
-void and_m(registers* registers, cpu_state* cpu_state) {
+void ana_m(registers* registers, cpu_state* cpu_state) {
     uint8_t initial = registers->a;
     uint16_t result = (uint16_t)initial & read_byte_mem(registers->hl);
 
@@ -473,5 +473,95 @@ void in(registers* registers, cpu_state* cpu_state) {
     //log_info("Value 0x%02X sent from device 0x%02X", value, device);
 
     registers->pc += 2;
+    cpu_state->cycles += 10;
+}
+
+#define LOWER_BITS_OF_BYTE 0b00001111
+#define HIGHER_BITS_OF_BYTE 0b11110000
+
+void daa(registers* registers, cpu_state* cpu_state) {
+    uint8_t lower_bits = registers->a ^ LOWER_BITS_OF_BYTE;
+
+    if (lower_bits > 9 || BIT_TEST(registers->f, AUX_CARRY_DISTANCE)) {
+        lower_bits += 6;
+        registers->a += 6;
+    }
+
+    if (lower_bits > LOWER_BITS_OF_BYTE)
+        registers->f = BIT_SET(registers->f, AUX_CARRY_DISTANCE);
+    else
+        registers->f = BIT_CLEAR(registers->f, AUX_CARRY_DISTANCE);
+
+    uint8_t higher_bits = (registers->a ^ HIGHER_BITS_OF_BYTE) >> 4;
+
+    if (higher_bits > 9 || BIT_TEST(registers->f, CARRY_DISTANCE)) {
+        higher_bits += 6;
+        registers->a += (higher_bits << 4) | registers->a;
+    }
+
+    if (higher_bits > 9)
+        registers->f = BIT_SET(registers->f, CARRY_DISTANCE);
+
+    check_set_flags(registers, ZERO | SIGN | PARRY, registers->a, registers->a);
+
+    registers->pc++;
+    cpu_state->cycles += 4;
+}
+
+void stc(registers* registers, cpu_state* cpu_state) {
+    registers->f = BIT_SET(registers->f, CARRY_DISTANCE);
+
+    registers->pc++;
+    cpu_state->cycles += 4;
+}
+
+void dcx(registers* registers, cpu_state* cpu_state, int pair_register) {
+    load_pair_register(pair_register, read_pair_register(pair_register) - 1);
+
+    registers->pc++;
+    cpu_state->cycles += 5;
+}
+
+void ora(registers* registers, cpu_state* cpu_state, int _register) {
+    uint8_t initial = registers->a;
+    uint16_t result = (uint16_t)initial | read_register(_register);
+
+    registers->a = result;
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+
+    registers->pc++;
+    cpu_state->cycles += 4;
+}
+
+void ora_m(registers* registers, cpu_state* cpu_state) {
+    uint8_t initial = registers->a;
+    uint16_t result = (uint16_t)initial | read_byte_mem(registers->hl);
+
+    registers->a = result;
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+
+    registers->pc++;
+    cpu_state->cycles += 7;
+}
+
+void inr(registers* registers, cpu_state* cpu_state, int _register) {
+    uint8_t intial = read_register(_register);
+    uint16_t result = (uint16_t)intial + 1;
+
+    load_register(_register, result);
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY, intial, result);
+
+    registers->pc++;
+    cpu_state->cycles += 5;
+}
+
+void inr_m(registers* registers, cpu_state* cpu_state) {
+    uint8_t intial = read_byte_mem(registers->hl);
+    uint16_t result = (uint16_t)intial + 1;
+
+    write_byte_mem(registers->hl, result);
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY, intial, result);
+
+    registers->pc++;
     cpu_state->cycles += 10;
 }

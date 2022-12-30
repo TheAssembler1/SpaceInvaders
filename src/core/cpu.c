@@ -25,13 +25,12 @@ void deinit_cpu(){
 }
 
 static void execute_opcode(uint16_t opcode){
-    //log_log("0x%04x", regs->pc);
     switch(opcode){
         case 0x00: nop(regs, cpu_st);                                break;
         case 0x01: lxi(regs, cpu_st, BC);                            break;
         case 0x02: stax(regs, cpu_st, BC);                           break;
         case 0x03: inx(regs, cpu_st, BC);                            break;
-        case 0x04: inr(regs, cpu_st, B);                            break;
+        case 0x04: inr(regs, cpu_st, B);                             break;
         case 0x05: dcr(regs, cpu_st, B);                             break;
         case 0x06: mvi(regs, cpu_st, B);                             break;
         case 0x07: rlc(regs, cpu_st);                                break;
@@ -46,7 +45,7 @@ static void execute_opcode(uint16_t opcode){
         case 0x11: lxi(regs, cpu_st, DE);                            break;
         case 0x12: stax(regs, cpu_st, DE);                           break;
         case 0x13: inx(regs, cpu_st, DE);                            break;
-        case 0x14: inr(regs, cpu_st, D);                            break;
+        case 0x14: inr(regs, cpu_st, D);                             break;
         case 0x15: dcr(regs, cpu_st, D);                             break;
         case 0x16: mvi(regs, cpu_st, D);                             break;
         case 0x17: ral(regs, cpu_st);                                break;
@@ -61,7 +60,7 @@ static void execute_opcode(uint16_t opcode){
         case 0x21: lxi(regs, cpu_st, HL);                            break;
         case 0x22: shld(regs, cpu_st);                               break;
         case 0x23: inx(regs, cpu_st, HL);                            break;
-        case 0x24: inr(regs, cpu_st, H);                            break;
+        case 0x24: inr(regs, cpu_st, H);                             break;
         case 0x25: dcr(regs, cpu_st, H);                             break;
         case 0x26: mvi(regs, cpu_st, H);                             break;
         case 0x27: daa(regs, cpu_st);                                break;

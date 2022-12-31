@@ -3,7 +3,7 @@
 
 #define MEM_BUFFER_SIZE 0xFFFF + 1
 
-void init_mem();
+void init_mem(bool load_test, char* filepath);
 void deinit_mem();
 
 uint8_t read_byte_mem(unsigned int address);

@@ -18,10 +18,12 @@
 
 #ifdef UNIX
 #define ROM_FOLDER "../../../rom/"
+#define TEST_ROM_FOLDER "../../../cpu_tests/"
 #define FONT_PATH "../../../res/fonts/FreeSans.ttf"
 #elif defined(WINDOWS)
 #define ROM_FOLDER "..\\..\\..\\rom\\"
 #define FONT_PATH "..\\..\\..\\res\\fonts\\FreeSans.ttf"
+#define TEST_ROM_FOLDER "..\\..\\..\\cpu_tests\\"
 #endif
 
 #define ROM_INVADERS_E ROM_FOLDER "invaders.e"

@@ -56,9 +56,22 @@ static void load_rom(const char* folder_path){
 
     //printing bytes 0x00 through 0xFF
     print_mem(0x00, 0xFF);
-}   
+} 
 
-void init_mem(){
+#define MAX_FILE_LENGTH 100
+#define ROM_TEST_START 0x100
+
+static void load_tests(const char* folder_path, const char* filename) {
+    char full_file_path[MAX_FILE_LENGTH];
+    full_file_path[0] = '\n';
+
+    strcpy(full_file_path, folder_path);
+    strcat(full_file_path, filename);
+
+    write_rom_to_mem(full_file_path, ROM_TEST_START);
+}
+
+void init_mem(bool load_test, const char* file_name){
     mem_buffer = (int8_t*)malloc(MEM_BUFFER_SIZE);
 
     if (mem_buffer)
@@ -71,7 +84,12 @@ void init_mem(){
     if(mem_buffer)
         memset(mem_buffer, 0, MEM_BUFFER_SIZE);
 
-    load_rom(ROM_FOLDER);
+    if (!load_test) {
+        load_rom(ROM_FOLDER);
+    } //NOTE load tests
+    else {
+        load_tests(TEST_ROM_FOLDER, file_name);
+    }
 }
 
 void deinit_mem(){

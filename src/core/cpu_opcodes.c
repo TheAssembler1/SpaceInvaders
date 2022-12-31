@@ -54,26 +54,23 @@ void mvi_m(registers* registers, cpu_state* cpu_state) {
     cpu_state->cycles += 10;
 }
 
-void jmp(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool truthness, bool always_jump) {
-    bool jumped = false;
-
+void jmp(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool truthness) {
     /* 
         How to check the given flag is shown by the truthness
         truthness == true -> jmp if condition is true
         truthness == false -> jmp if condition is false
     */
-    if (always_jump || (truthness && BIT_TEST(registers->f, flag_distance)) || (!truthness && !BIT_TEST(registers->f, flag_distance))) {
+    if (flag_distance == ALWAYS_DISTANCE || (truthness && BIT_TEST(registers->f, flag_distance)) || (!truthness && !BIT_TEST(registers->f, flag_distance))) {
         registers->pc = read_short_mem(registers->pc + 1);
-        jumped = true;
     }
-   
-
-    if (!jumped)
+    else {
         registers->pc += 3;
+    }
+
     cpu_state->cycles += 10;
 }
 
-void call(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool truthness, bool always_call) {
+void call(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool truthness) {
     bool called = false;
 
     /*
@@ -81,7 +78,7 @@ void call(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, boo
         truthness == true -> jmp if condition is true
         truthness == false -> jmp if condition is false
     */
-    if (always_call || (truthness && BIT_TEST(registers->f, flag_distance)) || (!truthness && !BIT_TEST(registers->f, flag_distance))) {
+    if (flag_distance == ALWAYS_DISTANCE || (truthness && BIT_TEST(registers->f, flag_distance)) || (!truthness && !BIT_TEST(registers->f, flag_distance))) {
         //NOTE: dec sp by two and store next instruction at sp
         registers->sp -= 2;
         write_short_mem(registers->sp, registers->pc + 3);
@@ -128,10 +125,12 @@ void mov(registers* registers, cpu_state* cpu_state, int register_dst, int regis
 
 void mov_m(registers* registers, cpu_state* cpu_state, int _register, bool into_m) {
     //NOTE: into_m determines whether we are storing in m or getting value from m
-    if (into_m)
+    if (into_m) {
         write_byte_mem(registers->hl, read_register(_register));
-    else
+    }
+    else {
         load_register(_register, read_byte_mem(registers->hl));
+    }
 
     registers->pc++;
     cpu_state->cycles += 7;
@@ -159,10 +158,10 @@ void dcr_m(registers* registers, cpu_state* cpu_state) {
     cpu_state->cycles += 10;
 }
 
-void ret(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool truthness, bool always_return) {
+void ret(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool truthness) {
     bool returned = false;
 
-    if (always_return || (truthness && BIT_TEST(registers->f, flag_distance)) || (!truthness && !BIT_TEST(registers->f, flag_distance))) {
+    if (flag_distance == ALWAYS_DISTANCE || (truthness && BIT_TEST(registers->f, flag_distance)) || (!truthness && !BIT_TEST(registers->f, flag_distance))) {
         registers->pc = read_short_mem(registers->sp);
         registers->sp += 2;
         returned = true;
@@ -173,7 +172,7 @@ void ret(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool
         cpu_state->cycles += 5;
     }
     else {
-        if (always_return)
+        if (flag_distance == ALWAYS_DISTANCE)
             cpu_state->cycles += 10;
         else
             cpu_state->cycles += 11;
@@ -182,7 +181,7 @@ void ret(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool
 
 void dad(registers* registers, cpu_state* cpu_state, int pair_register) {
     uint16_t initial = registers->hl;
-    uint32_t result = (uint32_t)registers->hl + read_pair_register(pair_register);
+    uint32_t result = (uint32_t)initial + read_pair_register(pair_register);
 
     registers->hl = result;
     check_set_flags(registers, CARRY, initial >> 8, result >> 8);

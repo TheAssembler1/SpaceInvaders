@@ -12,6 +12,7 @@
 #define AUX_CARRY_DISTANCE 4
 #define PARRY_DISTANCE 1
 #define CARRY_DISTANCE 0
+#define ALWAYS_DISTANCE 8
 
 #define BOOL(x) (!(!(x)))
 

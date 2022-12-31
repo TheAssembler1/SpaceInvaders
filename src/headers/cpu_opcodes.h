@@ -84,7 +84,7 @@ condition is false, program execution will continue with the
 next sequential instruction.
 */
 //JMP | 3 | 10 | - - - - -
-void jmp(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool truthness, bool always_jump);
+void jmp(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool truthness);
 
 /* Intel 8080 Manual
 Note: This is not the description for each
@@ -105,7 +105,7 @@ bits of LOW ADD, If the specified condition is false, program
 execution continues with the next sequential instruction.
 */
 //CALL | 3 | 17/11 | - - - - - 
-void call(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool truthness, bool always_call);
+void call(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool truthness);
 
 /* Intel 8080 Manual
 Description: The contents of the memory location
@@ -168,7 +168,7 @@ is true, a return operation is performed. Otherwise, program
 execution continues with the next sequential instruction.
 */
 //RET | 1 | 4/10/11 | - - - - - 
-void ret(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool truthness, bool always_return);
+void ret(registers* registers, cpu_state* cpu_state, uint8_t flag_distance, bool truthness);
 
 /* Intel 8080 Manual
 Description: The 16-bit number in the specified regis-

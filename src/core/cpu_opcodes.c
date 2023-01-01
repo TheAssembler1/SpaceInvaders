@@ -209,6 +209,8 @@ typedef union{
 
 _shift_register shift_register;
 
+#define SHIFT_AND_BITS 0b00000111
+
 void out(registers* registers, cpu_state* cpu_state) {
     uint8_t value = registers->a;
     uint8_t device = read_byte_mem(registers->pc + 1);
@@ -218,7 +220,7 @@ void out(registers* registers, cpu_state* cpu_state) {
         shift_register.high_value = value;
     }
     else if (device == SHIFT_OUT_OFFSET) {
-        offset = value;
+        offset = value & SHIFT_AND_BITS;
     }
 
     //log_info("Value 0x%02X sent to device 0x%02X", value, device);
@@ -720,4 +722,19 @@ void cmp_m(registers* registers, cpu_state* cpu_state) {
 
     registers->pc++;
     cpu_state->cycles += 7;
+}
+
+void cmc(registers* registers, cpu_state* cpu_state) {
+    registers->f = BIT_FLIP(registers->f, CARRY_DISTANCE);
+
+    registers->pc++;
+    cpu_state->cycles += 4;
+}
+
+void cma(registers* registers, cpu_state* cpu_state) {
+    for (int i = 0; i < 8; i++)
+        registers->a = BIT_FLIP(registers->a, i);
+
+    registers->pc++;
+    cpu_state->cycles += 4;
 }

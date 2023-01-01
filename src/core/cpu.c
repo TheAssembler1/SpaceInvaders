@@ -78,6 +78,7 @@ static void execute_opcode(uint16_t opcode) {
 	case 0x2C: inr(regs, cpu_st, L);							 break;
 	case 0x2D: dcr(regs, cpu_st, L);                             break;
 	case 0x2E: mvi(regs, cpu_st, L);                             break;
+	case 0x2F: cma(regs, cpu_st);								 break;
 	case 0x30: nop(regs, cpu_st);                                break;
 	case 0x31: lxi(regs, cpu_st, SP);                            break;
 	case 0x32: sta(regs, cpu_st);                                break;
@@ -93,6 +94,7 @@ static void execute_opcode(uint16_t opcode) {
 	case 0x3C: inr(regs, cpu_st, A);							 break;
 	case 0x3D: dcr(regs, cpu_st, A);                             break;
 	case 0x3E: mvi(regs, cpu_st, A);                             break;
+	case 0x3F: cmc(regs, cpu_st);								 break;
 	case 0x40: mov(regs, cpu_st, B, B);                          break;
 	case 0x41: mov(regs, cpu_st, B, C);                          break;
 	case 0x42: mov(regs, cpu_st, B, D);                          break;

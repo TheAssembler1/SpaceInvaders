@@ -551,4 +551,18 @@ void cmp(registers* registers, cpu_state* cpu_state, int _register);
 //CMP_M | 1 | 7 | S Z A P C
 void cmp_m(registers* registers, cpu_state* cpu_state);
 
+/* Intel 8080 Manual
+Description: If the Carry Bit = 0, it is set to 1. If the Carry
+bit = 1, it is reset to 0;
+*/
+//CMC | 1 | 4 - - - - C
+void cmc(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: Each bit of the contents of the accumula-
+tor is copmlemented (producing the one's complement).
+*/
+//CMA | 1 | 4 | - - - - -
+void cma(registers* registers, cpu_state* cpu_state);
+
 #endif //CPU_OPCODES_H 

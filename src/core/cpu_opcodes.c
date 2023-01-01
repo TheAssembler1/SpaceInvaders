@@ -738,3 +738,10 @@ void cma(registers* registers, cpu_state* cpu_state) {
     registers->pc++;
     cpu_state->cycles += 4;
 }
+
+void hlt(registers* registers, cpu_state* cpu_state) {
+    cpu_state->halted = true;
+
+    registers->pc++;
+    cpu_state->cycles += 7;
+}

@@ -27,8 +27,8 @@ void deinit_cpu(){
 }
 
 static void execute_opcode(uint16_t opcode) {
-
-	uint16_t current_pc = regs->pc;
+	if (cpu_st->halted)
+		return;
 
 	switch (opcode) {
 	case 0x00: nop(regs, cpu_st);                                break;

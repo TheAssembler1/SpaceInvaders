@@ -565,4 +565,13 @@ tor is copmlemented (producing the one's complement).
 //CMA | 1 | 4 | - - - - -
 void cma(registers* registers, cpu_state* cpu_state);
 
+/* Intel 8080 Manual
+Descriptoin: The program counter is incremented to
+the address of the next sequential instruction. The CPU
+then enters the STOPPPED state and no further activity takes
+place until an interupt occurs
+*/
+//HLT | 1 | 7 | - - - - -
+void hlt(registers* registers, cpu_state* cpu_state);
+
 #endif //CPU_OPCODES_H 

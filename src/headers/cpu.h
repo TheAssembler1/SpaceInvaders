@@ -67,6 +67,7 @@ typedef struct _registers registers;
 struct _cpu_state{
     long double cycles;
     bool interrupts_enabled;
+    bool halted;
 };
 
 typedef struct _cpu_state cpu_state;

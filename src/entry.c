@@ -1,7 +1,7 @@
 #include <headers.h>
 
 //FIXME::this should be passed through args
-#define TEST_MODE 1
+#define TEST_MODE 0
 
 int main(int argc, char* argv[]) {
     if (!TEST_MODE) {

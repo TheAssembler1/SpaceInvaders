@@ -534,4 +534,21 @@ void sbb(registers* registers, cpu_state* cpu_state, int _register);
 //SBB_M | 1 | 7 | S Z A P C
 void sbb_m(registers* registers, cpu_state* cpu_state);
 
+/* Intel 8080 Manual
+Descriptoin: The specified byte is compared to the 
+contents of the accumulator. The comparison is performed
+by internally subtacting the contents of the REG from the ac-
+cumulaotr (leaving both unchanged) and setting the cond-
+tion bits according to the result. In particular, the Zero bit is
+set if the qunatities are equal, and reset if they are unequal.
+Since a subtact operation is performed, the Carry bit will be
+set if there is no carry out of bit 7, indicating that the
+contents of REG are greater than the contents of the accu-
+mulator, and reset otherwise.
+*/
+//CMP | 1 | 4 | S Z A P C
+void cmp(registers* registers, cpu_state* cpu_state, int _register);
+//CMP_M | 1 | 7 | S Z A P C
+void cmp_m(registers* registers, cpu_state* cpu_state);
+
 #endif //CPU_OPCODES_H 

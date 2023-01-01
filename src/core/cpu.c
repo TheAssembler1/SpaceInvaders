@@ -213,6 +213,14 @@ static void execute_opcode(uint16_t opcode) {
 	case 0xB5: ora(regs, cpu_st, L);                             break;
 	case 0xB6: ora_m(regs, cpu_st);                              break;
 	case 0xB7: ora(regs, cpu_st, A);                             break;
+	case 0xB8: cmp(regs, cpu_st, B);                             break;
+	case 0xB9: cmp(regs, cpu_st, C);                             break;
+	case 0xBA: cmp(regs, cpu_st, D);                             break;
+	case 0xBB: cmp(regs, cpu_st, E);                             break;
+	case 0xBC: cmp(regs, cpu_st, H);                             break;
+	case 0xBD: cmp(regs, cpu_st, L);                             break;
+	case 0xBE: cmp_m(regs, cpu_st);                              break;
+	case 0xBF: cmp(regs, cpu_st, A);                             break;
 	case 0xC0: ret(regs, cpu_st, !BIT_TEST(regs->f, ZERO_DISTANCE));          break;
 	case 0xC1: pop(regs, cpu_st, BC);										  break;
 	case 0xC2: jmp(regs, cpu_st, !BIT_TEST(regs->f, ZERO_DISTANCE));          break;

@@ -701,3 +701,23 @@ void sbb_m(registers* registers, cpu_state* cpu_state) {
     registers->pc++;
     cpu_state->cycles += 7;
 }
+
+void cmp(registers* registers, cpu_state* cpu_state, int _register) {
+    uint8_t initial = registers->a;
+    uint16_t result = (uint16_t)initial - read_register(_register);
+
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+
+    registers->pc++;
+    cpu_state->cycles += 4;
+}
+
+void cmp_m(registers* registers, cpu_state* cpu_state) {
+    uint8_t initial = registers->a;
+    uint16_t result = (uint16_t)initial - read_byte_mem(registers->hl);
+
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+
+    registers->pc++;
+    cpu_state->cycles += 7;
+}

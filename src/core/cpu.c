@@ -27,6 +27,9 @@ void deinit_cpu(){
 }
 
 static void execute_opcode(uint16_t opcode) {
+
+	uint16_t current_pc = regs->pc;
+
 	switch (opcode) {
 	case 0x00: nop(regs, cpu_st);                                break;
 	case 0x01: lxi(regs, cpu_st, BC);                            break;
@@ -40,6 +43,7 @@ static void execute_opcode(uint16_t opcode) {
 	case 0x09: dad(regs, cpu_st, BC);                            break;
 	case 0x0A: ldax(regs, cpu_st, BC);                           break;
 	case 0x0B: dcx(regs, cpu_st, BC);                            break;
+	case 0x0C: inr(regs, cpu_st, C);							 break;
 	case 0x0D: dcr(regs, cpu_st, C);                             break;
 	case 0x0E: mvi(regs, cpu_st, C);                             break;
 	case 0x0F: rrc(regs, cpu_st);                                break;
@@ -55,6 +59,7 @@ static void execute_opcode(uint16_t opcode) {
 	case 0x19: dad(regs, cpu_st, DE);                            break;
 	case 0x1A: ldax(regs, cpu_st, DE);                           break;
 	case 0x1B: dcx(regs, cpu_st, DE);                            break;
+	case 0x1C: inr(regs, cpu_st, E); break;
 	case 0x1D: dcr(regs, cpu_st, E);                             break;
 	case 0x1E: mvi(regs, cpu_st, E);                             break;
 	case 0x1F: rar(regs, cpu_st);                                break;
@@ -70,6 +75,7 @@ static void execute_opcode(uint16_t opcode) {
 	case 0x29: dad(regs, cpu_st, HL);                            break;
 	case 0x2A: lhld(regs, cpu_st);                               break;
 	case 0x2B: dcx(regs, cpu_st, HL);                            break;
+	case 0x2C: inr(regs, cpu_st, L);							 break;
 	case 0x2D: dcr(regs, cpu_st, L);                             break;
 	case 0x2E: mvi(regs, cpu_st, L);                             break;
 	case 0x30: nop(regs, cpu_st);                                break;
@@ -84,6 +90,7 @@ static void execute_opcode(uint16_t opcode) {
 	case 0x39: dad(regs, cpu_st, SP);                            break;
 	case 0x3A: lda(regs, cpu_st);                                break;
 	case 0x3B: dcx(regs, cpu_st, SP);                            break;
+	case 0x3C: inr(regs, cpu_st, A);							 break;
 	case 0x3D: dcr(regs, cpu_st, A);                             break;
 	case 0x3E: mvi(regs, cpu_st, A);                             break;
 	case 0x40: mov(regs, cpu_st, B, B);                          break;
@@ -111,7 +118,7 @@ static void execute_opcode(uint16_t opcode) {
 	case 0x56: mov_m(regs, cpu_st, D, false);                    break;
 	case 0x57: mov(regs, cpu_st, D, A);                          break;
 	case 0x58: mov(regs, cpu_st, E, B);                          break;
-	case 0x59: mov(regs, cpu_st, E, D);                          break;
+	case 0x59: mov(regs, cpu_st, E, C);                          break;
 	case 0x5A: mov(regs, cpu_st, E, D);                          break;
 	case 0x5B: mov(regs, cpu_st, E, E);                          break;
 	case 0x5C: mov(regs, cpu_st, E, H);                          break;
@@ -127,7 +134,7 @@ static void execute_opcode(uint16_t opcode) {
 	case 0x66: mov_m(regs, cpu_st, H, false);                    break;
 	case 0x67: mov(regs, cpu_st, H, A);                          break;
 	case 0x68: mov(regs, cpu_st, L, B);                          break;
-	case 0x69: mov(regs, cpu_st, L, D);                          break;
+	case 0x69: mov(regs, cpu_st, L, C);                          break;
 	case 0x6A: mov(regs, cpu_st, L, D);                          break;
 	case 0x6B: mov(regs, cpu_st, L, E);                          break;
 	case 0x6C: mov(regs, cpu_st, L, H);                          break;
@@ -143,13 +150,29 @@ static void execute_opcode(uint16_t opcode) {
 		//HLT    
 	case 0x77: mov_m(regs, cpu_st, A, true);                     break;
 	case 0x78: mov(regs, cpu_st, A, B);                          break;
-	case 0x79: mov(regs, cpu_st, A, D);                          break;
+	case 0x79: mov(regs, cpu_st, A, C);                          break;
 	case 0x7A: mov(regs, cpu_st, A, D);                          break;
 	case 0x7B: mov(regs, cpu_st, A, E);                          break;
 	case 0x7C: mov(regs, cpu_st, A, H);                          break;
 	case 0x7D: mov(regs, cpu_st, A, L);                          break;
 	case 0x7E: mov_m(regs, cpu_st, A, false);                    break;
 	case 0x7F: mov(regs, cpu_st, A, A);                          break;
+	case 0x80: add(regs, cpu_st, B); break;
+	case 0x81: add(regs, cpu_st, C); break;
+	case 0x82: add(regs, cpu_st, D); break;
+	case 0x83: add(regs, cpu_st, E); break;
+	case 0x84: add(regs, cpu_st, H); break;
+	case 0x85: add(regs, cpu_st, L); break;
+	case 0x86: add_m(regs, cpu_st);  break;
+	case 0x87: add(regs, cpu_st, A); break;
+	case 0x90: sub(regs, cpu_st, B); break;
+	case 0x91: sub(regs, cpu_st, C); break;
+	case 0x92: sub(regs, cpu_st, D); break;
+	case 0x93: sub(regs, cpu_st, E); break;
+	case 0x94: sub(regs, cpu_st, H); break;
+	case 0x95: sub(regs, cpu_st, L); break;
+	case 0x96: sub_m(regs, cpu_st);  break;
+	case 0x97: sub(regs, cpu_st, A); break;
 	case 0xA0: ana(regs, cpu_st, B);                             break;
 	case 0xA1: ana(regs, cpu_st, C);                             break;
 	case 0xA2: ana(regs, cpu_st, D);                             break;
@@ -175,72 +198,77 @@ static void execute_opcode(uint16_t opcode) {
 	case 0xB6: ora_m(regs, cpu_st);                              break;
 	case 0xB7: ora(regs, cpu_st, A);                             break;
 	case 0xC0: ret(regs, cpu_st, !BIT_TEST(regs->f, ZERO_DISTANCE));          break;
-	case 0xC1: pop(regs, cpu_st, BC);                            break;
+	case 0xC1: pop(regs, cpu_st, BC);										  break;
 	case 0xC2: jmp(regs, cpu_st, !BIT_TEST(regs->f, ZERO_DISTANCE));          break;
-	case 0xC3: jmp(regs, cpu_st, true);        break;
+	case 0xC3: jmp(regs, cpu_st, true);										  break;
 	case 0xC4: call(regs, cpu_st, !BIT_TEST(regs->f, ZERO_DISTANCE));         break;
-	case 0xC5: push(regs, cpu_st, BC);                           break;
-	case 0xC6: adi(regs, cpu_st);                                break;
-	case 0xC7: rst(regs, cpu_st, 0b0000000000000000);            break;
+	case 0xC5: push(regs, cpu_st, BC);									      break;
+	case 0xC6: adi(regs, cpu_st);										      break;
+	case 0xC7: rst(regs, cpu_st, 0b0000000000000000);					      break;
 	case 0xC8: ret(regs, cpu_st, BIT_TEST(regs->f, ZERO_DISTANCE));           break;
-	case 0xC9: ret(regs, cpu_st, true);        break;
+	case 0xC9: ret(regs, cpu_st, true);										  break;
 	case 0xCA: jmp(regs, cpu_st, BIT_TEST(regs->f, ZERO_DISTANCE));           break;
-	case 0xCB: jmp(regs, cpu_st, true);        break;
+	case 0xCB: jmp(regs, cpu_st, true);										  break;
 	case 0xCC: call(regs, cpu_st, BIT_TEST(regs->f, ZERO_DISTANCE));          break;
-	case 0xCD: call(regs, cpu_st, true);       break;
-	case 0xCE: aci(regs, cpu_st);                                break;
-	case 0xCF: rst(regs, cpu_st, 0b0000000000001000);            break;
+	case 0xCD: call(regs, cpu_st, true);								      break;
+	case 0xCE: aci(regs, cpu_st);										      break;
+	case 0xCF: rst(regs, cpu_st, 0b0000000000001000);						  break;
 	case 0xD0: ret(regs, cpu_st, !BIT_TEST(regs->f, CARRY_DISTANCE));         break;
-	case 0xD1: pop(regs, cpu_st, DE);                            break;
+	case 0xD1: pop(regs, cpu_st, DE);								          break;
 	case 0xD2: jmp(regs, cpu_st, !BIT_TEST(regs->f, CARRY_DISTANCE));         break;
-	case 0xD3: out(regs, cpu_st);                                break;
+	case 0xD3: out(regs, cpu_st);                                             break;
 	case 0xD4: call(regs, cpu_st, !BIT_TEST(regs->f, CARRY_DISTANCE));        break;
-	case 0xD5: push(regs, cpu_st, DE);                           break;
-	case 0xD6: sui(regs, cpu_st);                                break;
-	case 0xD7: rst(regs, cpu_st, 0b0000000000010000);            break;
+	case 0xD5: push(regs, cpu_st, DE);										  break;
+	case 0xD6: sui(regs, cpu_st);											  break;
+	case 0xD7: rst(regs, cpu_st, 0b0000000000010000);						  break;
 	case 0xD8: ret(regs, cpu_st, BIT_TEST(regs->f, CARRY_DISTANCE));          break;
-	case 0xD9: ret(regs, cpu_st, true);        break;
+	case 0xD9: ret(regs, cpu_st, true);										  break;
 	case 0xDA: jmp(regs, cpu_st, BIT_TEST(regs->f, CARRY_DISTANCE));          break;
-	case 0xDB: in(regs, cpu_st);                                 break;
+	case 0xDB: in(regs, cpu_st);											  break;
 	case 0xDC: call(regs, cpu_st, BIT_TEST(regs->f, CARRY_DISTANCE));         break;
-	case 0xDD: call(regs, cpu_st, true);       break;
-	case 0xDE: sbi(regs, cpu_st);                                break;
-	case 0xDF: rst(regs, cpu_st, 0b0000000000011000);            break;
+	case 0xDD: call(regs, cpu_st, true);									  break;
+	case 0xDE: sbi(regs, cpu_st);											  break;
+	case 0xDF: rst(regs, cpu_st, 0b0000000000011000);						  break;
 	case 0xE0: ret(regs, cpu_st, !BIT_TEST(regs->f, PARRY_DISTANCE));         break;
-	case 0xE1: pop(regs, cpu_st, HL);                            break;
+	case 0xE1: pop(regs, cpu_st, HL);										  break;
 	case 0xE2: jmp(regs, cpu_st, !BIT_TEST(regs->f, PARRY_DISTANCE));         break;
+	case 0xE3: xthl(regs, cpu_st);											  break;
 	case 0xE4: call(regs, cpu_st, !BIT_TEST(regs->f, PARRY_DISTANCE));        break;
-	case 0xE5: push(regs, cpu_st, HL);                           break;
-	case 0xE6: ani(regs, cpu_st);                                break;
-	case 0xE7: rst(regs, cpu_st, 0b0000000000100000);            break;
+	case 0xE5: push(regs, cpu_st, HL);									      break;
+	case 0xE6: ani(regs, cpu_st);											  break;
+	case 0xE7: rst(regs, cpu_st, 0b0000000000100000);						  break;
 	case 0xE8: ret(regs, cpu_st, BIT_TEST(regs->f, PARRY_DISTANCE));          break;
+	case 0xE9: pchl(regs, cpu_st);											  break;
 	case 0xEA: jmp(regs, cpu_st, BIT_TEST(regs->f, PARRY_DISTANCE));          break;
-	case 0xEB: xchg(regs, cpu_st);                               break;
+	case 0xEB: xchg(regs, cpu_st);											  break;
 	case 0xEC: call(regs, cpu_st, BIT_TEST(regs->f, PARRY_DISTANCE));         break;
-	case 0xED: call(regs, cpu_st, true);       break;
-	case 0xEF: rst(regs, cpu_st, 0b0000000000101000);            break;
-	case 0xEE: xri(regs, cpu_st);                                break;
+	case 0xED: call(regs, cpu_st, true);									  break;
+	case 0xEF: rst(regs, cpu_st, 0b0000000000101000);						  break;
+	case 0xEE: xri(regs, cpu_st);											  break;
 	case 0xF0: ret(regs, cpu_st, !BIT_TEST(regs->f, SIGN_DISTANCE));          break;
-	case 0xF1: pop(regs, cpu_st, AF);                            break;
+	case 0xF1: pop(regs, cpu_st, AF);										  break;
 	case 0xF2: jmp(regs, cpu_st, !BIT_TEST(regs->f, SIGN_DISTANCE));          break;
-	case 0xF3: di(regs, cpu_st);                                 break;
-	case 0xF4: call(regs, cpu_st, !BIT_TEST(regs->f, SIGN_DISTANCE));          break;
-	case 0xF5: push(regs, cpu_st, AF);                           break;
-	case 0xF6: ori(regs, cpu_st);                                break;
-	case 0xF7: rst(regs, cpu_st, 0b0000000000110000);            break;
+	case 0xF3: di(regs, cpu_st);											  break;
+	case 0xF4: call(regs, cpu_st, !BIT_TEST(regs->f, SIGN_DISTANCE));         break;
+	case 0xF5: push(regs, cpu_st, AF);										  break;
+	case 0xF6: ori(regs, cpu_st);											  break;
+	case 0xF7: rst(regs, cpu_st, 0b0000000000110000);						  break;
 	case 0xF8: ret(regs, cpu_st, BIT_TEST(regs->f, SIGN_DISTANCE));           break;
-	case 0xF9: sphl(regs, cpu_st);                               break;
+	case 0xF9: sphl(regs, cpu_st);											  break;
 	case 0xFA: jmp(regs, cpu_st, BIT_TEST(regs->f, SIGN_DISTANCE));           break;
-	case 0xFB: ei(regs, cpu_st);                                 break;
+	case 0xFB: ei(regs, cpu_st);											  break;
 	case 0xFC: call(regs, cpu_st, BIT_TEST(regs->f, SIGN_DISTANCE));          break;
-	case 0xFD: call(regs, cpu_st, true);       break;
-	case 0xFE: cpi(regs, cpu_st);                                break;
-	case 0xFF: rst(regs, cpu_st, 0b0000000000111000);            break;
+	case 0xFD: call(regs, cpu_st, true);									  break;
+	case 0xFE: cpi(regs, cpu_st);											  break;
+	case 0xFF: rst(regs, cpu_st, 0b0000000000111000);						  break;
 	default:
 		log_error("opcode %x does not exist", opcode);
 		deinit_manager();
 		break;
 	}
+
+	//log_log("%x", current_pc);
+	//print_cpu();
 }
 
 void execute_interrupt(uint16_t opcode) {
@@ -306,40 +334,50 @@ static int parity_array[256] = {1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 
 
 #define OVERFLOW 0xFF
 
-void check_set_flags(registers* registers, uint8_t flags, uint8_t intial, uint16_t result) {
-    if (BIT_TEST(flags, SIGN_DISTANCE)) {
-        if (BIT_TEST(result, SIGN_DISTANCE))
-            registers->f = BIT_SET(registers->f, SIGN_DISTANCE);
-        else
-            registers->f = BIT_CLEAR(registers->f, SIGN_DISTANCE);
+void check_set_flags(registers* registers, uint8_t flags, uint8_t initial, uint16_t result) {
+	if (BIT_TEST(flags, SIGN_DISTANCE)) {
+        if (BIT_TEST((uint8_t)result, SIGN_DISTANCE)){
+			registers->f = BIT_SET(registers->f, SIGN_DISTANCE);
+		}else
+		{
+			registers->f = BIT_CLEAR(registers->f, SIGN_DISTANCE);
+		}
     }
 
     if (BIT_TEST(flags, ZERO_DISTANCE)) {
-        if (!result) 
-            registers->f = BIT_SET(registers->f, ZERO_DISTANCE);
-        else
-            registers->f = BIT_CLEAR(registers->f, ZERO_DISTANCE);
+        if (!(uint8_t)result) {
+			registers->f = BIT_SET(registers->f, ZERO_DISTANCE);
+		}
+        else{
+			registers->f = BIT_CLEAR(registers->f, ZERO_DISTANCE);
+		}
     }
 
     if (BIT_TEST(flags, AUX_CARRY_DISTANCE)) {
-        if (~(registers->a ^ intial ^ result) & 0x10)
-            registers->f = BIT_SET(registers->f, AUX_CARRY_DISTANCE);
-        else
-            registers->f = BIT_CLEAR(registers->f, AUX_CARRY_DISTANCE);
+        if (~(registers->a ^ initial ^ (uint8_t)result) & 0x10){
+			registers->f = BIT_SET(registers->f, AUX_CARRY_DISTANCE);
+		}
+		else{
+			registers->f = BIT_CLEAR(registers->f, AUX_CARRY_DISTANCE);
+		}
     }
 
     if (BIT_TEST(flags, PARRY_DISTANCE)) {
-        if (parity_array[(uint8_t)result])
-            registers->f = BIT_SET(registers->f, PARRY_DISTANCE);
-        else
-            registers->f = BIT_CLEAR(registers->f, PARRY_DISTANCE);
+        if (parity_array[(uint8_t)result]){
+			registers->f = BIT_SET(registers->f, PARRY_DISTANCE);
+		}
+        else{
+			registers->f = BIT_CLEAR(registers->f, PARRY_DISTANCE);
+		}
     }
 
     if (BIT_TEST(flags, CARRY_DISTANCE)) {
-        if (result > OVERFLOW)
-            registers->f = BIT_SET(registers->f, CARRY_DISTANCE);
-        else
-            registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
+        if (result > OVERFLOW){
+			registers->f = BIT_SET(registers->f, CARRY_DISTANCE);
+		}
+        else{
+			registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
+		}
     }
 }
 

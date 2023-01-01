@@ -46,7 +46,7 @@ static void cycle_test_machine() {
             }
 
             
-            ret(regs, cpu_st, ALWAYS_DISTANCE, false);
+            ret(regs, cpu_st, true);
         }
 
         run_next_opcode();

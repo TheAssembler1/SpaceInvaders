@@ -477,4 +477,42 @@ contents of the H and L registers are unchanged
 //SPHL | 1 | 5 | - - - - -
 void sphl(registers* registers, cpu_state* cpu_state);
 
+/* Intel 8080 Manual
+Description: The contents of the L register are ex-
+changed with the contents of the memory byte whose ad-
+dress is held in the stack pointer SP. The contents of the H
+register are exchanged with the contents of the memory
+byte whose address is one greater than that held in the stack 
+pointer.
+*/
+//XTHL | 1 | 18 | - - - - -
+void xthl(registers* registers, cpu_state* cpu_state);
+
+
+/* Intel 8080 Manual
+Description: The 16 bits of data held in pc
+register replaces the contents of the stack pointer SP. The
+contents of the pc register is unchanged
+*/
+//SPHL | 1 | 5 | - - - - -
+void pchl(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The specified byte is added to the con-
+tents of the accumulator using two's copmlement arithmetic.
+*/
+//ADD | 1 | 4 | S Z A P C
+void add(registers* registers, cpu_state* cpu_state, int _register);
+//ADD_M | 1 | 4 | S Z A P C
+void add_m(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The specified byte is subtracted from the con-
+tents of the accumulator using two's copmlement arithmetic.
+*/
+//ADD | 1 | 4 | S Z A P C
+void sub(registers* registers, cpu_state* cpu_state, int _register);
+//ADD_M | 1 | 4 | S Z A P C
+void sub_m(registers* registers, cpu_state* cpu_state);
+
 #endif //CPU_OPCODES_H 

@@ -194,9 +194,22 @@ void xra_m(registers* registers, cpu_state* cpu_state) {
     cpu_state->cycles += 7;
 }
 
+#define SHIFT_OUT 0x04
+#define SHIFT_OUT_OFFSET 0x02
+
+uint8_t offset = 0;
+uint16_t shift_value = 0;
+
 void out(registers* registers, cpu_state* cpu_state) {
     uint8_t value = registers->a;
     uint8_t device = read_byte_mem(registers->pc + 1);
+
+    if (device == SHIFT_OUT) {
+        //log_log("TEST");
+    }
+    else if (device == SHIFT_OUT_OFFSET) {
+        offset = value;
+    }
 
     //log_info("Value 0x%02X sent to device 0x%02X", value, device);
 
@@ -335,7 +348,17 @@ void adi(registers* registers, cpu_state* cpu_state) {
 
     registers->a = result;
     check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
-
+    //if (registers->pc == 0x02CE
+    //    || registers->pc == 0x2DA
+    //    || registers->pc == 0x02E6
+    //    || registers->pc == 0x02F2
+    //    || registers->pc == 0x02FE
+    //    || registers->pc == 0x030A
+    //    || registers->pc == 0x0316
+    //    ) {
+    //    log_log("%x-++++++++++++++", result);
+    //    print_cpu();
+    //}
     registers->pc += 2;
     cpu_state->cycles += 7;
 }
@@ -443,13 +466,18 @@ void rst(registers* registers, cpu_state* cpu_state, uint16_t address) {
     registers->pc = address;
 }
 
+#define SHIFT_IN_DEVICE 0x03
+
 //FIXME:: read input from device
 //Current just reading a in from device;
 void in(registers* registers, cpu_state* cpu_state) {
     registers->a = 0;
 
     int device = read_byte_mem(registers->pc + 1);
-    int value = registers->a;
+
+    if (device == SHIFT_IN_DEVICE) {
+        registers->a = shift_value;
+    }
 
     //log_info("Value 0x%02X sent from device 0x%02X", value, device);
 
@@ -552,4 +580,64 @@ void sphl(registers* registers, cpu_state* cpu_state) {
 
     registers->pc++;
     cpu_state->cycles += 5;
+}
+
+void xthl(registers* registers, cpu_state* cpu_state) {
+    uint16_t temp = registers->hl;
+    registers->hl = read_short_mem(registers->sp);
+    write_short_mem(registers->sp, temp);
+
+    registers->pc++;
+    cpu_state->cycles += 18;
+}
+
+void pchl(registers* registers, cpu_state* cpu_state) {
+    registers->pc = registers->hl;
+
+    registers->pc++;
+    cpu_state->cycles += 5;
+}
+
+void add(registers* registers, cpu_state* cpu_state, int _register) {
+    uint8_t initial = registers->a;
+    uint16_t result = (uint16_t)initial + read_register(_register);
+
+    registers->a = result;
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+
+    registers->pc++;
+    cpu_state->cycles += 4;
+}
+
+void add_m(registers* registers, cpu_state* cpu_state) {
+    uint8_t initial = registers->a;
+    uint16_t result = (uint16_t)initial + read_byte_mem(registers->hl);
+
+    registers->a = result;
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+
+    registers->pc++;
+    cpu_state->cycles += 7;
+}
+
+void sub(registers* registers, cpu_state* cpu_state, int _register) {
+    uint8_t initial = registers->a;
+    uint16_t result = (uint16_t)initial - read_register(_register);
+
+    registers->a = result;
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+
+    registers->pc++;
+    cpu_state->cycles += 4;
+}
+
+void sub_m(registers* registers, cpu_state* cpu_state) {
+    uint8_t initial = registers->a;
+    uint16_t result = (uint16_t)initial - read_byte_mem(registers->hl);
+
+    registers->a = result;
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+
+    registers->pc++;
+    cpu_state->cycles += 7;
 }

@@ -1,7 +1,7 @@
 #ifndef GPU_H
 #define GPU_H
 
-#define ON_PIXEL 255, 255, 255
+#define ON_PIXEL 255, 0, 0
 #define OFF_PIXEL 0, 0, 0
 
 //NOTE: The screen is rotated in the cabinet

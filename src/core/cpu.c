@@ -30,6 +30,8 @@ static void execute_opcode(uint16_t opcode) {
 	if (cpu_st->halted)
 		return;
 
+	//log_log("%x", regs->pc);
+
 	switch (opcode) {
 	case 0x00: nop(regs, cpu_st);                                break;
 	case 0x01: lxi(regs, cpu_st, BC);                            break;
@@ -59,7 +61,7 @@ static void execute_opcode(uint16_t opcode) {
 	case 0x19: dad(regs, cpu_st, DE);                            break;
 	case 0x1A: ldax(regs, cpu_st, DE);                           break;
 	case 0x1B: dcx(regs, cpu_st, DE);                            break;
-	case 0x1C: inr(regs, cpu_st, E); break;
+	case 0x1C: inr(regs, cpu_st, E);							 break;
 	case 0x1D: dcr(regs, cpu_st, E);                             break;
 	case 0x1E: mvi(regs, cpu_st, E);                             break;
 	case 0x1F: rar(regs, cpu_st);                                break;
@@ -149,7 +151,7 @@ static void execute_opcode(uint16_t opcode) {
 	case 0x73: mov_m(regs, cpu_st, E, true);                     break;
 	case 0x74: mov_m(regs, cpu_st, H, true);                     break;
 	case 0x75: mov_m(regs, cpu_st, L, true);                     break;
-		//HLT    
+	case 0x76: hlt(regs, cpu_st);								 break;
 	case 0x77: mov_m(regs, cpu_st, A, true);                     break;
 	case 0x78: mov(regs, cpu_st, A, B);                          break;
 	case 0x79: mov(regs, cpu_st, A, C);                          break;
@@ -299,6 +301,7 @@ static void execute_opcode(uint16_t opcode) {
 
 void execute_interrupt(uint16_t opcode) {
     if (cpu_st->interrupts_enabled) {
+		cpu_st->halted = false;
         execute_opcode(opcode);
     }
 }

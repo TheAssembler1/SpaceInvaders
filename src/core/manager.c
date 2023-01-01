@@ -21,13 +21,8 @@ void init_manager(){
 
     cycle_machine();
 }
-/*
- 02AA D677      C020:	SUI	077H	;A=89H,C=1,P=0,S=1,Z=0
- 02AC D4A006    	CNC	CPUER	;TEST "CNC"
- 02AF ECA006    	CPE	CPUER	;TEST "CPE"
- 02B2 F4A006    	CP	CPUER	;TEST "CP"
- 02B5 CCA006    	CZ	CPUER	;TEST "CZ"
-*/
+
+
 static void cycle_test_machine() {
     while (regs->pc != 0x00) {
         if (regs->pc == 0x0005) {
@@ -51,6 +46,8 @@ static void cycle_test_machine() {
 
         run_next_opcode();
     }
+
+    log_log();
 }
 
 void init_test_manager() {

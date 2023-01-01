@@ -198,14 +198,24 @@ void xra_m(registers* registers, cpu_state* cpu_state) {
 #define SHIFT_OUT_OFFSET 0x02
 
 uint8_t offset = 0;
-uint16_t shift_value = 0;
+
+typedef union{
+    struct {
+        uint8_t low_value;
+        uint8_t high_value;
+    };
+    uint16_t value;
+} _shift_register;
+
+_shift_register shift_register;
 
 void out(registers* registers, cpu_state* cpu_state) {
     uint8_t value = registers->a;
     uint8_t device = read_byte_mem(registers->pc + 1);
 
     if (device == SHIFT_OUT) {
-        //log_log("TEST");
+        shift_register.low_value = shift_register.high_value;
+        shift_register.high_value = value;
     }
     else if (device == SHIFT_OUT_OFFSET) {
         offset = value;
@@ -471,12 +481,10 @@ void rst(registers* registers, cpu_state* cpu_state, uint16_t address) {
 //FIXME:: read input from device
 //Current just reading a in from device;
 void in(registers* registers, cpu_state* cpu_state) {
-    registers->a = 0;
-
     int device = read_byte_mem(registers->pc + 1);
 
     if (device == SHIFT_IN_DEVICE) {
-        registers->a = shift_value;
+        registers->a = (((shift_register.high_value << 8) | shift_register.low_value) << offset) >> 8;
     }
 
     //log_info("Value 0x%02X sent from device 0x%02X", value, device);
@@ -634,6 +642,58 @@ void sub(registers* registers, cpu_state* cpu_state, int _register) {
 void sub_m(registers* registers, cpu_state* cpu_state) {
     uint8_t initial = registers->a;
     uint16_t result = (uint16_t)initial - read_byte_mem(registers->hl);
+
+    registers->a = result;
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+
+    registers->pc++;
+    cpu_state->cycles += 7;
+}
+
+void adc(registers* registers, cpu_state* cpu_state, int _register) {
+    uint8_t initial = registers->a;
+    uint16_t result = (uint16_t)initial + read_register(_register);
+
+    result += (BIT_TEST(regs->f, CARRY_DISTANCE)) ? 1 : 0;
+
+    registers->a = result;
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+
+    registers->pc++;
+    cpu_state->cycles += 4;
+}
+
+void adc_m(registers* registers, cpu_state* cpu_state) {
+    uint8_t initial = registers->a;
+    uint16_t result = (uint16_t)initial + read_byte_mem(registers->hl);
+
+    result += (BIT_TEST(regs->f, CARRY_DISTANCE)) ? 1 : 0;
+
+    registers->a = result;
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+
+    registers->pc++;
+    cpu_state->cycles += 7;
+}
+
+void sbb(registers* registers, cpu_state* cpu_state, int _register) {
+    uint8_t initial = registers->a;
+    uint16_t result = (uint16_t)initial - read_register(_register);
+
+    result -= (BIT_TEST(regs->f, CARRY_DISTANCE)) ? 1 : 0;
+
+    registers->a = result;
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+
+    registers->pc++;
+    cpu_state->cycles += 4;
+}
+
+void sbb_m(registers* registers, cpu_state* cpu_state) {
+    uint8_t initial = registers->a;
+    uint16_t result = (uint16_t)initial - read_byte_mem(registers->hl);
+
+    result -= (BIT_TEST(regs->f, CARRY_DISTANCE)) ? 1 : 0;
 
     registers->a = result;
     check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);

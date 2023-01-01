@@ -165,6 +165,14 @@ static void execute_opcode(uint16_t opcode) {
 	case 0x85: add(regs, cpu_st, L); break;
 	case 0x86: add_m(regs, cpu_st);  break;
 	case 0x87: add(regs, cpu_st, A); break;
+	case 0x88: adc(regs, cpu_st, B); break;
+	case 0x89: adc(regs, cpu_st, C); break;
+	case 0x8A: adc(regs, cpu_st, D); break;
+	case 0x8B: adc(regs, cpu_st, E); break;
+	case 0x8C: adc(regs, cpu_st, H); break;
+	case 0x8D: adc(regs, cpu_st, L); break;
+	case 0x8E: adc_m(regs, cpu_st);  break;
+	case 0x8F: adc(regs, cpu_st, A); break;
 	case 0x90: sub(regs, cpu_st, B); break;
 	case 0x91: sub(regs, cpu_st, C); break;
 	case 0x92: sub(regs, cpu_st, D); break;
@@ -173,6 +181,14 @@ static void execute_opcode(uint16_t opcode) {
 	case 0x95: sub(regs, cpu_st, L); break;
 	case 0x96: sub_m(regs, cpu_st);  break;
 	case 0x97: sub(regs, cpu_st, A); break;
+	case 0x98: sbb(regs, cpu_st, B); break;
+	case 0x99: sbb(regs, cpu_st, C); break;
+	case 0x9A: sbb(regs, cpu_st, D); break;
+	case 0x9B: sbb(regs, cpu_st, E); break;
+	case 0x9C: sbb(regs, cpu_st, H); break;
+	case 0x9D: sbb(regs, cpu_st, L); break;
+	case 0x9E: sbb_m(regs, cpu_st);  break;
+	case 0x9F: sbb(regs, cpu_st, A); break;
 	case 0xA0: ana(regs, cpu_st, B);                             break;
 	case 0xA1: ana(regs, cpu_st, C);                             break;
 	case 0xA2: ana(regs, cpu_st, D);                             break;
@@ -381,7 +397,7 @@ void check_set_flags(registers* registers, uint8_t flags, uint8_t initial, uint1
     }
 }
 
-static void print_bits(int size, uint16_t value){
+void print_bits(int size, uint16_t value){
     for (int i = (size * 8) - 1; i >= 0; i--) {
         if (i != (size * 8) - 1 && (i + 1) % 8 == 0)
             log_log_nonewl(" ");

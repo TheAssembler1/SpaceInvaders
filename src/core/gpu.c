@@ -33,7 +33,7 @@ void render_screen(SDL_Renderer* renderer) {
 			else
 				SDL_SetRenderDrawColor(renderer, OFF_PIXEL, 0);
 
-			int x = linear_pixel_position % SCREEN_WIDTH;
+			int x = linear_pixel_position % SCREEN_WIDTH + 1;
 			int y = linear_pixel_position / SCREEN_WIDTH;
 
 			SDL_RenderDrawPoint(renderer, y, SCREEN_WIDTH - x);

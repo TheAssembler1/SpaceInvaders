@@ -108,4 +108,6 @@ void print_cpu();
 
 void execute_interrupt(uint16_t opcode);
 
+void print_bits(int size, uint16_t value);
+
 #endif //CPU_H

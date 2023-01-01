@@ -82,11 +82,26 @@ void deinit_test_manager() {
     exit(0);
 }
 
+#define TICK_INTERVAL 30
+
+static uint32_t next_time;
+
+uint32_t time_left() {
+    uint32_t now;
+
+    now = SDL_GetTicks();
+    if (next_time <= now)
+        return 0;
+    else
+        return next_time - now;
+}
+
 static void cycle_machine() {
     bool run_machine = true;
 
     SDL_Event event;
 
+    next_time = SDL_GetTicks() + TICK_INTERVAL;
     while (run_machine) {
         cpu_st->cycles = 0;
 
@@ -102,6 +117,9 @@ static void cycle_machine() {
 
         if (SDL_PollEvent(&event) && event.type == SDL_QUIT)
             run_machine = false;
+
+        SDL_Delay(time_left());
+        next_time += TICK_INTERVAL;
     }
 
     deinit_manager();

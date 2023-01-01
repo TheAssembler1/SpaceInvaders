@@ -512,7 +512,26 @@ tents of the accumulator using two's copmlement arithmetic.
 */
 //ADD | 1 | 4 | S Z A P C
 void sub(registers* registers, cpu_state* cpu_state, int _register);
-//ADD_M | 1 | 4 | S Z A P C
+//ADD_M | 1 | 7 | S Z A P C
 void sub_m(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The specified byte plus the contents of 
+the Carry bit is added to the contents of the accumulator.
+*/
+//ADC | 1 | 4 | S Z A P C
+void adc(registers* registers, cpu_state* cpu_state, int _register);
+//ADC_M | 1 | 7 | S Z A P C
+void adc_m(registers* registers, cpu_state* cpu_state);
+
+/* Intel 8080 Manual
+Description: The Carry bit is internally added to the 
+contents of the specified byte. This value is then subtracted
+from the accumulator using two's complement arithmetic.
+*/
+//SBB | 1 | 4 | S Z A P C
+void sbb(registers* registers, cpu_state* cpu_state, int _register);
+//SBB_M | 1 | 7 | S Z A P C
+void sbb_m(registers* registers, cpu_state* cpu_state);
 
 #endif //CPU_OPCODES_H 

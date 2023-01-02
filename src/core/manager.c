@@ -81,7 +81,7 @@ void deinit_test_manager() {
     exit(0);
 }
 
-#define TICK_INTERVAL 30
+#define TICK_INTERVAL 5
 
 static uint32_t next_time;
 

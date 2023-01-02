@@ -362,6 +362,7 @@ static int parity_array[256] = {1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 
 #define OVERFLOW 0xFF
 #define FLAG_TO_SET 0x01
 #define FLAG_TO_CLEAR 0x05
+#define FLAG_TO_CLEAR_AGAIN 0x03
 
 void check_set_flags(registers* registers, uint8_t flags, uint8_t initial, uint16_t result) {
 	if (BIT_TEST(flags, SIGN_DISTANCE)) {
@@ -410,6 +411,7 @@ void check_set_flags(registers* registers, uint8_t flags, uint8_t initial, uint1
     }
 
 	registers->f = BIT_CLEAR(registers->f, FLAG_TO_CLEAR);
+	registers->f = BIT_CLEAR(registers->f, FLAG_TO_CLEAR_AGAIN);
 	registers->f = BIT_SET(registers->f, FLAG_TO_SET);
 }
 
@@ -467,4 +469,14 @@ void print_cpu() {
 
     log_log("------------------------------");
     log_trace("End printing cpu");
+}
+
+uint8_t rotl(uint8_t value)
+{
+	return((value << 1) | (value >> 7));
+}
+
+uint8_t rotr(uint8_t value)
+{
+	return((value >> 1) | (value << 7));
 }

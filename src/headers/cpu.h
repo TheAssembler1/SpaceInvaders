@@ -111,4 +111,7 @@ void execute_interrupt(uint16_t opcode);
 
 void print_bits(int size, uint16_t value);
 
+uint8_t rotl(uint8_t value);
+uint8_t rotr(uint8_t value);
+
 #endif //CPU_H

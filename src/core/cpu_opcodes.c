@@ -277,34 +277,16 @@ void xchg(registers* registers, cpu_state* cpu_state) {
 }
 
 void rlc(registers* registers, cpu_state* cpu_state) {
-    uint8_t prev_a = registers->a;
-    
-    registers->a <<= 1;
-    if (BIT_TEST(prev_a, 7)) {
-        registers->f = BIT_SET(registers->f, CARRY_DISTANCE);
-        registers->a = BIT_SET(registers->a, 0);
-    }
-    else {
-        registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
-        registers->a = BIT_CLEAR(registers->a, 0);
-    }
+    registers->f = (BIT_TEST(registers->a, 7)) ? BIT_SET(registers->f, CARRY_DISTANCE) : BIT_CLEAR(registers->f, CARRY_DISTANCE);
+    registers->a = rotl(registers->a);
 
     registers->pc++;
     cpu_state->cycles += 4;
 }
 
 void rrc(registers* registers, cpu_state* cpu_state) {
-    uint8_t prev_a = registers->a;
-
-    registers->a >>= 1;
-    if (BIT_TEST(prev_a, 0)) {
-        registers->f = BIT_SET(registers->f, CARRY_DISTANCE);
-        registers->a = BIT_SET(registers->a, 7);
-    }
-    else {
-        registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
-        registers->a = BIT_CLEAR(registers->a, 7);
-    }
+    registers->f = (BIT_TEST(registers->a, 0)) ? BIT_SET(registers->f, CARRY_DISTANCE) : BIT_CLEAR(registers->f, CARRY_DISTANCE);
+    registers->a = rotr(registers->a);
 
     registers->pc++;
     cpu_state->cycles += 4;
@@ -314,19 +296,9 @@ void ral(registers* registers, cpu_state* cpu_state) {
     uint8_t prev_a = registers->a;
 
     registers->a <<= 1;
-    if (BIT_TEST(registers->f, CARRY_DISTANCE)) {
-        registers->a = BIT_SET(registers->a, 0);
-    }
-    else {
-        registers->a = BIT_CLEAR(registers->a, 0);
-    }
 
-    if (BIT_TEST(prev_a, 7)) {
-        registers->f = BIT_SET(registers->f, CARRY_DISTANCE);
-    }
-    else {
-        registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
-    }
+    registers->a = (BIT_TEST(registers->f, CARRY_DISTANCE)) ? BIT_SET(registers->a, 0) : BIT_CLEAR(registers->a, 0);
+    registers->f = (BIT_TEST(prev_a, 7)) ? BIT_SET(registers->f, CARRY_DISTANCE) : BIT_CLEAR(registers->f, CARRY_DISTANCE);
 
     registers->pc++;
     cpu_state->cycles += 4;
@@ -336,19 +308,9 @@ void rar(registers* registers, cpu_state* cpu_state) {
     uint8_t prev_a = registers->a;
 
     registers->a >>= 1;
-    if (BIT_TEST(registers->f, CARRY_DISTANCE)) {
-        registers->a = BIT_SET(registers->a, 0);
-    }
-    else {
-        registers->a = BIT_CLEAR(registers->a, 0);
-    }
 
-    if (BIT_TEST(prev_a, 7)) {
-        registers->f = BIT_SET(registers->f, CARRY_DISTANCE);
-    }
-    else {
-        registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
-    }
+    registers->a = (BIT_TEST(registers->f, CARRY_DISTANCE)) ? BIT_SET(registers->a, 7) : BIT_CLEAR(registers->a, 7);
+    registers->f = (BIT_TEST(prev_a, 0)) ? BIT_SET(registers->f, CARRY_DISTANCE) : BIT_CLEAR(registers->f, CARRY_DISTANCE);
 
     registers->pc++;
     cpu_state->cycles += 4;
@@ -360,17 +322,7 @@ void adi(registers* registers, cpu_state* cpu_state) {
 
     registers->a = result;
     check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
-    //if (registers->pc == 0x02CE
-    //    || registers->pc == 0x2DA
-    //    || registers->pc == 0x02E6
-    //    || registers->pc == 0x02F2
-    //    || registers->pc == 0x02FE
-    //    || registers->pc == 0x030A
-    //    || registers->pc == 0x0316
-    //    ) {
-    //    log_log("%x-++++++++++++++", result);
-    //    print_cpu();
-    //}
+
     registers->pc += 2;
     cpu_state->cycles += 7;
 }

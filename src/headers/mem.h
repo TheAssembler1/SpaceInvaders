@@ -13,5 +13,6 @@ uint16_t read_short_mem(unsigned int address);
 void write_short_mem(unsigned int address, uint16_t value);
 
 void print_mem(unsigned long start_address, unsigned long end_address);
+uint8_t* get_mem();
 
 #endif //MEM_H

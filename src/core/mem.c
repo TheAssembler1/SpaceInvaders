@@ -125,3 +125,7 @@ void print_mem(unsigned long start_address, unsigned long end_address) {
             log_log("");
     }
 }
+
+uint8_t* get_mem() {
+    return mem_buffer;
+}

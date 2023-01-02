@@ -1,8 +1,13 @@
 #ifndef GPU_H
 #define GPU_H
 
-#define ON_PIXEL 255, 0, 0
+#define DIFF_PIXEL 1
 #define OFF_PIXEL 0, 0, 0
+
+#define SPACESHIP 66, 233, 244
+#define SHIELDS 98, 222, 109
+#define ENEMIES 248, 59, 58
+#define TOP_SCREEN 219, 85, 221
 
 //NOTE: The screen is rotated in the cabinet
 #define SCREEN_WIDTH 256
@@ -10,6 +15,11 @@
 
 #define WINDOW_WIDTH SCREEN_HEIGHT
 #define WINDOW_HEIGHT SCREEN_WIDTH
+
+
+#define SPACESHIP_CUTOFF 40
+#define SHIELDS_CUTOFF 64
+#define ENEMIES_CUTOFF 224
 
 #define CYCLES_PER_SCREEN (CYCLES_PER_SECOND / (double)60)
 #define CYCLES_PER_HALF_WIDTH_OF_ROW (CYCLES_PER_SCREEN / SCREEN_WIDTH) / (double)2

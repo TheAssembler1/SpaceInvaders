@@ -177,7 +177,9 @@ void xra(registers* registers, cpu_state* cpu_state, int _register) {
     uint16_t result = (uint16_t)initial ^ read_register(_register);
 
     registers->a = result;
-    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+    check_set_flags(registers, SIGN | ZERO | PARRY, initial, result);
+    registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
+    registers->f = BIT_CLEAR(registers->f, AUX_CARRY_DISTANCE);
 
     registers->pc++;
     cpu_state->cycles += 4;
@@ -188,7 +190,9 @@ void xra_m(registers* registers, cpu_state* cpu_state) {
     uint16_t result = (uint16_t)initial ^ read_byte_mem(registers->hl);
 
     registers->a = result;
-    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+    check_set_flags(registers, SIGN | ZERO | PARRY, initial, result);
+    registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
+    registers->f = BIT_CLEAR(registers->f, AUX_CARRY_DISTANCE);
 
     registers->pc++;
     cpu_state->cycles += 7;
@@ -234,7 +238,8 @@ void ana(registers* registers, cpu_state* cpu_state, int _register) {
     uint16_t result = (uint16_t)initial & read_register(_register);
 
     registers->a = result;
-    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY, initial, result);
+    registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
 
     registers->pc++;
     cpu_state->cycles += 4;
@@ -246,6 +251,7 @@ void ana_m(registers* registers, cpu_state* cpu_state) {
 
     registers->a = result;
     check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+    registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
 
     registers->pc++;
     cpu_state->cycles += 7;
@@ -343,7 +349,8 @@ void ani(registers* registers, cpu_state* cpu_state) {
     uint16_t result = (uint16_t)initial & read_byte_mem(registers->pc + 1);
 
     registers->a = result;
-    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY, initial, result);
+    registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
 
     registers->pc += 2;
     cpu_state->cycles += 7;
@@ -354,7 +361,9 @@ void ori(registers* registers, cpu_state* cpu_state) {
     uint16_t result = (uint16_t)initial | read_byte_mem(registers->pc + 1);
 
     registers->a = result;
-    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+    check_set_flags(registers, SIGN | ZERO | PARRY, initial, result);
+    registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
+    registers->f = BIT_CLEAR(registers->f, AUX_CARRY_DISTANCE);
 
     registers->pc += 2;
     cpu_state->cycles += 7;
@@ -391,7 +400,9 @@ void xri(registers* registers, cpu_state* cpu_state) {
     uint16_t result = (uint16_t)initial ^ read_byte_mem(registers->pc + 1);
 
     registers->a = result;
-    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+    check_set_flags(registers, SIGN | ZERO | PARRY, initial, result);
+    registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
+    registers->f = BIT_CLEAR(registers->f, AUX_CARRY_DISTANCE);
 
     registers->pc += 2;
     cpu_state->cycles += 7;
@@ -431,17 +442,37 @@ void rst(registers* registers, cpu_state* cpu_state, uint16_t address) {
 }
 
 #define SHIFT_IN_DEVICE 0x03
+bool inputs[NUM_INPUTS];
 
-//FIXME:: read input from device
-//Current just reading a in from device;
+#define INPUT_PORT_1 0x01
+
 void in(registers* registers, cpu_state* cpu_state) {
     int device = read_byte_mem(registers->pc + 1);
+    registers->a = 0;
 
     if (device == SHIFT_IN_DEVICE) {
         registers->a = (((shift_register.high_value << 8) | shift_register.low_value) << offset) >> 8;
     }
+    else if(device == INPUT_PORT_1){
 
-    //log_info("Value 0x%02X sent from device 0x%02X", value, device);
+        #define CREDIT 0
+        #define TWOP_START 1
+        #define ONEP_START 2
+        #define ALWAYS_ONE 3
+        #define ONEP_SHOT 4
+        #define ONEP_LEFT 5
+        #define ONEP_RIGHT 6
+        #define NOT_CONNECTED 7
+
+        registers->a = (inputs[INSERT_COIN]) ? BIT_SET(registers->a, CREDIT) : BIT_CLEAR(registers->a, CREDIT);
+        registers->a = BIT_CLEAR(registers->a, TWOP_START);
+        registers->a = (inputs[SPACE]) ? BIT_SET(registers->a, ONEP_START) : BIT_CLEAR(registers->a, ONEP_START);
+        registers->a = BIT_SET(registers->a, ALWAYS_ONE);
+        registers->a = (inputs[SPACE]) ? BIT_SET(registers->a, ONEP_SHOT) : BIT_CLEAR(registers->a, ONEP_SHOT);
+        registers->a = (inputs[A_KEY]) ? BIT_SET(registers->a, ONEP_LEFT) : BIT_CLEAR(registers->a, ONEP_LEFT);
+        registers->a = (inputs[D_KEY]) ? BIT_SET(registers->a, ONEP_RIGHT) : BIT_CLEAR(registers->a, ONEP_RIGHT);
+        registers->a = BIT_CLEAR(registers->a, NOT_CONNECTED);
+    }
 
     registers->pc += 2;
     cpu_state->cycles += 10;
@@ -489,7 +520,9 @@ void ora(registers* registers, cpu_state* cpu_state, int _register) {
     uint16_t result = (uint16_t)initial | read_register(_register);
 
     registers->a = result;
-    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+    check_set_flags(registers, SIGN | ZERO | PARRY, initial, result);
+    registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
+    registers->f = BIT_CLEAR(registers->f, AUX_CARRY_DISTANCE);
 
     registers->pc++;
     cpu_state->cycles += 4;
@@ -500,7 +533,9 @@ void ora_m(registers* registers, cpu_state* cpu_state) {
     uint16_t result = (uint16_t)initial | read_byte_mem(registers->hl);
 
     registers->a = result;
-    check_set_flags(registers, SIGN | ZERO | AUX_CARRY | PARRY | CARRY, initial, result);
+    check_set_flags(registers, SIGN | ZERO | PARRY, initial, result);
+    registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
+    registers->f = BIT_CLEAR(registers->f, AUX_CARRY_DISTANCE);
 
     registers->pc++;
     cpu_state->cycles += 7;

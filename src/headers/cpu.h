@@ -25,6 +25,10 @@
 #define CYCLES_PER_SECOND  2000000
 #define CYCLES_PER_FRAME CYCLES_PER_SECOND / 60
 
+#define FLAG_TO_SET 0x01
+#define FLAG_TO_CLEAR 0x05
+#define FLAG_TO_CLEAR_AGAIN 0x03
+
 struct _registers{
     union{
         struct{

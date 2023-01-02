@@ -6,9 +6,11 @@ SDL_Window* window;
 void init_gpu() {
 	log_info("initializing the gpu");
 
-	SDL_CreateWindowAndRenderer(WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE, &window, &renderer);
+	SDL_CreateWindowAndRenderer(WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_WINDOW_MAXIMIZED, &window, &renderer);
 	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
 	SDL_RenderClear(renderer);
+
+	SDL_RenderSetLogicalSize(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
 void deinit_gpu() {
@@ -36,7 +38,7 @@ void render_screen(SDL_Renderer* renderer) {
 			int x = linear_pixel_position % SCREEN_WIDTH + 1;
 			int y = linear_pixel_position / SCREEN_WIDTH;
 
-			SDL_RenderDrawPoint(renderer, y, SCREEN_WIDTH - x);
+			SDL_RenderDrawPoint(renderer, y, SCREEN_WIDTH - x);;
 		}
 
 		current_pixel_byte++;

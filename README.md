@@ -41,3 +41,30 @@ I have implemented this protocol in a testbench for an FPGA Intel 8080 implement
 by a software emulator test suite; both of these could be useful references for you in 
 implementing the scaffolding necessary to run these CPU tests without any complicated OS,
 or even any computer, around your CPU.
+
+# ALMOST PASSING AL EXER8080 TESTS
+Issue #1: Always Clear Bit 5 and Bit 3, and Set Bit 1 for POP PSW
+instruction.
+
+Issue #2: Auxillary Carry Flag (AC) value calculation incorrect for
+subtraction.
+
+Issue #3: ANA and ANI set Auxillary Carry Flag (AC) to the OR'ing of
+bits 3 of the two operands.
+
+Issue #4: XRA, XRI, ORA, ORI clear Auxillary Carry Flag (AC).
+
+Issue #5: Auxillary Carry Flag (AC) value calculation incorrect for
+addition.
+
+Issue #6: The prior Carry Flag (CY) value needs to be taken into
+account for SBB and SBI subtraction with borrow instuctions.
+
+Issue #7: The prior Carry Flag (CY) value needs to be taken into
+account for ADC and ACI addition with carry instructions.
+
+Issue #8: The DAA adjustment can also cause the Carry Flag (CY) to be
+set during the addition to the 4 low order bits.
+
+Issue #9: The DAA adjustment can cause the Carry Flag (CY) to be set,
+but not to be clear if it was already set.

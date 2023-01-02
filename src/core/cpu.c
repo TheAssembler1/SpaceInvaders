@@ -366,16 +366,16 @@ static int parity_array[256] = {1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 
 
 void check_set_flags(registers* registers, uint8_t flags, uint8_t initial, uint16_t result) {
 	if (BIT_TEST(flags, SIGN_DISTANCE)) {
-        if (BIT_TEST((uint8_t)result, SIGN_DISTANCE)){
+        if (BIT_TEST(result & 0xFF, SIGN_DISTANCE)){
 			registers->f = BIT_SET(registers->f, SIGN_DISTANCE);
-		}else
-		{
+		}
+		else{
 			registers->f = BIT_CLEAR(registers->f, SIGN_DISTANCE);
 		}
     }
 
     if (BIT_TEST(flags, ZERO_DISTANCE)) {
-        if (!(uint8_t)result) {
+        if (!(result & 0xFF)) {
 			registers->f = BIT_SET(registers->f, ZERO_DISTANCE);
 		}
         else{
@@ -384,7 +384,7 @@ void check_set_flags(registers* registers, uint8_t flags, uint8_t initial, uint1
     }
 
     if (BIT_TEST(flags, AUX_CARRY_DISTANCE)) {
-        if (~(registers->a ^ initial ^ (uint8_t)result) & 0x10){
+        if (((initial & 0xF) + (result & 0xF)) >> 4 > 0xF) {
 			registers->f = BIT_SET(registers->f, AUX_CARRY_DISTANCE);
 		}
 		else{
@@ -393,7 +393,7 @@ void check_set_flags(registers* registers, uint8_t flags, uint8_t initial, uint1
     }
 
     if (BIT_TEST(flags, PARRY_DISTANCE)) {
-        if (parity_array[(uint8_t)result]){
+        if (parity_array[result & 0xFF]){
 			registers->f = BIT_SET(registers->f, PARRY_DISTANCE);
 		}
         else{

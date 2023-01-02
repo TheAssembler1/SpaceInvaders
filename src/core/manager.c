@@ -81,7 +81,7 @@ void deinit_test_manager() {
     exit(0);
 }
 
-#define TICK_INTERVAL 5
+#define TICK_INTERVAL 30
 
 static uint32_t next_time;
 
@@ -94,6 +94,8 @@ uint32_t time_left() {
     else
         return next_time - now;
 }
+
+bool inputs[NUM_INPUTS];
 
 static void cycle_machine() {
     bool run_machine = true;
@@ -114,8 +116,45 @@ static void cycle_machine() {
 
         render_screen(renderer);
 
-        if (SDL_PollEvent(&event) && event.type == SDL_QUIT)
-            run_machine = false;
+        if (SDL_PollEvent(&event)) {
+            switch (event.type) {
+            case SDL_QUIT:
+                run_machine = false;
+                break;
+            case SDL_KEYDOWN:
+                if (event.key.keysym.scancode == SDL_SCANCODE_A) {
+                    inputs[A_KEY] = true;
+                }
+                else if (event.key.keysym.scancode == SDL_SCANCODE_D) {
+                    inputs[D_KEY] = true;
+                }
+                else if (event.key.keysym.scancode == SDL_SCANCODE_SPACE) {
+                    inputs[SPACE] = true;
+                }
+                else if (event.key.keysym.scancode == SDL_SCANCODE_UP) {
+                    inputs[INSERT_COIN] = true;
+                }
+                else if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
+                    run_machine = false;
+                }
+                break;
+            
+            case SDL_KEYUP:
+                if (event.key.keysym.scancode == SDL_SCANCODE_A) {
+                    inputs[A_KEY] = false;
+                }
+                else if (event.key.keysym.scancode == SDL_SCANCODE_D) {
+                    inputs[D_KEY] = false;
+                }
+                else if (event.key.keysym.scancode == SDL_SCANCODE_SPACE) {
+                    inputs[SPACE] = false;
+                }
+                else if (event.key.keysym.scancode == SDL_SCANCODE_UP) {
+                    inputs[INSERT_COIN] = false;
+                }
+                break;
+            }
+        }
 
         SDL_Delay(time_left());
         next_time += TICK_INTERVAL;

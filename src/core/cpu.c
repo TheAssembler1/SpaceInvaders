@@ -360,6 +360,8 @@ static int parity_array[256] = {1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 
                                 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1};
 
 #define OVERFLOW 0xFF
+#define FLAG_TO_SET 0x01
+#define FLAG_TO_CLEAR 0x05
 
 void check_set_flags(registers* registers, uint8_t flags, uint8_t initial, uint16_t result) {
 	if (BIT_TEST(flags, SIGN_DISTANCE)) {
@@ -406,6 +408,9 @@ void check_set_flags(registers* registers, uint8_t flags, uint8_t initial, uint1
 			registers->f = BIT_CLEAR(registers->f, CARRY_DISTANCE);
 		}
     }
+
+	registers->f = BIT_CLEAR(registers->f, FLAG_TO_CLEAR);
+	registers->f = BIT_SET(registers->f, FLAG_TO_SET);
 }
 
 void print_bits(int size, uint16_t value){

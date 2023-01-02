@@ -30,8 +30,6 @@ static void execute_opcode(uint16_t opcode) {
 	if (cpu_st->halted)
 		return;
 
-	//log_log("%x", regs->pc);
-
 	switch (opcode) {
 	case 0x00: nop(regs, cpu_st);                                break;
 	case 0x01: lxi(regs, cpu_st, BC);                            break;

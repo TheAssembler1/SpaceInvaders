@@ -24,6 +24,8 @@ void init_manager(){
 
 
 static void cycle_test_machine() {
+    log_log();
+
     while (regs->pc != 0x00) {
         if (regs->pc == 0x0005) {
             if (regs->c == 0x02) {
@@ -59,7 +61,7 @@ void init_test_manager() {
         log_info("success initializing SDL");
 
     init_cpu();
-    init_mem(true, "TST8080.COM");
+    init_mem(true, "8080EXM.COM");
 
 
     regs->pc = 0x100;

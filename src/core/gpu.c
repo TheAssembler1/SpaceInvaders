@@ -6,7 +6,7 @@ SDL_Window* window;
 void init_gpu() {
 	log_info("initializing the gpu");
 
-	SDL_CreateWindowAndRenderer(WINDOW_WIDTH, WINDOW_HEIGHT, 0, &window, &renderer);
+	SDL_CreateWindowAndRenderer(WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE, &window, &renderer);
 	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
 	SDL_RenderClear(renderer);
 }

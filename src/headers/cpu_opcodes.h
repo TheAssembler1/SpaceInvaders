@@ -113,7 +113,7 @@ addressed by registers B and C, or by registers D and E, re-
 place the contents of the accumulator.
 */
 //LDAX | 1 | 7 | - - - - -
-void ldax(registers* registers, cpu_state* cpu_state, int _register);
+void ldax(registers* registers, cpu_state* cpu_state, int pair_register);
 
 /* Intel 8080 Manual
 Description: the byte at the memory address formed

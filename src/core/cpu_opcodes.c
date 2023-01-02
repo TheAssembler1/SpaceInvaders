@@ -85,8 +85,8 @@ void call(registers* registers, cpu_state* cpu_state, bool should_call) {
     }
 }
 
-void ldax(registers* registers, cpu_state* cpu_state, int _register) {
-    registers->a = read_byte_mem(read_pair_register(_register));
+void ldax(registers* registers, cpu_state* cpu_state, int pair_register) {
+    registers->a = read_byte_mem(read_pair_register(pair_register));
 
     registers->pc++;
     cpu_state->cycles += 7;

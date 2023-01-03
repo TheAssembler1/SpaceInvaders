@@ -4,7 +4,7 @@ SDL_Renderer* renderer;
 SDL_Window* window;
 uint8_t* last_mem_buffer;
 
-#define SCALE 3
+#define SCALE 2
 
 void init_gpu() {
 	log_info("initializing the gpu");

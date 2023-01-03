@@ -442,7 +442,7 @@ void rst(registers* registers, cpu_state* cpu_state, uint16_t address) {
 }
 
 #define SHIFT_IN_DEVICE 0x03
-bool inputs[NUM_INPUTS];
+extern bool inputs[NUM_INPUTS];
 
 #define INPUT_PORT_1 0x01
 

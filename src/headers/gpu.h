@@ -9,6 +9,8 @@
 #define ENEMIES 248, 59, 58
 #define TOP_SCREEN 219, 85, 221
 
+#define BACKGROUND_COLOR 0, 0, 0
+
 //NOTE: The screen is rotated in the cabinet
 #define SCREEN_WIDTH 256
 #define SCREEN_HEIGHT 224

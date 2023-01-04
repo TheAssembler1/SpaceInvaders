@@ -22,8 +22,10 @@ endif()
 
 # setting sdl 32 bit libraries
 if(WIN32)
+	# https://github.com/libsdl-org/SDL/releases/tag/release-2.0.20
 	set(SDL2_LIBRARIES "${CMAKE_CURRENT_LIST_DIR}/dep/SDL2-2.0.20/lib/${CPU_ARCH}/SDL2.lib")
 	set(SDL_DLL  "${CMAKE_CURRENT_LIST_DIR}/dep/SDL2-2.0.20/lib/${CPU_ARCH}/SDL2.dll")
+	# https://www.libsdl.org/projects/SDL_ttf/release/
 	set(SDL2_TTF_LIBRARIES "${CMAKE_CURRENT_LIST_DIR}/dep/SDL2_ttf-2.20.1/lib/${CPU_ARCH}/SDL2_ttf.lib")
 	set(SDL_TTF_DLL  "${CMAKE_CURRENT_LIST_DIR}/dep/SDL2_ttf-2.20.1/lib/${CPU_ARCH}/SDL2_ttf.dll")
 

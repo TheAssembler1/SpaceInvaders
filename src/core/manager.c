@@ -61,7 +61,7 @@ void init_test_manager() {
         log_info("success initializing SDL");
 
     init_cpu();
-    init_mem(true, "8080EXM.COM");
+    init_mem(true, "CPUTEST.COM");
 
 
     regs->pc = 0x100;

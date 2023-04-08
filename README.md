@@ -26,7 +26,7 @@ just a minimal support framework described below:
 These binaries should be loaded to memory starting at 0x0100, and at startup, your 
 CPU should jump to 0x0100. You should also put two handlers at addresses 0x0000 and 0x0005:
 
-    The handler at 0x0000 signals the end of the test run.
+    The handler at 0x0000 signals the end of the test run.v
 
     The handler at 0x0005 is used to communicate the values of the registers C, D and E 
     with the outside world. Register C selects from multiple functions:

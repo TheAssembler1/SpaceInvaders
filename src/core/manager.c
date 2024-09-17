@@ -11,7 +11,7 @@ void init_manager(){
         log_info("success initializing SDL");
 
     //initing sdl_ttf
-    TTF_Init();
+    //TTF_Init();
 
     init_cpu();
     init_mem(false, NULL);

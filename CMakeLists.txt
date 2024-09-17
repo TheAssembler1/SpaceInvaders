@@ -35,7 +35,7 @@ elseif(UNIX)
 	list(APPEND CMAKE_MODULE_PATH dep/find_cmake) 
 
 	find_package(SDL2 REQUIRED)
-	find_package(SDL2_ttf REQUIRED)
+        #find_package(SDL2_ttf REQUIRED)
 
 	set(CMAKE_BINARY_DIR "${CMAKE_CURRENT_LIST_DIR}/out/build/${CPU_ARCH}")
 	set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})

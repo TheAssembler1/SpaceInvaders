@@ -9,15 +9,6 @@ Space Invaders emulator written in C
 - http://www.emulator101.com/reference/8080-by-opcode.html
 - https://pastraiser.com/cpu/i8080/i8080_opcodes.html
 
-#### Following this order of emulators 
-- Chip 8
-- Space Invaders
-- Pacman
-- Gameboy
-- GBC
-- Sega Master System 
-- Sega Genesis
-
 #### Intel 8080 Test
 https://altairclone.com/downloads/cpu_tests/
 You can find some Intel 8080 CPU tests on this website. These can be run with no OS, 

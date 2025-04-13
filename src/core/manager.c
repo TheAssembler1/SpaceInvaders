@@ -2,16 +2,16 @@
 
 static void cycle_machine();
 
-void init_manager(){
-    //initing sdl
+void init_manager() {
+    // initing sdl
     SDL_SetMainReady();
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         log_error("error initializing SDL: %s\n", SDL_GetError());
     else
         log_info("success initializing SDL");
 
-    //initing sdl_ttf
-    //TTF_Init();
+    // initing sdl_ttf
+    // TTF_Init();
 
     init_cpu();
     init_mem(false, NULL);
@@ -22,7 +22,6 @@ void init_manager(){
     cycle_machine();
 }
 
-
 static void cycle_test_machine() {
     log_log();
 
@@ -30,19 +29,16 @@ static void cycle_test_machine() {
         if (regs->pc == 0x0005) {
             if (regs->c == 0x02) {
                 log_log_nonewl("%c", regs->e);
-            }
-            else if (regs->c == 0x09) {
+            } else if (regs->c == 0x09) {
                 while (read_byte_mem(regs->de) != '$') {
                     log_log_nonewl("%c", read_byte_mem(regs->de));
                     regs->de++;
                 }
-            }
-            else {
+            } else {
                 log_error("Unknown c in test interrupt");
                 deinit_test_manager();
             }
 
-            
             ret(regs, cpu_st, true);
         }
 
@@ -53,7 +49,7 @@ static void cycle_test_machine() {
 }
 
 void init_test_manager() {
-    //initing sdl
+    // initing sdl
     SDL_SetMainReady();
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         log_error("error initializing SDL: %s\n", SDL_GetError());
@@ -61,8 +57,7 @@ void init_test_manager() {
         log_info("success initializing SDL");
 
     init_cpu();
-    init_mem(true, "CPUTEST.COM");
-
+    init_mem(true, "8080EXM.COM");
 
     regs->pc = 0x100;
     regs->sp = 0xFFFF;
@@ -77,7 +72,7 @@ void deinit_test_manager() {
 
     SDL_Quit();
 
-    //exiting here instead of in main
+    // exiting here instead of in main
     exit(0);
 }
 
@@ -106,7 +101,7 @@ static void cycle_machine() {
     while (run_machine) {
         cpu_st->cycles = 0;
 
-        while(cpu_st->cycles < CYCLES_PER_FRAME)
+        while (cpu_st->cycles < CYCLES_PER_FRAME)
             run_next_opcode();
         execute_interrupt(HALFWAY_INTERRUPT);
 
@@ -124,32 +119,25 @@ static void cycle_machine() {
             case SDL_KEYDOWN:
                 if (event.key.keysym.scancode == SDL_SCANCODE_A) {
                     inputs[A_KEY] = true;
-                }
-                else if (event.key.keysym.scancode == SDL_SCANCODE_D) {
+                } else if (event.key.keysym.scancode == SDL_SCANCODE_D) {
                     inputs[D_KEY] = true;
-                }
-                else if (event.key.keysym.scancode == SDL_SCANCODE_SPACE) {
+                } else if (event.key.keysym.scancode == SDL_SCANCODE_SPACE) {
                     inputs[SPACE] = true;
-                }
-                else if (event.key.keysym.scancode == SDL_SCANCODE_UP) {
+                } else if (event.key.keysym.scancode == SDL_SCANCODE_UP) {
                     inputs[INSERT_COIN] = true;
-                }
-                else if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
+                } else if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
                     run_machine = false;
                 }
                 break;
-            
+
             case SDL_KEYUP:
                 if (event.key.keysym.scancode == SDL_SCANCODE_A) {
                     inputs[A_KEY] = false;
-                }
-                else if (event.key.keysym.scancode == SDL_SCANCODE_D) {
+                } else if (event.key.keysym.scancode == SDL_SCANCODE_D) {
                     inputs[D_KEY] = false;
-                }
-                else if (event.key.keysym.scancode == SDL_SCANCODE_SPACE) {
+                } else if (event.key.keysym.scancode == SDL_SCANCODE_SPACE) {
                     inputs[SPACE] = false;
-                }
-                else if (event.key.keysym.scancode == SDL_SCANCODE_UP) {
+                } else if (event.key.keysym.scancode == SDL_SCANCODE_UP) {
                     inputs[INSERT_COIN] = false;
                 }
                 break;
@@ -163,16 +151,16 @@ static void cycle_machine() {
     deinit_manager();
 }
 
-void deinit_manager(){
+void deinit_manager() {
     print_cpu();
 
     deinit_cpu();
     deinit_mem();
     deinit_gpu();
 
-    //deiniting sdl
+    // deiniting sdl
     SDL_Quit();
 
-    //exiting here instead of in main
+    // exiting here instead of in main
     exit(0);
 }

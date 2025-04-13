@@ -5,6 +5,7 @@ CMakeFiles
 .vs
 Makefile
 CMakeCache.txt 
+build
 
 # Prerequisites
 *.d

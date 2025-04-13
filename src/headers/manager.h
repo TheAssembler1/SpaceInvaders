@@ -15,4 +15,4 @@ void deinit_test_manager();
 
 extern bool inputs[NUM_INPUTS];
 
-#endif //MANAGER_H
+#endif // MANAGER_H

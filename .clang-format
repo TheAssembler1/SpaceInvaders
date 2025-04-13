@@ -1,0 +1,29 @@
+BasedOnStyle: LLVM
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+
+# Brace placement
+BreakBeforeBraces: Attach
+
+# Spaces around keywords and operators
+SpaceAfterCStyleCast: true
+SpaceBeforeParens: ControlStatements
+
+# Function declaration formatting
+AllowShortFunctionsOnASingleLine: InlineOnly
+AlwaysBreakAfterReturnType: None
+
+# Pointer and reference alignment
+PointerAlignment: Left
+
+# Keep a space before function calls: f (x) → false => f(x)
+SpacesBeforeTrailingComments: 1
+Cpp11BracedListStyle: true
+
+# Clean up includes if using clangd tooling
+SortIncludes: true
+
+# Optional: Limit line length
+ColumnLimit: 100
+

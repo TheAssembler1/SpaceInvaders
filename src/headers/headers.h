@@ -1,15 +1,15 @@
 #ifndef HEADERS_H
 #define HEADERS_H
 
-//c standard headers
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+// c standard headers
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
-//global defines
+// global defines
 #ifdef __unix__
 #define UNIX
 #elif defined(_WIN32) || defined(WIN32)
@@ -31,18 +31,18 @@
 #define ROM_INVADERS_G ROM_FOLDER "invaders.g"
 #define ROM_INVADERS_H ROM_FOLDER "invaders.h"
 
-//external headers
+// external headers
 #define SDL_MAIN_HANDLED
 #include <SDL.h>
 #include <SDL_ttf.h>
 
-//this projects headers
-#include "log.h"
+// this projects headers
 #include "cpu.h"
 #include "cpu_opcodes.h"
-#include "mem.h"
-#include "manager.h"
-#include "tests.h"
 #include "gpu.h"
+#include "log.h"
+#include "manager.h"
+#include "mem.h"
+#include "tests.h"
 
-#endif //HEADERS_H
+#endif // HEADERS_H

@@ -11,20 +11,19 @@
 
 #define BACKGROUND_COLOR 0, 0, 0
 
-//NOTE: The screen is rotated in the cabinet
+// NOTE: The screen is rotated in the cabinet
 #define SCREEN_WIDTH 256
 #define SCREEN_HEIGHT 224
 
 #define WINDOW_WIDTH SCREEN_HEIGHT
 #define WINDOW_HEIGHT SCREEN_WIDTH
 
-
 #define SPACESHIP_CUTOFF 40
 #define SHIELDS_CUTOFF 64
 #define ENEMIES_CUTOFF 224
 
-#define CYCLES_PER_SCREEN (CYCLES_PER_SECOND / (double)60)
-#define CYCLES_PER_HALF_WIDTH_OF_ROW (CYCLES_PER_SCREEN / SCREEN_WIDTH) / (double)2
+#define CYCLES_PER_SCREEN (CYCLES_PER_SECOND / (double) 60)
+#define CYCLES_PER_HALF_WIDTH_OF_ROW (CYCLES_PER_SCREEN / SCREEN_WIDTH) / (double) 2
 
 #define VIDEO_RAM_START 0x2400
 #define VIDEO_RAM_END 0x3FFF

@@ -10,9 +10,6 @@ void init_manager() {
     else
         log_info("success initializing SDL");
 
-    // initing sdl_ttf
-    // TTF_Init();
-
     init_cpu();
     init_mem(false, NULL);
     init_gpu();
@@ -38,10 +35,8 @@ static void cycle_test_machine() {
                 log_error("Unknown c in test interrupt");
                 deinit_test_manager();
             }
-
             ret(regs, cpu_st, true);
         }
-
         run_next_opcode();
     }
 

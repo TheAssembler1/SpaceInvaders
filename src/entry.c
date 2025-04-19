@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 // FIXME::this should be passed through args
-#define TEST_MODE 0
+#define TEST_MODE 1
 
 void handle_sigint(int sig) {
     printf("\n[!] Caught signal %d (Ctrl+C), exiting cleanly.\n", sig);
